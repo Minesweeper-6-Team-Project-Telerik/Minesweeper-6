@@ -29,7 +29,7 @@ namespace MineSweeper.GameModel.Interfaces
         /// <summary>
         ///     Gets the value.
         /// </summary>
-        T Value { get; }
+        T Value { get; set; }
 
         /// <summary>
         ///     The reveal.

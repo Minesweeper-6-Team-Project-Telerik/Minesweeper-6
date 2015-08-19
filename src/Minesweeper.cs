@@ -25,7 +25,11 @@ using System.Runtime.InteropServices;
 
 namespace MineSweeper
 {
+    using System;
+    using System.Windows;
+
     using MineSweeper.ConsoleGame;
+    using MineSweeper.GraphicGame;
 
     /// <summary>
     ///     The program.
@@ -35,10 +39,15 @@ namespace MineSweeper
         /// <summary>
         ///     The main.
         /// </summary>
+        [STAThread]
+
+        // <summary>
+        // The main.
+        // </summary>
         private static void Main()
         {
-            var game = new ConsoleMinesweeperGame(5, 10, 15);
-
+            // var game = new ConsoleMinesweeperGame(5, 10, 15);
+            var game = new WpfMinesweeperGame(10, 10, 25);
             game.Start();
         }
     }

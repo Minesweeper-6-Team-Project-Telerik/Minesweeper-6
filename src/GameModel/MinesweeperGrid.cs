@@ -56,17 +56,17 @@ namespace MineSweeper.GameModel
         /// <summary>
         ///     Gets the cols.
         /// </summary>
-        protected int Cols { get; private set; }
+        protected int Cols { get; }
 
         /// <summary>
         ///     Gets the rows.
         /// </summary>
-        protected int Rows { get; private set; }
+        protected int Rows { get; }
 
         /// <summary>
         ///     The Grid.
         /// </summary>
-        protected MinesweeperCell<T>[,] Grid { get; private set; }
+        protected MinesweeperCell<T>[,] Grid { get; }
 
         /// <summary>
         ///     The reset.

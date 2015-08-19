@@ -43,7 +43,7 @@ namespace MineSweeper.ConsoleGame
         /// <summary>
         ///     Gets the Grid.
         /// </summary>
-        public ConsoleMinesweeperGrid Grid { get; private set; }
+        public ConsoleMinesweeperGrid Grid { get; }
 
         /// <summary>
         ///     Gets or sets the score.

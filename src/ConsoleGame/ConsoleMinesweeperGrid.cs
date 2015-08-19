@@ -6,7 +6,6 @@
 //   The console minesweeper Grid.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace MineSweeper.ConsoleGame
 {
     using System.Text;
@@ -14,7 +13,7 @@ namespace MineSweeper.ConsoleGame
     using MineSweeper.GameModel;
 
     /// <summary>
-    /// The console minesweeper Grid.
+    ///     The console minesweeper Grid.
     /// </summary>
     internal class ConsoleMinesweeperGrid : MinesweeperGrid<char>
     {
@@ -70,10 +69,10 @@ namespace MineSweeper.ConsoleGame
         }
 
         /// <summary>
-        /// The to string.
+        ///     The to string.
         /// </summary>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         public override string ToString()
         {

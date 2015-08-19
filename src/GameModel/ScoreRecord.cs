@@ -33,16 +33,6 @@ namespace MineSweeper.GameModel
         }
 
         /// <summary>
-        ///     Gets or sets the player name.
-        /// </summary>
-        public string PlayerName { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the score.
-        /// </summary>
-        public int Score { get; set; }
-
-        /// <summary>
         /// The compare to.
         /// </summary>
         /// <param name="obj">
@@ -62,5 +52,15 @@ namespace MineSweeper.GameModel
 
             return -1 * this.Score.CompareTo(((ScoreRecord)obj).Score);
         }
+
+        /// <summary>
+        ///     Gets or sets the player name.
+        /// </summary>
+        public string PlayerName { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the score.
+        /// </summary>
+        public int Score { get; set; }
     }
 }

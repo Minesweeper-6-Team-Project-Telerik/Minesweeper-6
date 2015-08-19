@@ -10,8 +10,6 @@ namespace MineSweeper.GameModel.Interfaces
 {
     using System.Collections.Generic;
 
-    using MineSweeper.ConsoleGame;
-
     /// <summary>
     /// The Game interface.
     /// </summary>
@@ -19,11 +17,6 @@ namespace MineSweeper.GameModel.Interfaces
     /// </typeparam>
     internal interface IMinesweeperGame<T>
     {
-        /// <summary>
-        ///     Gets the Grid.
-        /// </summary>
-        ConsoleMinesweeperGrid Grid { get; }
-
         /// <summary>
         ///     Gets or sets the score.
         /// </summary>

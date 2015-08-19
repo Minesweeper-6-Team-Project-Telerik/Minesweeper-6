@@ -25,25 +25,25 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0" x:Name="matrix_0_0" Click="Matix_0_0" FontSize="21.333" />
-        <Button Grid.Row="0" Grid.Column="1" x:Name="matrix_0_1" Click="Matix_0_1" FontSize="21.333" />
-        <Button Grid.Row="0" Grid.Column="2" x:Name="matrix_0_2" Click="Matix_0_2" FontSize="21.333" />
-        <Button Grid.Row="0" Grid.Column="3" x:Name="matrix_0_3" Click="Matix_0_3" FontSize="21.333" />
+        <Button Grid.Row="0" Grid.Column="0" x:Name="matrix_0_0" Click="Matrix_0_0"  Mouse.MouseDown="Matrix_0_0_Right" FontSize="21.333" />
+        <Button Grid.Row="0" Grid.Column="1" x:Name="matrix_0_1" Click="Matrix_0_1" Mouse.MouseDown="Matrix_0_1_Right" FontSize="21.333" />
+        <Button Grid.Row="0" Grid.Column="2" x:Name="matrix_0_2" Click="Matrix_0_2" Mouse.MouseDown="Matrix_0_2_Right" FontSize="21.333" />
+        <Button Grid.Row="0" Grid.Column="3" x:Name="matrix_0_3" Click="Matrix_0_3" Mouse.MouseDown="Matrix_0_3_Right" FontSize="21.333" />
 
-        <Button Grid.Row="1" Grid.Column="0" x:Name="matrix_1_0" Click="Matix_1_0" FontSize="21.333" />
-        <Button Grid.Row="1" Grid.Column="1" x:Name="matrix_1_1" Click="Matix_1_1" FontSize="21.333" />
-        <Button Grid.Row="1" Grid.Column="2" x:Name="matrix_1_2" Click="Matix_1_2" FontSize="21.333" />
-        <Button Grid.Row="1" Grid.Column="3" x:Name="matrix_1_3" Click="Matix_1_3" FontSize="21.333" />
+        <Button Grid.Row="1" Grid.Column="0" x:Name="matrix_1_0" Click="Matrix_1_0" Mouse.MouseDown="Matrix_1_0_Right" FontSize="21.333" />
+        <Button Grid.Row="1" Grid.Column="1" x:Name="matrix_1_1" Click="Matrix_1_1" Mouse.MouseDown="Matrix_1_1_Right" FontSize="21.333" />
+        <Button Grid.Row="1" Grid.Column="2" x:Name="matrix_1_2" Click="Matrix_1_2" Mouse.MouseDown="Matrix_1_2_Right" FontSize="21.333" />
+        <Button Grid.Row="1" Grid.Column="3" x:Name="matrix_1_3" Click="Matrix_1_3" Mouse.MouseDown="Matrix_1_3_Right" FontSize="21.333" />
 
-        <Button Grid.Row="2" Grid.Column="0" x:Name="matrix_2_0" Click="Matix_2_0" FontSize="21.333" />
-        <Button Grid.Row="2" Grid.Column="1" x:Name="matrix_2_1" Click="Matix_2_1" FontSize="21.333" />
-        <Button Grid.Row="2" Grid.Column="2" x:Name="matrix_2_2" Click="Matix_2_2" FontSize="21.333" />
-        <Button Grid.Row="2" Grid.Column="3" x:Name="matrix_2_3" Click="Matix_2_3" FontSize="21.333" />
+        <Button Grid.Row="2" Grid.Column="0" x:Name="matrix_2_0" Click="Matrix_2_0" Mouse.MouseDown="Matrix_2_0_Right" FontSize="21.333" />
+        <Button Grid.Row="2" Grid.Column="1" x:Name="matrix_2_1" Click="Matrix_2_1" Mouse.MouseDown="Matrix_2_1_Right" FontSize="21.333" />
+        <Button Grid.Row="2" Grid.Column="2" x:Name="matrix_2_2" Click="Matrix_2_2" Mouse.MouseDown="Matrix_2_2_Right" FontSize="21.333" />
+        <Button Grid.Row="2" Grid.Column="3" x:Name="matrix_2_3" Click="Matrix_2_3" Mouse.MouseDown="Matrix_2_3_Right" FontSize="21.333" />
 
-        <Button Grid.Row="3" Grid.Column="0" x:Name="matrix_3_0" Click="Matix_3_0" FontSize="21.333" />
-        <Button Grid.Row="3" Grid.Column="1" x:Name="matrix_3_1" Click="Matix_3_1" FontSize="21.333" />
-        <Button Grid.Row="3" Grid.Column="2" x:Name="matrix_3_2" Click="Matix_3_2" FontSize="21.333" />
-        <Button Grid.Row="3" Grid.Column="3" x:Name="matrix_3_3" Click="Matix_3_3" FontSize="21.333" />
+        <Button Grid.Row="3" Grid.Column="0" x:Name="matrix_3_0" Click="Matrix_3_0" Mouse.MouseDown="Matrix_3_0_Right" FontSize="21.333" />
+        <Button Grid.Row="3" Grid.Column="1" x:Name="matrix_3_1" Click="Matrix_3_1" Mouse.MouseDown="Matrix_3_1_Right" FontSize="21.333" />
+        <Button Grid.Row="3" Grid.Column="2" x:Name="matrix_3_2" Click="Matrix_3_2" Mouse.MouseDown="Matrix_3_2_Right" FontSize="21.333" />
+        <Button Grid.Row="3" Grid.Column="3" x:Name="matrix_3_3" Click="Matrix_3_3" Mouse.MouseDown="Matrix_3_3_Right" FontSize="21.333" />
         <Label x:Name="label" Content="Moves Count:" HorizontalAlignment="Left" Margin="0,-38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.241,-0.462" Height="29" Width="85" Grid.ColumnSpan="2"/>
         <TextBox x:Name="counterTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="15,-36,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="42"/>
         <Label x:Name="label1" Content="Timer:" Grid.Column="2" HorizontalAlignment="Left" Margin="37,-38,0,0" VerticalAlignment="Top" Height="25" Grid.ColumnSpan="2" Width="46"/>

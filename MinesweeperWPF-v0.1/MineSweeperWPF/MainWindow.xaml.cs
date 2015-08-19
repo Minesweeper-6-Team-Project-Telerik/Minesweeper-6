@@ -2,19 +2,10 @@
 {
     using MineSweeper.ConsoleGame;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Documents;
     using System.Windows.Input;
-    using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using System.Windows.Navigation;
-    using System.Windows.Shapes;
     using System.Windows.Threading;
 
     /// <summary>
@@ -37,6 +28,10 @@
         private static int passedTimeSeconds = 1;
 
         private static int passedTimeMinutes = 0;
+
+        private static string flag = "pack://application:,,/Images/Flag.png";
+
+        private static string bomb = "pack://application:,,/Images/Bomb.png";
 
         /// <summary>
         /// Main Program Window
@@ -111,7 +106,7 @@
 
             if (check == "*")
             {
-                button.Content = "Boom!";
+                PaintButtonValue(button, bomb);
                 timer.Stop();
 
                 ShowWindow("Lost");
@@ -129,6 +124,19 @@
 
             button.IsEnabled = false;
             movesCount++;
+        }
+
+        private void PaintButtonValue(Button button, string value)
+        {
+            StackPanel panel = new StackPanel();
+            panel.Orientation = Orientation.Horizontal;
+
+            Image image = new Image();
+            image.Source = new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute));
+
+            panel.Children.Add(image);
+
+            button.Content = panel;
         }
 
         /// <summary>
@@ -186,100 +194,324 @@
             matrix_3_3.IsEnabled = false;
         }
 
-        private void Matix_0_0(object sender, RoutedEventArgs e)
+        private void Matrix_0_0(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_0_0, 0, 0);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_0_1(object sender, RoutedEventArgs e)
+        private void Matrix_0_0_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_0_0;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_0_1(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_0_1, 0, 1);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_0_2(object sender, RoutedEventArgs e)
+        private void Matrix_0_1_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_0_1;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_0_2(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_0_2, 0, 2);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_0_3(object sender, RoutedEventArgs e)
+        private void Matrix_0_2_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_0_2;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_0_3(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_0_3, 0, 3);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_1_0(object sender, RoutedEventArgs e)
+        private void Matrix_0_3_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_0_3;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_1_0(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_1_0, 1, 0);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_1_1(object sender, RoutedEventArgs e)
+        private void Matrix_1_0_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_1_0;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_1_1(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_1_1, 1, 1);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_1_2(object sender, RoutedEventArgs e)
+        private void Matrix_1_1_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_1_1;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_1_2(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_1_2, 1, 2);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_1_3(object sender, RoutedEventArgs e)
+        private void Matrix_1_2_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_1_2;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_1_3(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_1_3, 1, 3);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_2_0(object sender, RoutedEventArgs e)
+        private void Matrix_1_3_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_1_3;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_2_0(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_2_0, 2, 0);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_2_1(object sender, RoutedEventArgs e)
+        private void Matrix_2_0_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_2_0;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_2_1(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_2_1, 2, 1);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_2_2(object sender, RoutedEventArgs e)
+        private void Matrix_2_1_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_2_1;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_2_2(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_2_2, 2, 2);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_2_3(object sender, RoutedEventArgs e)
+        private void Matrix_2_2_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_2_2;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_2_3(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_2_3, 2, 3);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_3_0(object sender, RoutedEventArgs e)
+        private void Matrix_2_3_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_2_3;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_3_0(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_3_0, 3, 0);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_3_1(object sender, RoutedEventArgs e)
+        private void Matrix_3_0_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_3_0;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_3_1(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_3_1, 3, 1);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_3_2(object sender, RoutedEventArgs e)
+        private void Matrix_3_1_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_3_1;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_3_2(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_3_2, 3, 2);
             counterTextBox.Text = movesCount.ToString();
         }
 
-        private void Matix_3_3(object sender, RoutedEventArgs e)
+        private void Matrix_3_2_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_3_2;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
+        }
+
+        private void Matrix_3_3(object sender, RoutedEventArgs e)
         {
             GiveContent(matrix_3_3, 3, 3);
             counterTextBox.Text = movesCount.ToString();
+        }
+
+        private void Matrix_3_3_Right(object sender, MouseEventArgs e)
+        {
+            Button button = matrix_3_3;
+
+            if (button.Content == null)
+            {
+                PaintButtonValue(button, flag);
+            }
+            else
+            {
+                button.Content = null;
+            }
         }
 
         /// <summary>

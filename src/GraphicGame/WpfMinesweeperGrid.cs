@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace MineSweeper.GraphicGame
 {
+    using System;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -19,12 +20,12 @@ namespace MineSweeper.GraphicGame
     internal class WpfMinesweeperGrid : MinesweeperGrid<WpfMinesweeperButton>
     {
         /// <summary>
-        /// The row height.
+        ///     The row height.
         /// </summary>
         private const int RowHeight = 25;
 
         /// <summary>
-        /// The row width.
+        ///     The row width.
         /// </summary>
         private const int RowWidth = 25;
 
@@ -45,11 +46,11 @@ namespace MineSweeper.GraphicGame
         {
             this.Reset();
 
-            this.WpfGrid = new Grid { Width = RowWidth * columns, Height = RowHeight * rows, ShowGridLines = true };                
+            this.WpfGrid = new Grid { Width = RowWidth * columns, Height = RowHeight * rows, ShowGridLines = true };
 
             for (var i = 0; i < rows; i++)
             {
-                var gridRow = new RowDefinition { Height = new GridLength(RowHeight) };                
+                var gridRow = new RowDefinition { Height = new GridLength(RowHeight) };
                 this.WpfGrid.RowDefinitions.Add(gridRow);
             }
 
@@ -98,6 +99,10 @@ namespace MineSweeper.GraphicGame
 
             if (this.Grid[row, column].HasBomb)
             {
+                // this.RevealMines();
+                var handler = this.BombOpened;
+                handler?.Invoke(this, EventArgs.Empty);
+
                 btn.Content = "*";
             }
             else
@@ -110,6 +115,11 @@ namespace MineSweeper.GraphicGame
         }
 
         /// <summary>
+        ///     The bomb opened.
+        /// </summary>
+        public event EventHandler BombOpened;
+
+        /// <summary>
         /// The click event.
         /// </summary>
         /// <param name="sender">
@@ -119,7 +129,7 @@ namespace MineSweeper.GraphicGame
         /// The e.
         /// </param>
         private void ClickEvent(object sender, RoutedEventArgs e)
-        {            
+        {
             this.RevealCell((sender as WpfMinesweeperButton).Row, (sender as WpfMinesweeperButton).Col);
             (sender as WpfMinesweeperButton).IsEnabled = false;
         }

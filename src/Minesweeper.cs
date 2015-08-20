@@ -28,7 +28,6 @@ namespace MineSweeper
     using System;
     using System.Windows;
 
-    using MineSweeper.ConsoleGame;
     using MineSweeper.GraphicGame;
 
     /// <summary>
@@ -47,8 +46,10 @@ namespace MineSweeper
         private static void Main()
         {
             // var game = new ConsoleMinesweeperGame(5, 10, 15);
-            var game = new WpfMinesweeperGame(10, 10, 25);
-            game.Start();
+            // var game = new WpfMinesweeperGame(10, 10, 25);
+            // game.Start();
+            var app = new Application();
+            app.Run(new WpfMinesweeperMainWindow(10, 10, 25));
         }
     }
 }

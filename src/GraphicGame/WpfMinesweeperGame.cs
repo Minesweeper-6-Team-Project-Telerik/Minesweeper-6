@@ -9,8 +9,6 @@
 namespace MineSweeper.GraphicGame
 {
     using System.Collections.Generic;
-    using System.Windows;
-    using System.Windows.Controls;
 
     using MineSweeper.GameModel.Interfaces;
 
@@ -38,33 +36,25 @@ namespace MineSweeper.GraphicGame
         }
 
         /// <summary>
-        /// Gets the grid.
+        ///     Gets the grid.
         /// </summary>
         public WpfMinesweeperGrid Grid { get; }
 
         /// <summary>
-        /// Gets or sets the score.
+        ///     Gets or sets the score.
         /// </summary>
         public int Score { get; set; }
 
         /// <summary>
-        /// Gets or sets the score board.
+        ///     Gets or sets the score board.
         /// </summary>
         public List<IScoreRecord> ScoreBoard { get; set; }
 
         /// <summary>
-        /// The start.
+        ///     The start.
         /// </summary>
         public void Start()
         {
-            var qWindow = new Window();
-
-            qWindow.Title = "WPF in Console";
-            qWindow.Width = this.Grid.WpfGrid.Width + 50;
-            qWindow.Height = this.Grid.WpfGrid.Height + 100;
-
-            qWindow.Content = this.Grid.WpfGrid;
-            qWindow.ShowDialog();
         }
     }
 }

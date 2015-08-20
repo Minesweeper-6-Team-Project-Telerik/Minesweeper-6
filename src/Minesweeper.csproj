@@ -59,6 +59,12 @@
     <Compile Include="GameModel\MinesweeperCell.cs" />
     <Compile Include="GameModel\MinesweeperGrid.cs" />
     <Compile Include="GameModel\ScoreRecord.cs" />
+    <Compile Include="GraphicGame\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicGame\WpfMinesweeperMainWindow.xaml.cs">
+      <DependentUpon>WpfMinesweeperMainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GraphicGame\WpfMinesweeperButton.cs" />
     <Compile Include="GraphicGame\WpfMinesweeperGame.cs" />
     <Compile Include="GraphicGame\WpfMinesweeperGrid.cs" />
@@ -69,6 +75,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="GraphicGame\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GraphicGame\WpfMinesweeperMainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

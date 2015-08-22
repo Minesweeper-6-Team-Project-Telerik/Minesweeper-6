@@ -46,8 +46,8 @@ namespace MineSweeper
         // </summary>
         private static void Main()
         {
-            var game = new ConsoleMinesweeperGame(10, 10, 15);
-            //var game = new WpfMinesweeperGame(10, 10, 25);
+            //var game = new ConsoleMinesweeperGame(10, 10, 15);
+            var game = new WpfMinesweeperGame(10, 10, 25);
             game.Start();
         }
     }

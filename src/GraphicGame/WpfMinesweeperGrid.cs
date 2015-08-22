@@ -122,6 +122,7 @@ namespace MineSweeper.GraphicGame
         {            
             this.RevealCell((sender as WpfMinesweeperButton).Row, (sender as WpfMinesweeperButton).Col);
             (sender as WpfMinesweeperButton).IsEnabled = false;
+            base.RevealNeighbourCells((sender as WpfMinesweeperButton).Row, (sender as WpfMinesweeperButton).Col);
         }
     }
 }

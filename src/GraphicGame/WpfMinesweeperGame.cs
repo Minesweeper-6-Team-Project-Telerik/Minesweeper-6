@@ -33,7 +33,7 @@ namespace MineSweeper.GraphicGame
         /// </param>
         public WpfMinesweeperGame(int rows, int columns, int minesCount)
         {
-            //this.Grid = new WpfMinesweeperGrid(rows, columns, minesCount);
+            this.Grid = new WpfMinesweeperGrid(rows, columns, minesCount);
             this.ScoreBoard = new List<IScoreRecord>();
         }
 

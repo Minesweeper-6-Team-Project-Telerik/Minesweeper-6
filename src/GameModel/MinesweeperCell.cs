@@ -43,6 +43,7 @@ namespace MineSweeper.GameModel
             this.IsRevealed = revealed;
             this.HasBomb = hasBomb;
             this.Value = value;
+            this.BombCount = 0;
         }
 
         /// <summary>
@@ -59,6 +60,11 @@ namespace MineSweeper.GameModel
         ///     Gets or sets the value.
         /// </summary>
         public T Value { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the number of bombs surounding the specific cell
+        /// </summary>
+        public int BombCount { get; set; }
 
         /// <summary>
         ///     The reveal.

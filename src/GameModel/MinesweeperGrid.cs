@@ -9,6 +9,7 @@
 namespace MineSweeper.GameModel
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using MineSweeper.GameModel.Exceptions;
@@ -56,17 +57,17 @@ namespace MineSweeper.GameModel
         /// <summary>
         ///     Gets the cols.
         /// </summary>
-        protected int Cols { get; }
+        protected int Cols { get; private set;  }
 
         /// <summary>
         ///     Gets the rows.
         /// </summary>
-        protected int Rows { get; }
+        protected int Rows { get; private set; }
 
         /// <summary>
         ///     The Grid.
         /// </summary>
-        protected MinesweeperCell<T>[,] Grid { get; }
+        protected MinesweeperCell<T>[,] Grid { get; private set; }
 
         /// <summary>
         ///     The reset.
@@ -100,6 +101,34 @@ namespace MineSweeper.GameModel
 
             this.Grid[row, column].Reveal();
             return this.Grid[row, column].Value;
+        }
+
+        public virtual void RevealNeighbourCells(int row, int column)
+        {
+
+            var minRow = (row - 1) < 0 ? row : row - 1;
+            var maxRow = (row + 1) >= this.Rows ? row : row + 1;
+            var minColumn = (column - 1) < 0 ? column : column - 1;
+            var maxColumn = (column + 1) >= this.Cols ? column : column + 1;
+
+            for (var i = minRow; i <= maxRow; i++)
+            {
+                for (var j = minColumn; j <= maxColumn; j++)
+                {
+                    if (this.Grid[i, j].IsRevealed || this.Grid[i, j].HasBomb)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        this.RevealCell(i, j);
+                        if (this.NeighbourMinesCount(i, j) == 0)
+                        {
+                            this.RevealNeighbourCells(i, j);
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>

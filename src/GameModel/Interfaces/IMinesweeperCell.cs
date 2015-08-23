@@ -32,6 +32,10 @@ namespace MineSweeper.GameModel.Interfaces
         T Value { get; set; }
 
         /// <summary>
+        ///     Gets and sets the number of bombs surounding the specific cell
+        /// </summary>
+        int BombCount { get; set; }
+        /// <summary>
         ///     The reveal.
         /// </summary>
         void Reveal();

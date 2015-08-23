@@ -9,6 +9,7 @@
 namespace MineSweeper.ConsoleGame
 {
     using System.Text;
+    using System.Collections.Generic;
 
     using MineSweeper.GameModel;
 

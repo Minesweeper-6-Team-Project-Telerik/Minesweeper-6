@@ -43,7 +43,7 @@ namespace MineSweeper.ConsoleGame
         /// <summary>
         ///     Gets the Grid.
         /// </summary>
-        public ConsoleMinesweeperGrid Grid { get; }
+        public ConsoleMinesweeperGrid Grid { get; private set;  }
 
         /// <summary>
         ///     Gets or sets the score.
@@ -113,8 +113,9 @@ namespace MineSweeper.ConsoleGame
                     default:
                         {
                             int row;
-                            var column = 0;
-                            var tryParse = false;
+                            int column;
+                            bool tryParse = false;
+
 
                             if (commandList.Count < 2)
                             {
@@ -147,6 +148,7 @@ namespace MineSweeper.ConsoleGame
                             }
                             else
                             {
+                                this.Grid.RevealNeighbourCells(row, column);
                                 Console.WriteLine(this.Grid.ToString());
                                 this.Score++;
                                 this.NextCommand();

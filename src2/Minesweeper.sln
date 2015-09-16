@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40302.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper", "Minesweeper\Minesweeper.csproj", "{1A5E20A2-0220-4BA2-B4F7-8216DC38735E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfMinesweeper", "WpfMinesweeper\WpfMinesweeper.csproj", "{B1C1D5F1-D255-4664-85D6-60E2561DEBB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A5E20A2-0220-4BA2-B4F7-8216DC38735E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A5E20A2-0220-4BA2-B4F7-8216DC38735E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A5E20A2-0220-4BA2-B4F7-8216DC38735E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A5E20A2-0220-4BA2-B4F7-8216DC38735E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1C1D5F1-D255-4664-85D6-60E2561DEBB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1C1D5F1-D255-4664-85D6-60E2561DEBB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1C1D5F1-D255-4664-85D6-60E2561DEBB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1C1D5F1-D255-4664-85D6-60E2561DEBB4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

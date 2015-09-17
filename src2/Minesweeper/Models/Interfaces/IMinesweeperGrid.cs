@@ -16,6 +16,11 @@ namespace Minesweeper.Models.Interfaces
     public interface IMinesweeperGrid
     {
         /// <summary>
+        ///     The bomb opened event.
+        /// </summary>
+        event EventHandler BoomEvent;
+        
+        /// <summary>
         ///     The Cols.
         /// </summary>
         int Cols { get; }
@@ -26,9 +31,9 @@ namespace Minesweeper.Models.Interfaces
         int Rows { get; }
 
         /// <summary>
-        ///     The bomb opened event.
+        /// Gets the mines count.
         /// </summary>
-        event EventHandler BoomEvent;
+        int MinesCount { get; }
 
         /// <summary>
         /// The reveal cell.

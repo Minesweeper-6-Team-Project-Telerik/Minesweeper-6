@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="WpfMinesweeperButton.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The wpf minesweeper button.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace WpfMinesweeper
 {
     using System.Windows.Controls;

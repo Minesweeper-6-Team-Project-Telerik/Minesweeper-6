@@ -1,27 +1,31 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IPlayer.cs" company="">
+// <copyright file="DifficultyType.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   The Player interface.
+//   The difficulty type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Minesweeper.Models.Interfaces
+namespace Minesweeper.Models
 {
     /// <summary>
-    /// The Player interface.
+    ///     The difficulty type.
     /// </summary>
-    public interface IPlayer
+    public enum MinesweeperDifficultyType
     {
         /// <summary>
-        /// Gets or sets the name.
+        ///     The easy.
         /// </summary>
-        string Name { get; set; }
+        Easy, 
 
         /// <summary>
-        /// Gets or sets the score.
+        ///     The medium.
         /// </summary>
-        int Score { get; set; }
+        Medium, 
+
+        /// <summary>
+        ///     The hard.
+        /// </summary>
+        Hard
     }
 }

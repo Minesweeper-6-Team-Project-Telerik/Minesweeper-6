@@ -20,9 +20,9 @@ namespace Minesweeper.Models
     public class MinesweeperGrid : IMinesweeperGrid
     {
         /// <summary>
-        ///     The mines count.
+        ///     Gets the grid.
         /// </summary>
-        private readonly int minesCount;
+        private MinesweeperCell[,] grid;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MinesweeperGrid"/> class.
@@ -38,16 +38,21 @@ namespace Minesweeper.Models
         /// </param>
         public MinesweeperGrid(int rows, int columns, int minesCount)
         {
+            if (rows <= 0 || columns <= 0 || minesCount <= 0)
+            {
+                throw new ArgumentException("Array dimentions and bom count should be positive value!");
+            }
+
             this.Rows = rows;
             this.Cols = columns;
-            this.minesCount = minesCount;
-            this.Grid = new IMinesweeperCell[rows, columns];
+            this.MinesCount = minesCount;
+            this.grid = new MinesweeperCell[rows, columns];
 
             for (var i = 0; i < rows; i++)
             {
                 for (var j = 0; j < columns; j++)
                 {
-                    this.Grid[i, j] = new MinesweeperCell();
+                    this.grid[i, j] = new MinesweeperCell();
                 }
             }
 
@@ -55,9 +60,14 @@ namespace Minesweeper.Models
         }
 
         /// <summary>
-        ///     Gets the grid.
+        ///     The boom event.
         /// </summary>
-        private IMinesweeperCell[,] Grid { get; set; }
+        public event EventHandler BoomEvent;
+
+        /// <summary>
+        ///     The mines count.
+        /// </summary>
+        public int MinesCount { get; private set; }
 
         /// <summary>
         ///     The Cols.
@@ -69,7 +79,6 @@ namespace Minesweeper.Models
         /// </summary>
         public int Rows { get; private set; }
 
-        
         /// <summary>
         /// The reveal cell.
         /// </summary>
@@ -86,7 +95,7 @@ namespace Minesweeper.Models
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            if (this.Grid[row, column].HasBomb)
+            if (this.grid[row, column].HasBomb)
             {
                 var handler = this.BoomEvent;
 
@@ -96,7 +105,7 @@ namespace Minesweeper.Models
                 }
             }
 
-            this.Grid[row, column].IsRevealed = true;
+            this.grid[row, column].IsRevealed = true;
         }
 
         /// <summary>
@@ -115,7 +124,7 @@ namespace Minesweeper.Models
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            this.Grid[row, column].IsProtected = true;
+            this.grid[row, column].IsProtected = true;
         }
 
         /// <summary>
@@ -150,7 +159,7 @@ namespace Minesweeper.Models
             {
                 for (var j = minColumn; j <= maxColumn; j++)
                 {
-                    if (this.Grid[i, j].HasBomb)
+                    if (this.grid[i, j].HasBomb)
                     {
                         count++;
                     }
@@ -165,7 +174,7 @@ namespace Minesweeper.Models
         /// </summary>
         public void RevealAllMines()
         {
-            foreach (var elem in this.Grid)
+            foreach (var elem in this.grid)
             {
                 if (!elem.IsRevealed)
                 {
@@ -173,11 +182,6 @@ namespace Minesweeper.Models
                 }
             }
         }
-
-        /// <summary>
-        ///     The boom event.
-        /// </summary>
-        public event EventHandler BoomEvent;
 
         /// <summary>
         /// The is cell revealed.
@@ -200,7 +204,7 @@ namespace Minesweeper.Models
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            return this.Grid[row, column].IsRevealed;
+            return this.grid[row, column].IsRevealed;
         }
 
         /// <summary>
@@ -224,7 +228,7 @@ namespace Minesweeper.Models
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            return this.Grid[row, column].IsProtected;
+            return this.grid[row, column].IsProtected;
         }
 
         /// <summary>
@@ -248,7 +252,7 @@ namespace Minesweeper.Models
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            return this.Grid[row, column].HasBomb;
+            return this.grid[row, column].HasBomb;
         }
 
         /// <summary>
@@ -269,7 +273,7 @@ namespace Minesweeper.Models
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            this.Grid[row, column].IsProtected = !this.Grid[row, column].IsProtected;
+            this.grid[row, column].IsProtected = !this.grid[row, column].IsProtected;
         }
 
         /// <summary>
@@ -294,7 +298,7 @@ namespace Minesweeper.Models
         /// </summary>
         private void PutRandomBombs()
         {
-            var mineCoordinates = new int[this.minesCount]; // creates array of coordinates of mines row*x+column
+            var mineCoordinates = new int[this.MinesCount]; // creates array of coordinates of mines row*x+column
             var currentMinesCount = 0;
             var randomGenerator = new Random();
 
@@ -313,15 +317,15 @@ namespace Minesweeper.Models
                 mineCoordinates[currentMinesCount] = randomNumber;
                 currentMinesCount++;
             }
-            while (currentMinesCount < this.minesCount);
+            while (currentMinesCount < this.MinesCount);
 
-            for (var i = 0; i < this.minesCount; i++)
+            for (var i = 0; i < this.MinesCount; i++)
             {
                 // fill mines
                 var row = mineCoordinates[i] % this.Rows;
                 var column = mineCoordinates[i] / this.Cols;
 
-                this.Grid[row, column].HasBomb = true;
+                this.grid[row, column].HasBomb = true;
             }
         }
     }

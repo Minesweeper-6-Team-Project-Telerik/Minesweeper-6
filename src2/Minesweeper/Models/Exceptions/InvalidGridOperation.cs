@@ -6,18 +6,17 @@
 //   The invalid grid operation.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Minesweeper.Models.Exceptions
 {
     using System;
 
     /// <summary>
-    /// The invalid grid operation.
+    ///     The invalid grid operation.
     /// </summary>
     public class InvalidGridOperation : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InvalidGridOperation"/> class.
+        ///     Initializes a new instance of the <see cref="InvalidGridOperation" /> class.
         /// </summary>
         public InvalidGridOperation()
             : base("Invalid grid operation!")

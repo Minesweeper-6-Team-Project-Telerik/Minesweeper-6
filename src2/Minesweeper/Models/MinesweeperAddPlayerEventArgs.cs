@@ -1,28 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinesweeperCellClickEventArgs.cs" company="">
+// <copyright file="MinesweeperAddPlayerEventArgs.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   The minesweeper cell click event args.
+//   The minesweeper add player event args.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Minesweeper.Models
 {
     using System;
 
+    using Minesweeper.Models.Interfaces;
+
     /// <summary>
-    ///     The minesweeper cell click event args.
+    ///     The minesweeper add player event args.
     /// </summary>
-    public class MinesweeperCellClickEventArgs : EventArgs
+    public class MinesweeperAddPlayerEventArgs : EventArgs
     {
         /// <summary>
-        ///     Gets or sets the row.
+        ///     Gets or sets the player.
         /// </summary>
-        public int Row { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the col.
-        /// </summary>
-        public int Col { get; set; }
+        public MinesweeperPlayer Player { get; set; }
     }
 }

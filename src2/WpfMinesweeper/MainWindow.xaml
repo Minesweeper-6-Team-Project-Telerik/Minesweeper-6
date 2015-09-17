@@ -7,22 +7,24 @@
             <Menu Width="Auto" Height="20" Background="#FFA9D1F4" DockPanel.Dock="Top">
                 <MenuItem Header="Game">
                     <MenuItem Header="New">
-                        <MenuItem Header="Easy" Name="StartEasy" Click="MenuItem_NewEasyGame_Click"/>
-                        <MenuItem Header="Medium" Name="StartMedium" Click="MenuItem_NewMediumGame_Click"/>
-                        <MenuItem Header="Hard" Name="StartHard" Click="MenuItem_NewHardGame_Click"/>
+                        <MenuItem Header="Easy" Name="StartEasy" Click="MenuItem_NewEasyGame_Click" />
+                        <MenuItem Header="Medium" Name="StartMedium" Click="MenuItem_NewMediumGame_Click" />
+                        <MenuItem Header="Hard" Name="StartHard" Click="MenuItem_NewHardGame_Click" />
                     </MenuItem>
-                    <MenuItem Header="High Scores"/>
-                    <MenuItem Header="Exit"/>
+                    <MenuItem Header="High Scores" Click="ScoreItem_Click" />
+                    <MenuItem Header="Exit" />
                 </MenuItem>
                 <MenuItem Header="Help">
-                    <MenuItem Header="About"/>                    
-                </MenuItem>                
+                    <MenuItem Header="About" />
+                </MenuItem>
             </Menu>
         </DockPanel>
-        <Label Content="0" x:Name="ScoreLabel" HorizontalContentAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="35" Margin="5,25,0,0" BorderThickness="1" IsEnabled="False" FontFamily="Verdana" FontSize="20" Background="White"/>
-        <Label Content="" x:Name="TimeLabel"  HorizontalContentAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="35" Margin="0,25,15,0" BorderThickness="1" IsEnabled="False" FontFamily="Verdana" FontSize="20" Background="White"/>
-        <Grid Name="WinesweeperGrid" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20">
-
-        </Grid>
+        <Label Content="0" x:Name="ScoreLabel" HorizontalContentAlignment="Right" HorizontalAlignment="Left"
+               VerticalAlignment="Top" Width="75" Height="35" Margin="5,25,0,0" BorderThickness="1" IsEnabled="False"
+               FontFamily="Verdana" FontSize="20" Background="White" />
+        <Label Content="" x:Name="TimeLabel" HorizontalContentAlignment="Right" HorizontalAlignment="Right"
+               VerticalAlignment="Top" Width="75" Height="35" Margin="0,25,15,0" BorderThickness="1" IsEnabled="False"
+               FontFamily="Verdana" FontSize="20" Background="White" />
+        <Grid Name="WinesweeperGrid" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" />
     </Grid>
 </Window>

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IPlayerBoard.cs" company="">
+// <copyright file="IMinesweeperPlayerBoard.cs" company="">
 //   
 // </copyright>
 // <summary>
@@ -12,14 +12,14 @@ namespace Minesweeper.Models.Interfaces
     using System.Collections.Generic;
 
     /// <summary>
-    /// The PlayerBoard interface.
+    ///     The PlayerBoard interface.
     /// </summary>
-    public interface IPlayerBoard
+    public interface IMinesweeperPlayerBoard
     {
         /// <summary>
-        /// Gets the players.
+        ///     Gets the players.
         /// </summary>
-        List<Player> Players { get; }
+        List<MinesweeperPlayer> Players { get; }
 
         /// <summary>
         /// The add player.
@@ -27,6 +27,11 @@ namespace Minesweeper.Models.Interfaces
         /// <param name="player">
         /// The player.
         /// </param>
-        void AddPlayer(Player player);
+        void AddPlayer(MinesweeperPlayer player);
+
+        /// <summary>
+        /// The save.
+        /// </summary>
+        void Save();
     }
 }

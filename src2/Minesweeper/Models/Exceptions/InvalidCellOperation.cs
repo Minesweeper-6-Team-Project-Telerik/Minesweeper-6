@@ -6,18 +6,17 @@
 //   The invalid cell operation.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Minesweeper.Models.Exceptions
 {
     using System;
 
     /// <summary>
-    /// The invalid cell operation.
+    ///     The invalid cell operation.
     /// </summary>
     public class InvalidCellOperation : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InvalidCellOperation"/> class.
+        ///     Initializes a new instance of the <see cref="InvalidCellOperation" /> class.
         /// </summary>
         public InvalidCellOperation()
             : base("Invalid cell operation!")

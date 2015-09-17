@@ -6,18 +6,17 @@
 //   The minesweeper grid factory mdl.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Minesweeper.Models
 {
     using Minesweeper.Models.Interfaces;
 
     /// <summary>
-    /// The minesweeper grid factory mdl.
+    ///     The minesweeper grid factory mdl.
     /// </summary>
     public static class MinesweeperGridFactory
     {
         /// <summary>
-        /// The get people.
+        /// The create new table.
         /// </summary>
         /// <param name="type">
         /// The type.
@@ -25,18 +24,18 @@ namespace Minesweeper.Models
         /// <returns>
         /// The <see cref="IMinesweeperGrid"/>.
         /// </returns>
-        public static IMinesweeperGrid CreateNewTable(DifficultyType type)
+        public static IMinesweeperGrid CreateNewTable(MinesweeperDifficultyType type)
         {
             IMinesweeperGrid grid = null;
             switch (type)
             {
-                case DifficultyType.Easy:
-                    grid = new MinesweeperGrid(9, 9, 10);
+                case MinesweeperDifficultyType.Easy:
+                    grid = new MinesweeperGrid(3, 3, 1);
                     break;
-                case DifficultyType.Medium:
+                case MinesweeperDifficultyType.Medium:
                     grid = new MinesweeperGrid(16, 16, 40);
                     break;
-                case DifficultyType.Hard:
+                case MinesweeperDifficultyType.Hard:
                     grid = new MinesweeperGrid(22, 22, 99);
                     break;
             }

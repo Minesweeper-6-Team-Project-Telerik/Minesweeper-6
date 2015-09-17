@@ -1,31 +1,31 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IMinesweeperCell.cs" company="">
+// <copyright file="IPlayer.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   The MinesweeperCell interface.
+//   The Player interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Minesweeper.Models.Interfaces
 {
     /// <summary>
-    ///     The MinesweeperCell interface.
+    ///     The Player interface.
     /// </summary>
-    public interface IMinesweeperCell
+    public interface IMinesweeperPlayer
     {
         /// <summary>
-        ///     Gets or sets a value indicating whether is revealed.
+        ///     Gets or sets the name.
         /// </summary>
-        bool IsRevealed { get; set; }
+        string Name { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether has bomb.
+        ///     Gets or sets the score.
         /// </summary>
-        bool HasBomb { get; set; }
+        int Score { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether is protected.
+        ///     Gets or sets the time.
         /// </summary>
-        bool IsProtected { get; set; }
+        int Time { get; set; }
     }
 }

@@ -27,13 +27,13 @@ namespace Minesweeper.Models
         private bool isRevealed;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MinesweeperCell"/> class.
+        ///     Initializes a new instance of the <see cref="MinesweeperCell" /> class.
         /// </summary>
         public MinesweeperCell()
         {
             this.IsProtected = false;
-            this.HasBomb = false;
             this.IsRevealed = false;
+            this.HasBomb = false;            
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Minesweeper.Models
             {
                 if (this.isRevealed)
                 {
-               //     throw new InvalidCellOperation("Cell is already revealed!");
+                    throw new InvalidCellOperation("Cell is already revealed!");
                 }
 
                 if (!this.IsProtected)

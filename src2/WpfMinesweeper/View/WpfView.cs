@@ -14,7 +14,6 @@ namespace WpfMinesweeper.View
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using System.Windows.Threading;
 
     using Minesweeper.Models;
     using Minesweeper.Models.Interfaces;
@@ -26,7 +25,7 @@ namespace WpfMinesweeper.View
     internal class WpfView : IMinesweeperView
     {
         /// <summary>
-        /// The buttons.
+        ///     The buttons.
         /// </summary>
         private readonly List<WpfMinesweeperButton> buttons;
 
@@ -36,17 +35,17 @@ namespace WpfMinesweeper.View
         private readonly Grid win;
 
         /// <summary>
-        /// The is grid initialized.
+        ///     The is grid initialized.
         /// </summary>
         private bool isGridInitialized;
 
         /// <summary>
-        /// The last col.
+        ///     The last col.
         /// </summary>
         private int lastCol;
 
         /// <summary>
-        /// The last row.
+        ///     The last row.
         /// </summary>
         private int lastRow;
 
@@ -62,6 +61,11 @@ namespace WpfMinesweeper.View
             this.isGridInitialized = false;
             this.buttons = new List<WpfMinesweeperButton>();
         }
+
+        /// <summary>
+        /// The add player event.
+        /// </summary>
+        public event EventHandler AddPlayerEvent;
 
         /// <summary>
         /// The display time.
@@ -95,9 +99,10 @@ namespace WpfMinesweeper.View
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public void DisplayScoreBoard(IPlayerBoard board)
+        public void DisplayScoreBoard(IMinesweeperPlayerBoard board)
         {
-            throw new NotImplementedException();
+            var scoresWindow = new ScoresWindow(board);
+            scoresWindow.Show();
         }
 
         /// <summary>
@@ -187,14 +192,30 @@ namespace WpfMinesweeper.View
             }
         }
 
-        public void DisplayGameOver()
+        /// <summary>
+        /// The display game over.
+        /// </summary>
+        /// <param name="gameResult">
+        /// The game result.
+        /// </param>
+        public void DisplayGameOver(bool gameResult)
         {
             this.isGridInitialized = false;
-            //var dialog = new InputBox();
-            //if (dialog.ShowDialog() == true)
-            //{
-            //    MessageBox.Show("You said: " + dialog.ResponseText);
-            //} 
+
+            if (gameResult == false)
+            {
+                MessageBox.Show("Game Over!", "Minesweeper", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                var time = (Label)this.win.FindName("TimeLabel");
+                var score = (Label)this.win.FindName("ScoreLabel");
+                var inputBox = new InputBox(
+                    int.Parse(score.Content.ToString()), 
+                    int.Parse(time.Content.ToString()), 
+                    this.playerAdd);
+                inputBox.Show();
+            }
         }
 
         /// <summary>
@@ -212,6 +233,18 @@ namespace WpfMinesweeper.View
         /// </summary>
         public event EventHandler ShowScoreBoardEvent;
 
+        /// <summary>
+        /// The player add.
+        /// </summary>
+        /// <param name="player">
+        /// The player.
+        /// </param>
+        private void playerAdd(MinesweeperPlayer player)
+        {
+            var args = new MinesweeperAddPlayerEventArgs { Player = player };
+
+            this.AddPlayerEvent.Invoke(this, args);
+        }
 
         /// <summary>
         /// The button on mouse right button up.
@@ -226,7 +259,7 @@ namespace WpfMinesweeper.View
         {
             var args = new MinesweeperCellClickEventArgs
                            {
-                               Row = (sender as WpfMinesweeperButton).Row,
+                               Row = (sender as WpfMinesweeperButton).Row, 
                                Col = (sender as WpfMinesweeperButton).Col
                            };
 
@@ -249,7 +282,7 @@ namespace WpfMinesweeper.View
         {
             var args = new MinesweeperCellClickEventArgs
                            {
-                               Row = (sender as WpfMinesweeperButton).Row,
+                               Row = (sender as WpfMinesweeperButton).Row, 
                                Col = (sender as WpfMinesweeperButton).Col
                            };
 
@@ -257,6 +290,14 @@ namespace WpfMinesweeper.View
             this.lastRow = args.Row;
 
             this.OpenCellEvent.Invoke(this, args);
+        }
+
+        /// <summary>
+        /// The score item_ click.
+        /// </summary>
+        public void ScoreItem_Click()
+        {
+            this.ShowScoreBoardEvent.Invoke(this, EventArgs.Empty);
         }
     }
 }

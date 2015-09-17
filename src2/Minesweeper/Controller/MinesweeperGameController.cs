@@ -21,24 +21,29 @@ namespace Minesweeper.Controller
     public class MinesweeperGameController
     {
         /// <summary>
-        ///     The t.
+        /// The players filename.
         /// </summary>
-        private readonly DispatcherTimer timer;
+        private const string PlayersFilename = "scores.data";
 
         /// <summary>
         ///     The game view.
         /// </summary>
-        protected IMinesweeperView gameView;
+        private readonly IMinesweeperView gameView;
 
         /// <summary>
         ///     The grid.
         /// </summary>
-        protected IMinesweeperGrid grid;
+        private readonly IMinesweeperGrid grid;
 
         /// <summary>
         ///     The player board.
         /// </summary>
-        protected IPlayerBoard playerBoard;
+        private readonly IMinesweeperPlayerBoard players;
+
+        /// <summary>
+        ///     The t.
+        /// </summary>
+        private readonly DispatcherTimer timer;
 
         /// <summary>
         ///     The score.
@@ -59,19 +64,73 @@ namespace Minesweeper.Controller
         /// <param name="gameView">
         /// The game view.
         /// </param>
-        public MinesweeperGameController(DifficultyType type, IMinesweeperView gameView)
+        public MinesweeperGameController(MinesweeperDifficultyType type, IMinesweeperView gameView)
         {
+            if (gameView == null)
+            {
+                throw new ArgumentNullException("gameView");
+            }
+
+            // Create grid object
             this.grid = MinesweeperGridFactory.CreateNewTable(type);
+
             this.gameView = gameView;
+            
+            // Handle all view callbacks            
             this.gameView.OpenCellEvent += this.GameViewOnOpenCellEvent;
             this.gameView.ProtectCellEvent += this.GameViewOnProtectCellEvent;
+            this.gameView.AddPlayerEvent += this.GameViewOnAddPlayerEvent;
+            this.gameView.ShowScoreBoardEvent += this.GameViewOnShowScoreBoardEvent;
+
+            // Handle all grid callbacks
             this.grid.BoomEvent += this.GridOnBoomEvent;
-            this.score = 0;
-            this.secondsPassed = 0;
+
+            // Get the players
+            this.players = new MinesweeperPlayerBoard(PlayersFilename);
+
+            // Configure timer
             this.timer = new DispatcherTimer();
             this.timer.Interval = new TimeSpan(0, 0, 1);
-            this.timer.Tick += this.clockTimeTick;
+            this.timer.Tick += this.ClockTimeTick;
+
             this.timer.Start();
+            
+            // Other local data
+            this.score = 0;
+            this.secondsPassed = 0;
+
+            // Display grid
+            this.gameView.DisplayGrid(this.grid);            
+        }
+
+        /// <summary>
+        /// The game view on show score board event.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="eventArgs">
+        /// The event args.
+        /// </param>
+        private void GameViewOnShowScoreBoardEvent(object sender, EventArgs eventArgs)
+        {
+            this.gameView.DisplayScoreBoard(this.players);
+        }
+
+        /// <summary>
+        /// The game view on add player event.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="eventArgs">
+        /// The event args.
+        /// </param>
+        private void GameViewOnAddPlayerEvent(object sender, EventArgs eventArgs)
+        {
+            var args = (MinesweeperAddPlayerEventArgs)eventArgs;
+            this.players.AddPlayer(args.Player);
+            this.players.Save();
         }
 
         /// <summary>
@@ -83,7 +142,7 @@ namespace Minesweeper.Controller
         /// <param name="e">
         /// The e.
         /// </param>
-        private void clockTimeTick(object sender, EventArgs e)
+        private void ClockTimeTick(object sender, EventArgs e)
         {
             this.secondsPassed++;
             this.gameView.DisplayTime(this.secondsPassed);
@@ -119,7 +178,7 @@ namespace Minesweeper.Controller
         {
             this.timer.Stop();
             this.grid.RevealAllMines();
-            this.gameView.DisplayGameOver();            
+            this.gameView.DisplayGameOver(false);
             this.gameView.DisplayGrid(this.grid);
         }
 
@@ -140,15 +199,11 @@ namespace Minesweeper.Controller
             this.score++;
             this.gameView.DisplayGrid(this.grid);
             this.gameView.DisplayMoves(this.score);
-        }
 
-        /// <summary>
-        ///     The start game.
-        /// </summary>
-        public void StartGame()
-        {
-            this.gameView.DisplayGrid(this.grid);
+            if (this.score >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
+            {
+                this.gameView.DisplayGameOver(true);
+            }
         }
-
     }
 }

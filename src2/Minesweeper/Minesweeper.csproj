@@ -50,18 +50,19 @@
     <Compile Include="Controller\MinesweeperGameController.cs" />
     <Compile Include="Models\Exceptions\InvalidCellOperation.cs" />
     <Compile Include="Models\Exceptions\InvalidGridOperation.cs" />
-    <Compile Include="Models\GameData.cs" />
-    <Compile Include="Models\Interfaces\DifficultyType.cs" />
+    <Compile Include="Models\MinesweeperGameData.cs" />
+    <Compile Include="Models\MinesweeperPlayerBoard.cs" />
+    <Compile Include="Models\Interfaces\IMinesweeperPlayerBoard.cs" />
+    <Compile Include="Models\MinesweeperDifficultyType.cs" />
     <Compile Include="Models\Interfaces\IMinesweeperCell.cs" />
     <Compile Include="Models\Interfaces\IMinesweeperGrid.cs" />
-    <Compile Include="Models\Interfaces\IPlayer.cs" />
-    <Compile Include="Models\Interfaces\IPlayerBoard.cs" />
+    <Compile Include="Models\Interfaces\IMinesweeperPlayer.cs" />
+    <Compile Include="Models\MinesweeperAddPlayerEventArgs.cs" />
     <Compile Include="Models\MinesweeperCell.cs" />
     <Compile Include="Models\MinesweeperCellClickEventArgs.cs" />
     <Compile Include="Models\MinesweeperGridFactory.cs" />
     <Compile Include="Models\MinesweeperGrid.cs" />
-    <Compile Include="Models\Player.cs" />
-    <Compile Include="Models\PlayerBoard.cs" />
+    <Compile Include="Models\MinesweeperPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IMinesweeperView.cs" />
   </ItemGroup>

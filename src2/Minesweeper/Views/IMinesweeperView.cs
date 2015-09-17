@@ -9,14 +9,36 @@
 namespace Minesweeper.Views
 {
     using System;
+    using System.Collections.Generic;
 
+    using Minesweeper.Models;
     using Minesweeper.Models.Interfaces;
-
+    
     /// <summary>
     ///     The View interface.
     /// </summary>
     public interface IMinesweeperView
     {
+        /// <summary>
+        ///     The open cell.
+        /// </summary>
+        event EventHandler OpenCellEvent;
+
+        /// <summary>
+        ///     The protect cell.
+        /// </summary>
+        event EventHandler ProtectCellEvent;
+
+        /// <summary>
+        ///     The show score board event.
+        /// </summary>
+        event EventHandler ShowScoreBoardEvent;
+
+        /// <summary>
+        ///     The add player event.
+        /// </summary>
+        event EventHandler AddPlayerEvent;
+
         /// <summary>
         /// The display time.
         /// </summary>
@@ -39,7 +61,7 @@ namespace Minesweeper.Views
         /// <param name="board">
         /// The board.
         /// </param>
-        void DisplayScoreBoard(IPlayerBoard board);
+        void DisplayScoreBoard(IMinesweeperPlayerBoard board);
 
         /// <summary>
         /// The display grid.
@@ -47,25 +69,14 @@ namespace Minesweeper.Views
         /// <param name="grid">
         /// The grid.
         /// </param>
-        /// <typeparam name="T">
-        /// </typeparam>
         void DisplayGrid(IMinesweeperGrid grid);
 
-        void DisplayGameOver();
-
         /// <summary>
-        ///     The open cell.
+        /// The display game over.
         /// </summary>
-        event EventHandler OpenCellEvent;
-
-        /// <summary>
-        ///     The protect cell.
-        /// </summary>
-        event EventHandler ProtectCellEvent;
-        
-        /// <summary>
-        ///     The show score board.
-        /// </summary>
-        event EventHandler ShowScoreBoardEvent;
+        /// <param name="gameResult">
+        /// The game result.
+        /// </param>
+        void DisplayGameOver(bool gameResult);
     }
 }

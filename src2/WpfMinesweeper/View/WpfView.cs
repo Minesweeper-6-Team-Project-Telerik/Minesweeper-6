@@ -169,6 +169,11 @@ namespace WpfMinesweeper.View
             var rows = grid.Rows;
             var cols = grid.Cols;
 
+            if (grid.NeighbourMinesCount(this.lastRow, this.lastCol) == 0)
+            {
+                this.isGridInitialized = false;
+            }            
+
             if (this.isGridInitialized)
             {
                 var i = this.lastRow;
@@ -186,10 +191,7 @@ namespace WpfMinesweeper.View
                 {
                     for (var j = 0; j < cols; j++)
                     {
-                        var button = new WpfMinesweeperButton { Row = rows, Col = cols };
-
-                        this.UpdateCellButton(grid, button);
-
+                        var button = new WpfMinesweeperButton { Row = rows, Col = cols };                     
                         button.Name = "Button_" + i + "_" + j;
                         button.HorizontalAlignment = HorizontalAlignment.Left;
                         button.VerticalAlignment = VerticalAlignment.Top;
@@ -202,6 +204,8 @@ namespace WpfMinesweeper.View
                         button.Col = j;
                         this.win.Children.Add(button);
                         this.buttons.Add(button);
+
+                        this.UpdateCellButton(grid, button);
                     }
                 }
 
@@ -250,10 +254,11 @@ namespace WpfMinesweeper.View
         /// <param name="button">
         /// The button.
         /// </param>
-        private void UpdateCellButton(IMinesweeperGrid grid, ContentControl button)
+        private void UpdateCellButton(IMinesweeperGrid grid, WpfMinesweeperButton button)
         {
-            var i = this.lastRow;
-            var j = this.lastCol;
+            var i = button.Row;
+            var j = button.Col;
+            
             var color = new System.Windows.Media.Color();
 
             if (grid.IsCellProtected(i, j))
@@ -303,8 +308,7 @@ namespace WpfMinesweeper.View
                     {
                         button.Content = grid.NeighbourMinesCount(i, j).ToString();
                         button.Foreground = new SolidColorBrush(color);
-                    }
-                    
+                    }                    
                 }
             }
             else

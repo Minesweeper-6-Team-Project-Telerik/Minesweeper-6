@@ -22,7 +22,7 @@ namespace Minesweeper.Models
         /// <summary>
         ///     Gets the grid.
         /// </summary>
-        private MinesweeperCell[,] grid;
+        private readonly MinesweeperCell[,] grid;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MinesweeperGrid"/> class.
@@ -106,6 +106,7 @@ namespace Minesweeper.Models
             }
 
             this.grid[row, column].IsRevealed = true;
+            this.RevealAllNeightborsWithZeroMines();
         }
 
         /// <summary>
@@ -274,6 +275,46 @@ namespace Minesweeper.Models
             }
 
             this.grid[row, column].IsProtected = !this.grid[row, column].IsProtected;
+        }
+
+        /// <summary>
+        /// The open neightbor zero mines.
+        /// </summary>
+        /// <param name="row">
+        /// The row.
+        /// </param>
+        /// <param name="column">
+        /// The column.
+        /// </param>
+        private void OpenNeightborZeroMines(int row, int column)
+        {
+            for (var i = row - 1; i <= row + 1; i++)
+            {
+                for (var j = column - 1; j <= column + 1; j++)
+                {
+                    if (this.IsValidCell(i, j) && !this.HasCellBomb(i, j) && !this.IsCellRevealed(i, j))
+                    {
+                        this.RevealCell(i, j);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// The reveal all neightbors with zero mines.
+        /// </summary>
+        private void RevealAllNeightborsWithZeroMines()
+        {
+            for (var i = 0; i < this.Rows; i++)
+            {
+                for (var j = 0; j < this.Cols; j++)
+                {
+                    if (this.NeighbourMinesCount(i, j) == 0 && this.IsCellRevealed(i, j))
+                    {
+                        this.OpenNeightborZeroMines(i, j);
+                    }
+                }
+            }
         }
 
         /// <summary>

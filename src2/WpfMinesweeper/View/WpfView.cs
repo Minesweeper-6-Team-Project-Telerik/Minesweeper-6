@@ -254,6 +254,7 @@ namespace WpfMinesweeper.View
         {
             var i = this.lastRow;
             var j = this.lastCol;
+            var color = new System.Windows.Media.Color();
 
             if (grid.IsCellProtected(i, j))
             {
@@ -270,7 +271,40 @@ namespace WpfMinesweeper.View
                 }
                 else
                 {
-                    button.Content = grid.NeighbourMinesCount(i, j).ToString();
+                    switch (grid.NeighbourMinesCount(i, j))
+                    {
+                        case 1:
+                            color = Colors.Blue;
+                            break;
+                        case 2:
+                            color = Colors.Green;
+                            break;
+                        case 3:
+                            color = Colors.Red;
+                            break;
+                        case 4:
+                            color = Colors.LightBlue;
+                            break;
+                        case 5:
+                            color = Colors.LightGreen;
+                            break;
+                        case 6:
+                            color = Colors.LightCoral;
+                            break;
+                        case 7:
+                            color = Colors.DarkBlue;
+                            break;
+                        case 8:
+                            color = Colors.DarkRed;
+                            break;                        
+                    }
+
+                    if (grid.NeighbourMinesCount(i, j) != 0)
+                    {
+                        button.Content = grid.NeighbourMinesCount(i, j).ToString();
+                        button.Foreground = new SolidColorBrush(color);
+                    }
+                    
                 }
             }
             else

@@ -30,7 +30,7 @@ namespace Minesweeper.Models
             switch (type)
             {
                 case MinesweeperDifficultyType.Easy:
-                    grid = new MinesweeperGrid(3, 3, 1);
+                    grid = new MinesweeperGrid(9, 9, 10);
                     break;
                 case MinesweeperDifficultyType.Medium:
                     grid = new MinesweeperGrid(16, 16, 40);

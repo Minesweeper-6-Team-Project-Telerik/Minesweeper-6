@@ -52,7 +52,7 @@ namespace Minesweeper.Models
             {
                 if (this.isRevealed)
                 {
-                    throw new InvalidCellOperation("Cell is already revealed!");
+                   // throw new InvalidCellOperation("Cell is already revealed!");
                 }
 
                 if (!this.IsProtected)

@@ -8,9 +8,9 @@
                  Width="150" />
         <StackPanel Orientation="Horizontal">
             <Button Name="OkButton" Content="OK" Width="100" Height="25" Margin="35,10,0,0" HorizontalAlignment="Left"
-                    Click="OkButton_Click" />
+                    Click="OkButtonClick" />
             <Button Name="CancelButton" Content="Cancel" Width="100" Height="25" HorizontalAlignment="Right"
-                    Margin="25,10,25,0" Click="CancelButton_Click" />
+                    Margin="25,10,25,0" Click="CancelButtonClick" />
         </StackPanel>
     </StackPanel>
 </Window>

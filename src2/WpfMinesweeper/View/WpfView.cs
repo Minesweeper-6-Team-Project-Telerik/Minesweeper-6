@@ -10,14 +10,21 @@ namespace WpfMinesweeper.View
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Linq;
+    using System.Management.Instrumentation;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using System.Windows.Interop;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     using Minesweeper.Models;
     using Minesweeper.Models.Interfaces;
     using Minesweeper.Views;
+
+    using WpfMinesweeper.Properties;
 
     /// <summary>
     ///     The wpf view.
@@ -25,9 +32,19 @@ namespace WpfMinesweeper.View
     internal class WpfView : IMinesweeperView
     {
         /// <summary>
+        ///     The cell height and width.
+        /// </summary>
+        private const int CellHeightAndWidth = 20;
+
+        /// <summary>
         ///     The buttons.
         /// </summary>
         private readonly List<WpfMinesweeperButton> buttons;
+
+        /// <summary>
+        ///     The images.
+        /// </summary>
+        private readonly List<ImageBrush> images;
 
         /// <summary>
         ///     The win.
@@ -57,15 +74,41 @@ namespace WpfMinesweeper.View
         /// </param>
         public WpfView(Grid window)
         {
+            // Keep global grid for later use
             this.win = window;
+
             this.isGridInitialized = false;
+
+            // Keep reference to all grid buttons
             this.buttons = new List<WpfMinesweeperButton>();
+
+            // Initialize all resource pictures, and keep them in ram for performance
+            this.images = new List<ImageBrush>
+                              {
+                                  this.GetImage(Resources.MineSweeperBomb), 
+                                  this.GetImage(Resources.MineSweeperFlag)
+                              };
         }
 
         /// <summary>
-        /// The add player event.
+        ///     The add player event.
         /// </summary>
         public event EventHandler AddPlayerEvent;
+
+        /// <summary>
+        ///     The open cell event.
+        /// </summary>
+        public event EventHandler OpenCellEvent;
+
+        /// <summary>
+        ///     The protect cell event.
+        /// </summary>
+        public event EventHandler ProtectCellEvent;
+
+        /// <summary>
+        ///     The show score board event.
+        /// </summary>
+        public event EventHandler ShowScoreBoardEvent;
 
         /// <summary>
         /// The display time.
@@ -75,8 +118,14 @@ namespace WpfMinesweeper.View
         /// </param>
         public void DisplayTime(int timer)
         {
-            var MyTimeLabel = (Label)this.win.FindName("TimeLabel");
-            MyTimeLabel.Content = timer.ToString("D3");
+            var timeLabel = (Label)this.win.FindName("TimeLabel");
+
+            if (timeLabel == null)
+            {
+                throw new InstanceNotFoundException("Cannot find time label element!");
+            }
+
+            timeLabel.Content = timer.ToString("D3");
         }
 
         /// <summary>
@@ -87,8 +136,14 @@ namespace WpfMinesweeper.View
         /// </param>
         public void DisplayMoves(int moves)
         {
-            var MyMovesLabel = (Label)this.win.FindName("ScoreLabel");
-            MyMovesLabel.Content = moves.ToString("D3");
+            var movesLabel = (Label)this.win.FindName("ScoreLabel");
+
+            if (movesLabel == null)
+            {
+                throw new InstanceNotFoundException("Cannot find time label element!");
+            }
+
+            movesLabel.Content = moves.ToString("D3");
         }
 
         /// <summary>
@@ -97,8 +152,6 @@ namespace WpfMinesweeper.View
         /// <param name="board">
         /// The board.
         /// </param>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public void DisplayScoreBoard(IMinesweeperPlayerBoard board)
         {
             var scoresWindow = new ScoresWindow(board);
@@ -122,64 +175,28 @@ namespace WpfMinesweeper.View
                 var j = this.lastCol;
 
                 var button = this.buttons.First(x => x.Name == "Button_" + i.ToString() + "_" + j.ToString());
-
-                if (grid.IsCellProtected(i, j))
-                {
-                    button.Content = 'F'.ToString();
-                }
-                else if (grid.IsCellRevealed(i, j))
-                {
-                    button.IsEnabled = false;
-                    if (grid.HasCellBomb(i, j))
-                    {
-                        button.Content = '*'.ToString();
-                    }
-                    else
-                    {
-                        button.Content = grid.NeighbourMinesCount(i, j).ToString();
-                    }
-                }
-                else
-                {
-                    button.Content = string.Empty;
-                }
+                this.UpdateCellButton(grid, button);
             }
             else
             {
+                this.buttons.Clear();
+                this.win.Children.Clear();
+
                 for (var i = 0; i < rows; i++)
                 {
                     for (var j = 0; j < cols; j++)
                     {
                         var button = new WpfMinesweeperButton { Row = rows, Col = cols };
 
-                        if (grid.IsCellProtected(i, j))
-                        {
-                            button.Content = 'F'.ToString();
-                        }
-                        else if (grid.IsCellRevealed(i, j))
-                        {
-                            button.IsEnabled = false;
-                            if (grid.HasCellBomb(i, j))
-                            {
-                                button.Content = '*'.ToString();
-                            }
-                            else
-                            {
-                                button.Content = grid.NeighbourMinesCount(i, j).ToString();
-                            }
-                        }
-                        else
-                        {
-                            button.Content = string.Empty;
-                        }
+                        this.UpdateCellButton(grid, button);
 
                         button.Name = "Button_" + i + "_" + j;
                         button.HorizontalAlignment = HorizontalAlignment.Left;
                         button.VerticalAlignment = VerticalAlignment.Top;
-                        button.Width = 20;
-                        button.Height = 20;
-                        button.Margin = new Thickness(i * 20, j * 20, 0, 0);
-                        button.Click += this.button_Click;
+                        button.Width = CellHeightAndWidth;
+                        button.Height = CellHeightAndWidth;
+                        button.Margin = new Thickness(i * CellHeightAndWidth, j * CellHeightAndWidth, 0, 0);
+                        button.Click += this.CellButtonClick;
                         button.MouseRightButtonUp += this.ButtonOnMouseRightButtonUp;
                         button.Row = i;
                         button.Col = j;
@@ -208,42 +225,110 @@ namespace WpfMinesweeper.View
             }
             else
             {
-                var time = (Label)this.win.FindName("TimeLabel");
-                var score = (Label)this.win.FindName("ScoreLabel");
-                var inputBox = new InputBox(
-                    int.Parse(score.Content.ToString()), 
-                    int.Parse(time.Content.ToString()), 
-                    this.playerAdd);
+                var inputBox = new InputBox(this.PlayerAdd);
                 inputBox.Show();
             }
         }
 
         /// <summary>
-        ///     The open cell event.
+        ///     The score item_ click.
         /// </summary>
-        public event EventHandler OpenCellEvent;
+        public void ScoreItemClick()
+        {
+            if (this.ShowScoreBoardEvent != null)
+            {
+                this.ShowScoreBoardEvent.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         /// <summary>
-        ///     The protect cell event.
+        /// The update cell button.
         /// </summary>
-        public event EventHandler ProtectCellEvent;
+        /// <param name="grid">
+        /// The grid.
+        /// </param>
+        /// <param name="button">
+        /// The button.
+        /// </param>
+        private void UpdateCellButton(IMinesweeperGrid grid, ContentControl button)
+        {
+            var i = this.lastRow;
+            var j = this.lastCol;
+
+            if (grid.IsCellProtected(i, j))
+            {
+                button.Background = this.images[1];
+            }
+            else if (grid.IsCellRevealed(i, j))
+            {
+                button.ClearValue(Control.BackgroundProperty);                
+                button.IsEnabled = false;
+
+                if (grid.HasCellBomb(i, j))
+                {
+                    button.Background = this.images[0];
+                }
+                else
+                {
+                    button.Content = grid.NeighbourMinesCount(i, j).ToString();
+                }
+            }
+            else
+            {
+                button.ClearValue(Control.BackgroundProperty);                
+                button.Content = string.Empty;
+            }
+        }
 
         /// <summary>
-        ///     The show score board event.
+        /// The get image.
         /// </summary>
-        public event EventHandler ShowScoreBoardEvent;
+        /// <param name="imgResourse">
+        /// The img resourse.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ImageBrush"/>.
+        /// </returns>
+        private ImageBrush GetImage(Bitmap imgResourse)
+        {
+            var bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
+                imgResourse.GetHbitmap(), 
+                IntPtr.Zero, 
+                Int32Rect.Empty, 
+                BitmapSizeOptions.FromEmptyOptions());
+
+            return new ImageBrush(bitmapSource);
+        }
 
         /// <summary>
         /// The player add.
         /// </summary>
-        /// <param name="player">
-        /// The player.
+        /// <param name="name">
+        /// The name.
         /// </param>
-        private void playerAdd(MinesweeperPlayer player)
+        private void PlayerAdd(string name)
         {
+            var movesLabel = (Label)this.win.FindName("ScoreLabel");
+            var timeLabel = (Label)this.win.FindName("TimeLabel");
+
+            if (movesLabel == null || timeLabel == null)
+            {
+                throw new NullReferenceException("Move or time labels are not available!");
+            }
+
+            var player = new MinesweeperPlayer
+                             {
+                                 Name = name, 
+                                 Score = int.Parse(movesLabel.Content.ToString()), 
+                                 Time = int.Parse(timeLabel.Content.ToString())
+                             };
+
             var args = new MinesweeperAddPlayerEventArgs { Player = player };
 
-            this.AddPlayerEvent.Invoke(this, args);
+            if (this.AddPlayerEvent != null)
+            {
+                this.AddPlayerEvent.Invoke(this, args);
+            }
         }
 
         /// <summary>
@@ -257,16 +342,24 @@ namespace WpfMinesweeper.View
         /// </param>
         private void ButtonOnMouseRightButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
+            if ((sender as WpfMinesweeperButton) == null)
+            {
+                throw new NullReferenceException("No object given!");
+            }
+
             var args = new MinesweeperCellClickEventArgs
                            {
-                               Row = (sender as WpfMinesweeperButton).Row, 
-                               Col = (sender as WpfMinesweeperButton).Col
+                               Row = ((WpfMinesweeperButton)sender).Row, 
+                               Col = ((WpfMinesweeperButton)sender).Col
                            };
 
             this.lastCol = args.Col;
             this.lastRow = args.Row;
 
-            this.ProtectCellEvent.Invoke(this, args);
+            if (this.ProtectCellEvent != null)
+            {
+                this.ProtectCellEvent.Invoke(this, args);
+            }
         }
 
         /// <summary>
@@ -278,26 +371,26 @@ namespace WpfMinesweeper.View
         /// <param name="e">
         /// The e.
         /// </param>
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void CellButtonClick(object sender, RoutedEventArgs e)
         {
+            if ((sender as WpfMinesweeperButton) == null)
+            {
+                throw new NullReferenceException("No object given!");
+            }
+
             var args = new MinesweeperCellClickEventArgs
                            {
-                               Row = (sender as WpfMinesweeperButton).Row, 
-                               Col = (sender as WpfMinesweeperButton).Col
+                               Row = ((WpfMinesweeperButton)sender).Row, 
+                               Col = ((WpfMinesweeperButton)sender).Col
                            };
 
             this.lastCol = args.Col;
             this.lastRow = args.Row;
 
-            this.OpenCellEvent.Invoke(this, args);
-        }
-
-        /// <summary>
-        /// The score item_ click.
-        /// </summary>
-        public void ScoreItem_Click()
-        {
-            this.ShowScoreBoardEvent.Invoke(this, EventArgs.Empty);
+            if (this.OpenCellEvent != null)
+            {
+                this.OpenCellEvent.Invoke(this, args);
+            }
         }
     }
 }

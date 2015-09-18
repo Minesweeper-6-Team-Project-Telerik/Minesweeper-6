@@ -11,50 +11,30 @@ namespace WpfMinesweeper
     using System;
     using System.Windows;
 
-    using Minesweeper.Models;
-
     /// <summary>
     ///     Interaction logic for InputBox.xaml
     /// </summary>
     public partial class InputBox : Window
     {
         /// <summary>
-        /// The player delegate.
+        /// The player name delegate.
         /// </summary>
-        private readonly Action<MinesweeperPlayer> playerDelegate;
-
-        /// <summary>
-        /// The score.
-        /// </summary>
-        private readonly int score;
-
-        /// <summary>
-        /// The time.
-        /// </summary>
-        private readonly int time;
+        private readonly Action<string> playerNameDelegate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InputBox"/> class.
         /// </summary>
-        /// <param name="score">
-        /// The score.
+        /// <param name="playerNameDelegate">
+        /// The player name delegate.
         /// </param>
-        /// <param name="time">
-        /// The time.
-        /// </param>
-        /// <param name="playerDelegate">
-        /// The player Delegate.
-        /// </param>
-        public InputBox(int score, int time, Action<MinesweeperPlayer> playerDelegate)
+        public InputBox(Action<string> playerNameDelegate)
         {
-            this.score = score;
-            this.time = time;
             this.InitializeComponent();
-            this.playerDelegate = playerDelegate;
+            this.playerNameDelegate = playerNameDelegate;
         }
 
         /// <summary>
-        /// The cancel button_ click.
+        /// The cancel button click.
         /// </summary>
         /// <param name="sender">
         /// The sender.
@@ -62,7 +42,7 @@ namespace WpfMinesweeper
         /// <param name="e">
         /// The e.
         /// </param>
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -76,15 +56,10 @@ namespace WpfMinesweeper
         /// <param name="e">
         /// The e.
         /// </param>
-        private void OkButton_Click(object sender, RoutedEventArgs e)
+        private void OkButtonClick(object sender, RoutedEventArgs e)
         {
             // Input validations            
-            var newPlayer = new MinesweeperPlayer();
-            newPlayer.Name = this.NameTextBox.Text;
-            newPlayer.Score = this.score;
-            newPlayer.Time = this.time;
-
-            this.playerDelegate(newPlayer);
+            this.playerNameDelegate(this.NameTextBox.Text);
 
             this.Close();
         }

@@ -43,7 +43,7 @@ namespace Minesweeper.Controller
         /// <summary>
         ///     The t.
         /// </summary>
-        private readonly DispatcherTimer timer;
+        private DispatcherTimer timer;
 
         /// <summary>
         ///     The score.
@@ -54,6 +54,8 @@ namespace Minesweeper.Controller
         ///     The seconds passed.
         /// </summary>
         private int secondsPassed;
+
+        private bool isGameStarted;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MinesweeperGameController"/> class.
@@ -88,19 +90,8 @@ namespace Minesweeper.Controller
             // Get the players
             this.players = new MinesweeperPlayerBoard(PlayersFilename);
 
-            // Configure timer
-            this.timer = new DispatcherTimer();
-            this.timer.Interval = new TimeSpan(0, 0, 1);
-            this.timer.Tick += this.ClockTimeTick;
-
-            this.timer.Start();
-            
-            // Other local data
-            this.score = 0;
-            this.secondsPassed = 0;
-
-            // Display grid
-            this.gameView.DisplayGrid(this.grid);            
+            this.gameView.DisplayGrid(this.grid);
+            this.isGameStarted = false;
         }
 
         /// <summary>
@@ -193,17 +184,45 @@ namespace Minesweeper.Controller
         /// </param>
         private void GameViewOnOpenCellEvent(object sender, EventArgs eventArgs)
         {
-            var args = (MinesweeperCellClickEventArgs)eventArgs;
-            this.grid.RevealCell(args.Row, args.Col);
-
-            this.score++;
-            this.gameView.DisplayGrid(this.grid);
-            this.gameView.DisplayMoves(this.score);
-
-            if (this.score >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
+            if (!this.isGameStarted)
             {
-                this.gameView.DisplayGameOver(true);
+                this.StartGame();
+                this.isGameStarted = true;
             }
+            
+            var args = (MinesweeperCellClickEventArgs)eventArgs;
+
+            if (!this.grid.IsCellProtected(args.Row, args.Col))
+            {
+                this.grid.RevealCell(args.Row, args.Col);
+
+                this.score++;
+                this.gameView.DisplayGrid(this.grid);
+                this.gameView.DisplayMoves(this.score);
+
+                if (this.score >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
+                {
+                    this.timer.Stop();
+                    this.gameView.DisplayGameOver(true);
+                }
+            }            
+        }
+
+        private void StartGame()
+        {
+            // Configure timer
+            this.timer = new DispatcherTimer();
+            this.timer.Interval = new TimeSpan(0, 0, 1);
+            this.timer.Tick += this.ClockTimeTick;
+
+            this.timer.Start();
+
+            // Other local data
+            this.score = 0;
+            this.secondsPassed = 0;
+
+            // Display grid
+            this.gameView.DisplayGrid(this.grid);            
         }
     }
 }

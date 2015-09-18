@@ -23,7 +23,7 @@ namespace WpfMinesweeper
         /// <summary>
         ///     The view.
         /// </summary>
-        private readonly WpfView view;
+        private WpfView view;
 
         /// <summary>
         ///     The game controller.
@@ -43,6 +43,20 @@ namespace WpfMinesweeper
         }
 
         /// <summary>
+        /// The score item_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        public void ScoreItemClick(object sender, RoutedEventArgs e)
+        {
+            this.view.ScoreItemClick();
+        }
+
+        /// <summary>
         /// The menu item_ new easy game_ click.
         /// </summary>
         /// <param name="sender">
@@ -51,11 +65,11 @@ namespace WpfMinesweeper
         /// <param name="e">
         /// The e.
         /// </param>
-        private void MenuItem_NewEasyGame_Click(object sender, RoutedEventArgs e)
+        private void MenuItemNewEasyGameClick(object sender, RoutedEventArgs e)
         {
-            this.WinesweeperGrid.Children.Clear();
             this.Width = 240;
             this.Height = 340;
+            this.view = new WpfView(this.WinesweeperGrid);
             this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Easy, this.view);
         }
 
@@ -68,11 +82,11 @@ namespace WpfMinesweeper
         /// <param name="e">
         /// The e.
         /// </param>
-        private void MenuItem_NewMediumGame_Click(object sender, RoutedEventArgs e)
-        {
-            this.WinesweeperGrid.Children.Clear();
+        private void MenuItemNewMediumGameClick(object sender, RoutedEventArgs e)
+        {         
             this.Width = 380;
             this.Height = 480;
+            this.view = new WpfView(this.WinesweeperGrid);
             this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Medium, this.view);
         }
 
@@ -85,26 +99,12 @@ namespace WpfMinesweeper
         /// <param name="e">
         /// The e.
         /// </param>
-        private void MenuItem_NewHardGame_Click(object sender, RoutedEventArgs e)
+        private void MenuItemNewHardGameClick(object sender, RoutedEventArgs e)
         {
-            this.WinesweeperGrid.Children.Clear();
             this.Width = 500;
             this.Height = 600;
+            this.view = new WpfView(this.WinesweeperGrid);
             this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Hard, this.view);
-        }
-
-        /// <summary>
-        /// The score item_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        public void ScoreItem_Click(object sender, RoutedEventArgs e)
-        {
-            this.view.ScoreItem_Click();
         }
     }
 }

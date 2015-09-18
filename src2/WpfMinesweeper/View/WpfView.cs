@@ -85,8 +85,8 @@ namespace WpfMinesweeper.View
             // Initialize all resource pictures, and keep them in ram for performance
             this.images = new List<ImageBrush>
                               {
-                                  this.GetImage(Resources.MineSweeperBomb), 
-                                  this.GetImage(Resources.MineSweeperFlag)
+                                  this.GetImage(Resources.bomb), 
+                                  this.GetImage(Resources.flag)
                               };
         }
 
@@ -198,14 +198,15 @@ namespace WpfMinesweeper.View
                         button.Width = CellHeightAndWidth;
                         button.Height = CellHeightAndWidth;
                         button.Margin = new Thickness(i * CellHeightAndWidth, j * CellHeightAndWidth, 0, 0);
-                        button.Click += this.CellButtonClick;
+                        button.Click += this.CellButtonClick;                        
                         button.MouseRightButtonUp += this.ButtonOnMouseRightButtonUp;
                         button.Row = i;
                         button.Col = j;
-                        this.win.Children.Add(button);
-                        this.buttons.Add(button);
 
                         this.UpdateCellButton(grid, button);
+
+                        this.win.Children.Add(button);
+                        this.buttons.Add(button);                        
                     }
                 }
 
@@ -272,7 +273,7 @@ namespace WpfMinesweeper.View
 
                 if (grid.HasCellBomb(i, j))
                 {
-                    button.Background = this.images[0];
+                    button.Content = "*";                    
                 }
                 else
                 {
@@ -288,19 +289,19 @@ namespace WpfMinesweeper.View
                             color = Colors.Red;
                             break;
                         case 4:
-                            color = Colors.LightBlue;
+                            color = Colors.Indigo;
                             break;
                         case 5:
-                            color = Colors.LightGreen;
+                            color = Colors.DarkSlateGray;
                             break;
                         case 6:
-                            color = Colors.LightCoral;
+                            color = Colors.DarkRed;
                             break;
                         case 7:
                             color = Colors.DarkBlue;
                             break;
                         case 8:
-                            color = Colors.DarkRed;
+                            color = Colors.Black;
                             break;                        
                     }
 

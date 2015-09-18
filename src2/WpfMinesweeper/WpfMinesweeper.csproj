@@ -112,9 +112,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\MinesweeperBomb.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Minesweeper\Minesweeper.csproj">
       <Project>{1a5e20a2-0220-4ba2-b4f7-8216dc38735e}</Project>
       <Name>Minesweeper</Name>
@@ -124,7 +121,7 @@
     <None Include="Resources\bomb.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\mine_flag.png" />
+    <None Include="Resources\flag.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

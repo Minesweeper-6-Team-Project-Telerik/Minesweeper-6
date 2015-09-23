@@ -50,6 +50,8 @@ namespace Minesweeper.Controller
         /// </summary>
         private int score;
 
+        private MinesweeperDifficultyType type;
+
         /// <summary>
         ///     The seconds passed.
         /// </summary>
@@ -76,6 +78,7 @@ namespace Minesweeper.Controller
             // Create grid object
             this.grid = MinesweeperGridFactory.CreateNewTable(type);
 
+            this.type = type;
             this.gameView = gameView;
             
             // Handle all view callbacks            
@@ -120,7 +123,14 @@ namespace Minesweeper.Controller
         private void GameViewOnAddPlayerEvent(object sender, EventArgs eventArgs)
         {
             var args = (MinesweeperAddPlayerEventArgs)eventArgs;
-            this.players.AddPlayer(args.Player);
+            var player = new MinesweeperPlayer()
+                             {
+                                 Name = args.PlayerName, 
+                                 Time = this.secondsPassed,
+                                 Type = this.type
+                             };
+
+            this.players.AddPlayer(player);
             this.players.Save();
         }
 

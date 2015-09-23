@@ -20,6 +20,6 @@ namespace Minesweeper.Models
         /// <summary>
         ///     Gets or sets the player.
         /// </summary>
-        public MinesweeperPlayer Player { get; set; }
+        public string PlayerName { get; set; }
     }
 }

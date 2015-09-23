@@ -85,7 +85,7 @@ namespace WpfMinesweeper.View
             // Initialize all resource pictures, and keep them in ram for performance
             this.images = new List<ImageBrush>
                               {
-                                  this.GetImage(Resources.bomb), 
+                                  this.GetImage(Resources.mine), 
                                   this.GetImage(Resources.flag)
                               };
         }
@@ -274,7 +274,8 @@ namespace WpfMinesweeper.View
 
                 if (grid.HasCellBomb(i, j))
                 {
-                    button.Content = "*";                    
+                 //   button.Content = "*";
+                    button.Background = this.images[0];
                 }
                 else
                 {
@@ -357,14 +358,7 @@ namespace WpfMinesweeper.View
                 throw new NullReferenceException("Move or time labels are not available!");
             }
 
-            var player = new MinesweeperPlayer
-                             {
-                                 Name = name, 
-                                 Score = int.Parse(movesLabel.Content.ToString()), 
-                                 Time = int.Parse(timeLabel.Content.ToString())
-                             };
-
-            var args = new MinesweeperAddPlayerEventArgs { Player = player };
+            var args = new MinesweeperAddPlayerEventArgs { PlayerName = name };
 
             if (this.AddPlayerEvent != null)
             {

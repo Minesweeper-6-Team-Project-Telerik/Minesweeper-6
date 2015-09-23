@@ -63,9 +63,9 @@ namespace WpfMinesweeper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bomb {
+        internal static System.Drawing.Bitmap flag {
             get {
-                object obj = ResourceManager.GetObject("bomb", resourceCulture);
+                object obj = ResourceManager.GetObject("flag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace WpfMinesweeper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap flag {
+        internal static System.Drawing.Bitmap mine {
             get {
-                object obj = ResourceManager.GetObject("flag", resourceCulture);
+                object obj = ResourceManager.GetObject("mine", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

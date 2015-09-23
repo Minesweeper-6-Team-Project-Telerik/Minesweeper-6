@@ -26,6 +26,8 @@ namespace Minesweeper.Models
         /// </summary>
         private bool isRevealed;
 
+        private bool isProtected;
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="MinesweeperCell" /> class.
         /// </summary>
@@ -50,12 +52,7 @@ namespace Minesweeper.Models
 
             set
             {
-                if (this.isRevealed)
-                {
-                   // throw new InvalidCellOperation("Cell is already revealed!");
-                }
-
-                if (!this.IsProtected)
+                if (!this.IsProtected && !this.isRevealed)
                 {
                     this.isRevealed = value;
                 }
@@ -88,6 +85,21 @@ namespace Minesweeper.Models
         /// <summary>
         ///     Gets or sets a value indicating whether is protected.
         /// </summary>
-        public bool IsProtected { get; set; }
+        public bool IsProtected
+        {
+            get
+            {
+                return this.isProtected;
+            }
+
+            set
+            {
+                if (!this.IsRevealed)
+                {
+                    this.isProtected = value;
+                }
+                
+            }
+        }
     }
 }

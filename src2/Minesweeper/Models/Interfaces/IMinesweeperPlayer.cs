@@ -19,13 +19,13 @@ namespace Minesweeper.Models.Interfaces
         string Name { get; set; }
 
         /// <summary>
-        ///     Gets or sets the score.
-        /// </summary>
-        int Score { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the time.
+        /// Gets or sets the time.
         /// </summary>
         int Time { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the type.
+        /// </summary>
+        MinesweeperDifficultyType Type { get; set; }
     }
 }

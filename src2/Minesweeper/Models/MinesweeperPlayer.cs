@@ -29,8 +29,8 @@ namespace Minesweeper.Models
         public string Name { get; set; }
 
         /// <summary>
-        ///     Gets or sets the score.
+        /// Gets or sets the type.
         /// </summary>
-        public int Score { get; set; }
+        public MinesweeperDifficultyType Type { get; set; }
     }
 }

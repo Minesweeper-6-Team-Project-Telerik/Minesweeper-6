@@ -194,6 +194,7 @@ namespace Minesweeper.Controller
         /// </param>
         private void GameViewOnOpenCellEvent(object sender, EventArgs eventArgs)
         {
+            // Fix game over event. Score incrementation.
             if (!this.isGameStarted)
             {
                 this.StartGame();
@@ -210,7 +211,7 @@ namespace Minesweeper.Controller
                 this.gameView.DisplayGrid(this.grid);
                 this.gameView.DisplayMoves(this.score);
 
-                if (this.score >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
+                if (this.grid.RevealedCellsCount >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
                 {
                     this.timer.Stop();
                     this.gameView.DisplayGameOver(true);

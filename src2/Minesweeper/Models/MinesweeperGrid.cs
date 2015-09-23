@@ -48,13 +48,7 @@ namespace Minesweeper.Models
             this.MinesCount = minesCount;
             this.grid = new MinesweeperCell[rows, columns];
 
-            for (var i = 0; i < rows; i++)
-            {
-                for (var j = 0; j < columns; j++)
-                {
-                    this.grid[i, j] = new MinesweeperCell();
-                }
-            }
+            MinesweeperGridIterator.IterateGrid(this.Rows, this.Cols, PopulateGrid);
 
             this.PutRandomBombs();
         }
@@ -78,6 +72,8 @@ namespace Minesweeper.Models
         ///     The Rows.
         /// </summary>
         public int Rows { get; private set; }
+
+        public int RevealedCellsCount { get; private set; }
 
         /// <summary>
         /// The reveal cell.
@@ -106,6 +102,7 @@ namespace Minesweeper.Models
             }
 
             this.grid[row, column].IsRevealed = true;
+            this.RevealedCellsCount++;
             this.RevealAllNeightborsWithZeroMines();
         }
 
@@ -144,30 +141,16 @@ namespace Minesweeper.Models
         /// </exception>
         public int NeighbourMinesCount(int row, int column)
         {
+            this.grid[row, column].NeighbouringMinesCount = 0;
+
             if (!this.IsValidCell(row, column))
             {
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            // restrict neigbour cell area
-            var minRow = (row - 1) < 0 ? row : row - 1;
-            var maxRow = (row + 1) >= this.Rows ? row : row + 1;
-            var minColumn = (column - 1) < 0 ? column : column - 1;
-            var maxColumn = (column + 1) >= this.Cols ? column : column + 1;
+            MinesweeperGridIterator.IterateNeighbours(row, column, this.Rows, this.Cols, IncrementMinesCount);
 
-            var count = 0;
-            for (var i = minRow; i <= maxRow; i++)
-            {
-                for (var j = minColumn; j <= maxColumn; j++)
-                {
-                    if (this.grid[i, j].HasBomb)
-                    {
-                        count++;
-                    }
-                }
-            }
-
-            return count;
+            return this.grid[row, column].NeighbouringMinesCount;
         }
 
         /// <summary>
@@ -288,15 +271,14 @@ namespace Minesweeper.Models
         /// </param>
         private void OpenNeightborZeroMines(int row, int column)
         {
-            for (var i = row - 1; i <= row + 1; i++)
+            MinesweeperGridIterator.IterateNeighbours(row, column, RevealNeighbour);
+        }
+
+        private void RevealNeighbour(int row, int column)
+        {
+            if (this.IsValidCell(row, column) && !this.HasCellBomb(row, column) && !this.IsCellRevealed(row, column))
             {
-                for (var j = column - 1; j <= column + 1; j++)
-                {
-                    if (this.IsValidCell(i, j) && !this.HasCellBomb(i, j) && !this.IsCellRevealed(i, j))
-                    {
-                        this.RevealCell(i, j);
-                    }
-                }
+                this.RevealCell(row, column);
             }
         }
 
@@ -305,18 +287,16 @@ namespace Minesweeper.Models
         /// </summary>
         private void RevealAllNeightborsWithZeroMines()
         {
-            for (var i = 0; i < this.Rows; i++)
-            {
-                for (var j = 0; j < this.Cols; j++)
-                {
-                    if (this.NeighbourMinesCount(i, j) == 0 && this.IsCellRevealed(i, j))
-                    {
-                        this.OpenNeightborZeroMines(i, j);
-                    }
-                }
-            }
+            MinesweeperGridIterator.IterateGrid(this.Rows, this.Cols, RevealCellWithZeroMines);
         }
 
+        private void RevealCellWithZeroMines(int row, int column)
+        {
+            if (this.NeighbourMinesCount(row, column) == 0 && this.IsCellRevealed(row, column))
+            {
+                this.OpenNeightborZeroMines(row, column);
+            }
+        }
         /// <summary>
         /// The is valid cell.
         /// </summary>
@@ -367,6 +347,19 @@ namespace Minesweeper.Models
                 var column = mineCoordinates[i] / this.Cols;
 
                 this.grid[row, column].HasBomb = true;
+            }
+        }
+
+        private void PopulateGrid(int row, int column)
+        {
+            this.grid[row, column] = new MinesweeperCell();
+        }
+
+        private void IncrementMinesCount(int currentRow, int currentColumn, int initalRow, int inialColumn)
+        {
+            if (this.grid[currentRow, currentColumn].HasBomb)
+            {
+                this.grid[initalRow, inialColumn].NeighbouringMinesCount++;
             }
         }
     }

@@ -35,6 +35,8 @@ namespace Minesweeper.Models.Interfaces
         /// </summary>
         int MinesCount { get; }
 
+        int RevealedCellsCount { get; }
+
         /// <summary>
         /// The reveal cell.
         /// </summary>

@@ -22,11 +22,14 @@ namespace Minesweeper.Models
         private bool hasBomb;
 
         /// <summary>
+        /// The is protected.
+        /// </summary>
+        private bool isProtected;
+
+        /// <summary>
         ///     The is revealed.
         /// </summary>
         private bool isRevealed;
-
-        private bool isProtected;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MinesweeperCell" /> class.
@@ -99,15 +102,12 @@ namespace Minesweeper.Models
                 {
                     this.isProtected = value;
                 }
-                
             }
         }
-        
-        
+
         /// <summary>
         ///     Gets or sets a value indicating how many mines surround the cell.
         /// </summary>
         public int NeighbouringMinesCount { get; set; }
-
     }
 }

@@ -48,7 +48,7 @@ namespace Minesweeper.Models
             this.MinesCount = minesCount;
             this.grid = new MinesweeperCell[rows, columns];
 
-            MinesweeperGridIterator.IterateGrid(this.Rows, this.Cols, PopulateGrid);
+            MinesweeperGridIterator.IterateGrid(this.Rows, this.Cols, this.PopulateGrid);
 
             this.PutRandomBombs();
         }
@@ -73,6 +73,9 @@ namespace Minesweeper.Models
         /// </summary>
         public int Rows { get; private set; }
 
+        /// <summary>
+        /// Gets the revealed cells count.
+        /// </summary>
         public int RevealedCellsCount { get; private set; }
 
         /// <summary>
@@ -140,15 +143,15 @@ namespace Minesweeper.Models
         /// <exception cref="InvalidGridOperation">
         /// </exception>
         public int NeighbourMinesCount(int row, int column)
-        {
-            this.grid[row, column].NeighbouringMinesCount = 0;
-
+        {           
             if (!this.IsValidCell(row, column))
             {
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            MinesweeperGridIterator.IterateNeighbours(row, column, this.Rows, this.Cols, IncrementMinesCount);
+            this.grid[row, column].NeighbouringMinesCount = 0;
+
+            MinesweeperGridIterator.IterateNeighbours(row, column, this.Rows, this.Cols, this.IncrementMinesCount);
 
             return this.grid[row, column].NeighbouringMinesCount;
         }
@@ -271,9 +274,18 @@ namespace Minesweeper.Models
         /// </param>
         private void OpenNeightborZeroMines(int row, int column)
         {
-            MinesweeperGridIterator.IterateNeighbours(row, column, RevealNeighbour);
+            MinesweeperGridIterator.IterateNeighbours(row, column, this.RevealNeighbour);
         }
 
+        /// <summary>
+        /// The reveal neighbour.
+        /// </summary>
+        /// <param name="row">
+        /// The row.
+        /// </param>
+        /// <param name="column">
+        /// The column.
+        /// </param>
         private void RevealNeighbour(int row, int column)
         {
             if (this.IsValidCell(row, column) && !this.HasCellBomb(row, column) && !this.IsCellRevealed(row, column))
@@ -283,13 +295,22 @@ namespace Minesweeper.Models
         }
 
         /// <summary>
-        /// The reveal all neightbors with zero mines.
+        ///     The reveal all neightbors with zero mines.
         /// </summary>
         private void RevealAllNeightborsWithZeroMines()
         {
-            MinesweeperGridIterator.IterateGrid(this.Rows, this.Cols, RevealCellWithZeroMines);
+            MinesweeperGridIterator.IterateGrid(this.Rows, this.Cols, this.RevealCellWithZeroMines);
         }
 
+        /// <summary>
+        /// The reveal cell with zero mines.
+        /// </summary>
+        /// <param name="row">
+        /// The row.
+        /// </param>
+        /// <param name="column">
+        /// The column.
+        /// </param>
         private void RevealCellWithZeroMines(int row, int column)
         {
             if (this.NeighbourMinesCount(row, column) == 0 && this.IsCellRevealed(row, column))
@@ -297,6 +318,7 @@ namespace Minesweeper.Models
                 this.OpenNeightborZeroMines(row, column);
             }
         }
+
         /// <summary>
         /// The is valid cell.
         /// </summary>
@@ -350,11 +372,35 @@ namespace Minesweeper.Models
             }
         }
 
+        /// <summary>
+        /// The populate grid.
+        /// </summary>
+        /// <param name="row">
+        /// The row.
+        /// </param>
+        /// <param name="column">
+        /// The column.
+        /// </param>
         private void PopulateGrid(int row, int column)
         {
             this.grid[row, column] = new MinesweeperCell();
         }
 
+        /// <summary>
+        /// The increment mines count.
+        /// </summary>
+        /// <param name="currentRow">
+        /// The current row.
+        /// </param>
+        /// <param name="currentColumn">
+        /// The current column.
+        /// </param>
+        /// <param name="initalRow">
+        /// The inital row.
+        /// </param>
+        /// <param name="inialColumn">
+        /// The inial column.
+        /// </param>
         private void IncrementMinesCount(int currentRow, int currentColumn, int initalRow, int inialColumn)
         {
             if (this.grid[currentRow, currentColumn].HasBomb)

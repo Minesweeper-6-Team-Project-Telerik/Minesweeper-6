@@ -94,9 +94,11 @@ namespace ConsoleMinesweeper
             output.CursorSize = 100;
             output.SetCursorPosition(x, y);
 
+            ConsoleKeyInfo key;
+
             do
             {
-                var key = output.ReadKey(true);
+                key = output.ReadKey(true);
 
                 if (key.Key == ConsoleKey.RightArrow)
                 {
@@ -154,7 +156,7 @@ namespace ConsoleMinesweeper
 
                 output.SetCursorPosition(x, y);
             }
-            while (true);
+            while (key.Key != ConsoleKey.End);
         }
     }
 }

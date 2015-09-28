@@ -32,16 +32,6 @@ namespace ConsoleMinesweeper
         /// </exception>
         public static IEnumerable<string> SplitBy(this string str, int chunkLength)
         {
-            if (string.IsNullOrEmpty(str))
-            {
-                throw new ArgumentException();
-            }
-
-            if (chunkLength < 1)
-            {
-                throw new ArgumentException();
-            }
-
             for (var i = 0; i < str.Length; i += chunkLength)
             {
                 if (chunkLength + i > str.Length)

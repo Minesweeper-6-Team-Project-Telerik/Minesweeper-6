@@ -11,6 +11,7 @@ namespace ConsoleMinesweeper
     using System;
     using System.Collections.Generic;
 
+    using ConsoleMinesweeper.Models;
     using ConsoleMinesweeper.View;
 
     using Minesweeper.Controller;
@@ -19,7 +20,7 @@ namespace ConsoleMinesweeper
     /// <summary>
     ///     The console menus.
     /// </summary>
-    internal static class ConsoleMenus
+    public static class ConsoleMenus
     {
         /// <summary>
         ///     The view.
@@ -36,9 +37,9 @@ namespace ConsoleMinesweeper
         /// </summary>
         public static void StartGameMenu()
         {
-            var buttons = new List<Button>
+            var buttons = new List<ConsoleButton<ConsoleColor>>
                               {
-                                  new Button(
+                                  new ConsoleButton<ConsoleColor>(
                                       20, 
                                       3, 
                                       ConsoleColor.Blue, 
@@ -46,7 +47,7 @@ namespace ConsoleMinesweeper
                                       ConsoleColor.Yellow, 
                                       ConsoleColor.Blue, 
                                       "Easy"), 
-                                  new Button(
+                                  new ConsoleButton<ConsoleColor>(
                                       20, 
                                       3, 
                                       ConsoleColor.Blue, 
@@ -54,7 +55,7 @@ namespace ConsoleMinesweeper
                                       ConsoleColor.Yellow, 
                                       ConsoleColor.Blue, 
                                       "Medium"), 
-                                  new Button(
+                                  new ConsoleButton<ConsoleColor>(
                                       20, 
                                       3, 
                                       ConsoleColor.Blue, 
@@ -62,7 +63,7 @@ namespace ConsoleMinesweeper
                                       ConsoleColor.Yellow, 
                                       ConsoleColor.Blue, 
                                       "Hard"), 
-                                  new Button(
+                                  new ConsoleButton<ConsoleColor>(
                                       20, 
                                       3, 
                                       ConsoleColor.Blue, 
@@ -75,25 +76,34 @@ namespace ConsoleMinesweeper
             buttons[0].ClickEvent += (sender, args) =>
                 {
                     view = new ConsoleView();
-                    gameController = new MinesweeperGameController(MinesweeperDifficultyType.Easy, view);
+                    gameController = new MinesweeperGameController(
+                        MinesweeperDifficultyType.Easy, 
+                        view, 
+                        new ConsoleTimer());
                 };
 
             buttons[1].ClickEvent += (sender, args) =>
                 {
                     view = new ConsoleView();
-                    gameController = new MinesweeperGameController(MinesweeperDifficultyType.Medium, view);
+                    gameController = new MinesweeperGameController(
+                        MinesweeperDifficultyType.Medium, 
+                        view, 
+                        new ConsoleTimer());
                 };
 
             buttons[2].ClickEvent += (sender, args) =>
                 {
                     view = new ConsoleView();
-                    gameController = new MinesweeperGameController(MinesweeperDifficultyType.Hard, view);
+                    gameController = new MinesweeperGameController(
+                        MinesweeperDifficultyType.Hard, 
+                        view, 
+                        new ConsoleTimer());
                 };
 
             buttons[3].ClickEvent += (sender, args) => { StartMainMenu(); };
 
             Console.Clear();
-            var menu = new Menu(25, 2, 0, 0, ConsoleColor.DarkBlue, ConsoleColor.Gray, buttons);
+            var menu = new Menu(25, 2, 1, 1, ConsoleColor.DarkBlue, ConsoleColor.Gray, buttons);
             menu.Start();
         }
 
@@ -102,9 +112,9 @@ namespace ConsoleMinesweeper
         /// </summary>
         public static void StartMainMenu()
         {
-            var buttons = new List<Button>
+            var buttons = new List<ConsoleButton<ConsoleColor>>
                               {
-                                  new Button(
+                                  new ConsoleButton<ConsoleColor>(
                                       20, 
                                       3, 
                                       ConsoleColor.Blue, 
@@ -112,7 +122,7 @@ namespace ConsoleMinesweeper
                                       ConsoleColor.Yellow, 
                                       ConsoleColor.Blue, 
                                       "New Game"), 
-                                  new Button(
+                                  new ConsoleButton<ConsoleColor>(
                                       20, 
                                       3, 
                                       ConsoleColor.Blue, 
@@ -120,7 +130,7 @@ namespace ConsoleMinesweeper
                                       ConsoleColor.Yellow, 
                                       ConsoleColor.Blue, 
                                       "High Scores"), 
-                                  new Button(
+                                  new ConsoleButton<ConsoleColor>(
                                       20, 
                                       3, 
                                       ConsoleColor.Blue, 
@@ -128,7 +138,7 @@ namespace ConsoleMinesweeper
                                       ConsoleColor.Yellow, 
                                       ConsoleColor.Blue, 
                                       "Help"), 
-                                  new Button(
+                                  new ConsoleButton<ConsoleColor>(
                                       20, 
                                       3, 
                                       ConsoleColor.Blue, 
@@ -145,7 +155,7 @@ namespace ConsoleMinesweeper
 
             buttons[3].ClickEvent += (sender, args) => { Environment.Exit(0); };
 
-            var menu = new Menu(25, 2, 0, 0, ConsoleColor.DarkBlue, ConsoleColor.Gray, buttons);
+            var menu = new Menu(25, 2, 1, 1, ConsoleColor.DarkBlue, ConsoleColor.Gray, buttons);
             menu.Start();
         }
     }

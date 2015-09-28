@@ -265,7 +265,6 @@ namespace WpfMinesweeper.View
             if (grid.IsCellProtected(i, j))
             {
                 button.Background = this.images[1];
-                //button.Background = new SolidColorBrush(Colors.Gray);
             }
             else if (grid.IsCellRevealed(i, j))
             {
@@ -274,7 +273,6 @@ namespace WpfMinesweeper.View
 
                 if (grid.HasCellBomb(i, j))
                 {
-                 //   button.Content = "*";
                     button.Background = this.images[0];
                 }
                 else

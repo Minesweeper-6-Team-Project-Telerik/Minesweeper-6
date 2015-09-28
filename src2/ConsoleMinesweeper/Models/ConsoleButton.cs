@@ -6,17 +6,20 @@
 //   The button.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace ConsoleMinesweeper
+namespace ConsoleMinesweeper.Models
 {
     using System;
 
     /// <summary>
-    ///     The button.
+    /// The button.
     /// </summary>
-    internal class Button : ConsoleBox
+    /// <typeparam name="TColor">
+    /// </typeparam>
+    public class ConsoleButton<TColor> : ConsoleBox<TColor>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Button"/> class.
+        /// Initializes a new instance of the <see cref="ConsoleButton{TColor}"/> class. 
+        /// Initializes a new instance of the <see cref="ConsoleButton"/> class.
         /// </summary>
         /// <param name="sizeX">
         /// The size x.
@@ -39,35 +42,39 @@ namespace ConsoleMinesweeper
         /// <param name="text">
         /// The text.
         /// </param>
-        public Button(
+        public ConsoleButton(
             int sizeX, 
             int sizeY, 
-            ConsoleColor colorBack, 
-            ConsoleColor colorText, 
-            ConsoleColor colorBackSel, 
-            ConsoleColor colorTextSel, 
+            TColor colorBack, 
+            TColor colorText, 
+            TColor colorBackSel, 
+            TColor colorTextSel, 
             string text)
-            : base(0, 0, sizeX, sizeY, colorBack, colorText, text)
+            : base(1, 1, sizeX, sizeY, colorBack, colorText, text)
         {
-            // validation
+            if (colorBackSel == null || colorTextSel == null)
+            {
+                throw new ArgumentNullException("Colors cannot be null!");
+            }
+
             this.ColorBackSelected = colorBackSel;
-            this.ColorBackSelected = colorBackSel;
+            this.ColorTextSelected = colorTextSel;
         }
-
-        /// <summary>
-        ///     Gets or sets the color back selected.
-        /// </summary>
-        public ConsoleColor ColorBackSelected { get; protected set; }
-
-        /// <summary>
-        ///     Gets or sets the color text selected.
-        /// </summary>
-        public ConsoleColor ColorTextSelected { get; protected set; }
 
         /// <summary>
         ///     The click event.
         /// </summary>
         public event EventHandler ClickEvent;
+
+        /// <summary>
+        ///     Gets or sets the color back selected.
+        /// </summary>
+        public TColor ColorBackSelected { get; protected set; }
+
+        /// <summary>
+        ///     Gets or sets the color text selected.
+        /// </summary>
+        public TColor ColorTextSelected { get; protected set; }
 
         /// <summary>
         ///     The trigger.

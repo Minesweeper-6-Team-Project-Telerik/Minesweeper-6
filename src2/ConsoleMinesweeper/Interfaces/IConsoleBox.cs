@@ -6,14 +6,14 @@
 //   The ConsoleBox interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace ConsoleMinesweeper
+namespace ConsoleMinesweeper.Interfaces
 {
-    using System;
-
     /// <summary>
-    ///     The ConsoleBox interface.
+    /// The ConsoleBox interface.
     /// </summary>
-    public interface IConsoleBox
+    /// <typeparam name="TColor">
+    /// </typeparam>
+    public interface IConsoleBox<out TColor>
     {
         /// <summary>
         ///     Gets the start x.
@@ -38,12 +38,12 @@ namespace ConsoleMinesweeper
         /// <summary>
         ///     Gets the color background.
         /// </summary>
-        ConsoleColor ColorBackground { get; }
+        TColor ColorBackground { get; }
 
         /// <summary>
         ///     Gets the color text.
         /// </summary>
-        ConsoleColor ColorText { get; }
+        TColor ColorText { get; }
 
         /// <summary>
         ///     Gets the text.

@@ -12,15 +12,17 @@ namespace ConsoleMinesweeper
     using System.Collections.Generic;
     using System.Linq;
 
+    using ConsoleMinesweeper.Models;
+
     /// <summary>
     ///     The menu.
     /// </summary>
-    internal class Menu : ConsoleBox
+    public class Menu : ConsoleBox<ConsoleColor>
     {
         /// <summary>
         ///     The buttons.
         /// </summary>
-        private readonly IList<Button> buttons;
+        private readonly IList<ConsoleButton<ConsoleColor>> buttons;
 
         /// <summary>
         ///     The idx.
@@ -57,8 +59,8 @@ namespace ConsoleMinesweeper
             int sizeX, 
             int sizeY, 
             ConsoleColor colorBack, 
-            ConsoleColor colorText, 
-            IList<Button> buttons)
+            ConsoleColor colorText,
+            IList<ConsoleButton<ConsoleColor>> buttons)
             : base(startX, startY, sizeX, sizeY, colorBack, colorText, string.Empty)
         {
             this.buttons = buttons;
@@ -80,13 +82,13 @@ namespace ConsoleMinesweeper
 
             y = startY;
 
-            ConsolePrinter.Print(this);
+            ConsolePrinter.Print(new ConsoleWrapper(), this);
 
             foreach (var button in buttons)
             {
                 button.StartX = this.StartX + 3;
                 button.StartY = y + 3;
-                ConsolePrinter.Print(button);
+                ConsolePrinter.Print(new ConsoleWrapper(), button);
                 y += 2 + button.SizeY;
             }
         }
@@ -109,7 +111,7 @@ namespace ConsoleMinesweeper
 
                 foreach (var button in this.buttons)
                 {
-                    ConsolePrinter.Print(button);
+                    ConsolePrinter.Print(new ConsoleWrapper(), button);
                     y += 2 + button.SizeY;
                 }
             }
@@ -130,7 +132,7 @@ namespace ConsoleMinesweeper
                 this.buttons[this.idx - 1].Trigger();
                 foreach (var button in this.buttons)
                 {
-                    ConsolePrinter.Print(button);
+                    ConsolePrinter.Print(new ConsoleWrapper(), button);
                 }
             }
         }
@@ -142,11 +144,11 @@ namespace ConsoleMinesweeper
         {
             this.buttons[0].Trigger();
 
-            ConsolePrinter.Print(this);
+            ConsolePrinter.Print(new ConsoleWrapper(), this);
 
             foreach (var button in this.buttons)
             {
-                ConsolePrinter.Print(button);
+                ConsolePrinter.Print(new ConsoleWrapper(), button);
             }
 
             ConsoleKeyInfo key;

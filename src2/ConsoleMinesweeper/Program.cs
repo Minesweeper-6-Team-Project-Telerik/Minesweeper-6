@@ -11,7 +11,7 @@ namespace ConsoleMinesweeper
     /// <summary>
     ///     The program.
     /// </summary>
-    internal static class Program
+    public static class Program
     {
         /// <summary>
         /// The main.

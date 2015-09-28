@@ -6,17 +6,21 @@
 //   The console box.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace ConsoleMinesweeper
+namespace ConsoleMinesweeper.Models
 {
     using System;
 
+    using ConsoleMinesweeper.Interfaces;
+
     /// <summary>
-    ///     The console box.
+    /// The console box.
     /// </summary>
-    internal class ConsoleBox : IConsoleBox
+    /// <typeparam name="TColor">
+    /// </typeparam>
+    public class ConsoleBox<TColor> : IConsoleBox<TColor>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleBox"/> class.
+        /// Initializes a new instance of the <see cref="ConsoleBox{TColor}"/> class.
         /// </summary>
         /// <param name="startX">
         /// The start x.
@@ -39,16 +43,32 @@ namespace ConsoleMinesweeper
         /// <param name="text">
         /// The text.
         /// </param>
-        public ConsoleBox(
-            int startX, 
-            int startY, 
-            int sizeX, 
-            int sizeY, 
-            ConsoleColor colorBack, 
-            ConsoleColor colorText, 
-            string text)
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// </exception>
+        public ConsoleBox(int startX, int startY, int sizeX, int sizeY, TColor colorBack, TColor colorText, string text)
         {
-            // todo: validations
+            if (startX <= 0 || startY <= 0)
+            {
+                throw new ArgumentException("Start coordinates cannot be negative or 0!");
+            }
+
+            if (sizeX <= 0 || sizeY <= 0)
+            {
+                throw new ArgumentException("Sizes cannot be negative or 0!");
+            }
+
+            if (text == null)
+            {
+                throw new ArgumentNullException("Input string cannot be null!");
+            }
+
+            if (colorBack == null || colorText == null)
+            {
+                throw new ArgumentNullException("Colors cannot be null!");
+            }
+
             this.StartX = startX;
             this.StartY = startY;
             this.SizeX = sizeX;
@@ -81,12 +101,12 @@ namespace ConsoleMinesweeper
         /// <summary>
         ///     Gets or sets the color background.
         /// </summary>
-        public ConsoleColor ColorBackground { get; protected set; }
+        public TColor ColorBackground { get; protected set; }
 
         /// <summary>
         ///     Gets or sets the color text.
         /// </summary>
-        public ConsoleColor ColorText { get; protected set; }
+        public TColor ColorText { get; protected set; }
 
         /// <summary>
         ///     Gets or sets the text.

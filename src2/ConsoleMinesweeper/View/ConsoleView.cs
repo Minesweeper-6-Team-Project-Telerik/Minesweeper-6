@@ -11,6 +11,8 @@ namespace ConsoleMinesweeper.View
     using System;
     using System.Text;
 
+    using ConsoleMinesweeper.Models;
+
     using Minesweeper.Models;
     using Minesweeper.Models.Interfaces;
     using Minesweeper.Views;
@@ -23,17 +25,22 @@ namespace ConsoleMinesweeper.View
         /// <summary>
         ///     The grid box.
         /// </summary>
-        private GridBox gridBox;
+        private ConsoleBox<ConsoleColor> gridBox;
 
         /// <summary>
         ///     The score box.
         /// </summary>
-        private ConsoleBox scoreBox;
+        private ConsoleBox<ConsoleColor> scoreBox;
+
+        /// <summary>
+        ///     The time.
+        /// </summary>
+        private int time;
 
         /// <summary>
         ///     The time box.
         /// </summary>
-        private ConsoleBox timeBox;
+        private ConsoleBox<ConsoleColor> timeBox;
 
         /// <summary>
         ///     The open cell event.
@@ -63,13 +70,7 @@ namespace ConsoleMinesweeper.View
         /// </param>
         public void DisplayTime(int timer)
         {
-            if (this.timeBox == null)
-            {
-                this.timeBox = new ConsoleBox(35, 2, 10, 2, ConsoleColor.Cyan, ConsoleColor.DarkRed, timer.ToString());
-            }
-
-            this.timeBox.Text = "Time: " + this.timeBox;
-            ConsolePrinter.Print(this.timeBox);
+            this.time = timer;
         }
 
         /// <summary>
@@ -82,11 +83,33 @@ namespace ConsoleMinesweeper.View
         {
             if (this.scoreBox == null)
             {
-                this.scoreBox = new ConsoleBox(35, 2, 10, 2, ConsoleColor.Cyan, ConsoleColor.DarkRed, moves.ToString());
+                this.scoreBox = new ConsoleBox<ConsoleColor>(
+                    35, 
+                    2, 
+                    10, 
+                    2, 
+                    ConsoleColor.Cyan, 
+                    ConsoleColor.DarkRed, 
+                    moves.ToString());
             }
 
             this.scoreBox.Text = "Moves: " + moves;
-            ConsolePrinter.Print(this.scoreBox);
+            ConsolePrinter.Print(new ConsoleWrapper(), this.scoreBox);
+
+            if (this.timeBox == null)
+            {
+                this.timeBox = new ConsoleBox<ConsoleColor>(
+                    35, 
+                    10, 
+                    10, 
+                    2, 
+                    ConsoleColor.Cyan, 
+                    ConsoleColor.DarkRed, 
+                    this.time.ToString());
+            }
+
+            this.timeBox.Text = "Time: " + this.time;
+            ConsolePrinter.Print(new ConsoleWrapper(), this.timeBox);
         }
 
         /// <summary>
@@ -144,7 +167,7 @@ namespace ConsoleMinesweeper.View
 
             if (this.gridBox == null)
             {
-                this.gridBox = new GridBox(
+                this.gridBox = new ConsoleBox<ConsoleColor>(
                     2, 
                     2, 
                     grid.Rows + 1, 
@@ -152,15 +175,12 @@ namespace ConsoleMinesweeper.View
                     ConsoleColor.Cyan, 
                     ConsoleColor.DarkRed, 
                     sb.ToString());
-                this.gridBox.OpenCellEvent += (sender, args) => { this.OpenCellEvent.Invoke(sender, args); };
-                this.gridBox.ProtectCellEvent += (sender, args) => { this.ProtectCellEvent.Invoke(sender, args); };
                 Console.Clear();
-                ConsolePrinter.Print(this.gridBox);
-                this.gridBox.Start();
+                ConsolePrinter.PrintGrid(new ConsoleWrapper(), this.gridBox, this.OpenCellEvent, this.ProtectCellEvent);                
             }
 
             this.gridBox.Text = sb.ToString();
-            ConsolePrinter.Print(this.gridBox);
+            ConsolePrinter.Print(new ConsoleWrapper(), this.gridBox);
         }
 
         /// <summary>
@@ -173,15 +193,22 @@ namespace ConsoleMinesweeper.View
         {
             if (gameResult == false)
             {
-                var gameOverBox = new ConsoleBox(25, 10, 14, 5, ConsoleColor.Red, ConsoleColor.Black, "Game Over!");
+                var gameOverBox = new ConsoleBox<ConsoleColor>(
+                    25, 
+                    10, 
+                    14, 
+                    5, 
+                    ConsoleColor.Red, 
+                    ConsoleColor.Black, 
+                    "Game Over!");
 
-                ConsolePrinter.Print(gameOverBox);
+                ConsolePrinter.Print(new ConsoleWrapper(), gameOverBox);
                 Console.ReadKey(true);
                 ConsoleMenus.StartMainMenu();
             }
             else
             {
-                var gameOverBox = new ConsoleBox(
+                var gameOverBox = new ConsoleBox<ConsoleColor>(
                     15, 
                     10, 
                     30, 
@@ -190,7 +217,7 @@ namespace ConsoleMinesweeper.View
                     ConsoleColor.Black, 
                     "Enter your name: ");
 
-                ConsolePrinter.Print(gameOverBox);
+                ConsolePrinter.Print(new ConsoleWrapper(), gameOverBox);
                 var name = Console.ReadLine();
 
                 var args = new MinesweeperAddPlayerEventArgs { PlayerName = name };

@@ -32,7 +32,6 @@ namespace WpfMinesweeper
         /// </summary>
         private MinesweeperGameController gameController;
 
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="MainWindow" /> class.
         /// </summary>

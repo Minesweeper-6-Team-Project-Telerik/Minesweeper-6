@@ -8,7 +8,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace WpfMinesweeper
 {
+    using System;
     using System.Windows;
+    using System.Windows.Threading;
 
     using Minesweeper.Controller;
     using Minesweeper.Models;
@@ -30,6 +32,7 @@ namespace WpfMinesweeper
         /// </summary>
         private MinesweeperGameController gameController;
 
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="MainWindow" /> class.
         /// </summary>
@@ -39,7 +42,7 @@ namespace WpfMinesweeper
             this.view = new WpfView(this.WinesweeperGrid);
             this.Width = 240;
             this.Height = 340;
-            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Easy, this.view);
+            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Easy, this.view, new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)));
         }
 
         /// <summary>
@@ -70,7 +73,7 @@ namespace WpfMinesweeper
             this.Width = 240;
             this.Height = 340;
             this.view = new WpfView(this.WinesweeperGrid);
-            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Easy, this.view);
+            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Easy, this.view, new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)));
         }
 
         /// <summary>
@@ -87,7 +90,7 @@ namespace WpfMinesweeper
             this.Width = 380;
             this.Height = 480;
             this.view = new WpfView(this.WinesweeperGrid);
-            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Medium, this.view);
+            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Medium, this.view, new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)));
         }
 
         /// <summary>
@@ -104,7 +107,7 @@ namespace WpfMinesweeper
             this.Width = 500;
             this.Height = 600;
             this.view = new WpfView(this.WinesweeperGrid);
-            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Hard, this.view);
+            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Hard, this.view, new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)));
         }
     }
 }

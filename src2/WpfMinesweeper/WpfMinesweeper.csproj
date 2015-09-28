@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="View\WpfView.cs" />
     <Compile Include="WpfMinesweeperButton.cs" />
+    <Compile Include="WpfTimer.cs" />
     <Page Include="InputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

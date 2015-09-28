@@ -50,6 +50,7 @@
     <Compile Include="Controller\MinesweeperGameController.cs" />
     <Compile Include="Models\Exceptions\InvalidCellOperation.cs" />
     <Compile Include="Models\Exceptions\InvalidGridOperation.cs" />
+    <Compile Include="Models\Interfaces\IMinesweeperTimer.cs" />
     <Compile Include="Models\MinesweeperGameData.cs" />
     <Compile Include="Models\MinesweeperGridIterator.cs" />
     <Compile Include="Models\MinesweeperPlayerBoard.cs" />

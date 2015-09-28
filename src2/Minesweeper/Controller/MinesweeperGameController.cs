@@ -9,7 +9,6 @@
 namespace Minesweeper.Controller
 {
     using System;
-    using System.Windows.Threading;
 
     using Minesweeper.Models;
     using Minesweeper.Models.Interfaces;
@@ -21,7 +20,7 @@ namespace Minesweeper.Controller
     public class MinesweeperGameController
     {
         /// <summary>
-        /// The players filename.
+        ///     The players filename.
         /// </summary>
         private const string PlayersFilename = "scores.data";
 
@@ -36,28 +35,34 @@ namespace Minesweeper.Controller
         private readonly IMinesweeperGrid grid;
 
         /// <summary>
+        /// The minesweeper timer.
+        /// </summary>
+        private readonly IMinesweeperTimer minesweeperTimer;
+
+        /// <summary>
         ///     The player board.
         /// </summary>
         private readonly IMinesweeperPlayerBoard players;
 
         /// <summary>
-        ///     The t.
+        /// The type.
         /// </summary>
-        private DispatcherTimer timer;
+        private readonly MinesweeperDifficultyType type;
+
+        /// <summary>
+        /// The is game started.
+        /// </summary>
+        private bool isGameStarted;
 
         /// <summary>
         ///     The score.
         /// </summary>
         private int score;
 
-        private MinesweeperDifficultyType type;
-
         /// <summary>
         ///     The seconds passed.
         /// </summary>
         private int secondsPassed;
-
-        private bool isGameStarted;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MinesweeperGameController"/> class.
@@ -68,7 +73,13 @@ namespace Minesweeper.Controller
         /// <param name="gameView">
         /// The game view.
         /// </param>
-        public MinesweeperGameController(MinesweeperDifficultyType type, IMinesweeperView gameView)
+        /// <param name="timer">
+        /// The timer.
+        /// </param>
+        public MinesweeperGameController(
+            MinesweeperDifficultyType type, 
+            IMinesweeperView gameView, 
+            IMinesweeperTimer timer)
         {
             if (gameView == null)
             {
@@ -80,7 +91,10 @@ namespace Minesweeper.Controller
 
             this.type = type;
             this.gameView = gameView;
-            
+
+            // Create timer
+            this.minesweeperTimer = timer;
+
             // Handle all view callbacks            
             this.gameView.OpenCellEvent += this.GameViewOnOpenCellEvent;
             this.gameView.ProtectCellEvent += this.GameViewOnProtectCellEvent;
@@ -123,12 +137,7 @@ namespace Minesweeper.Controller
         private void GameViewOnAddPlayerEvent(object sender, EventArgs eventArgs)
         {
             var args = (MinesweeperAddPlayerEventArgs)eventArgs;
-            var player = new MinesweeperPlayer()
-                             {
-                                 Name = args.PlayerName, 
-                                 Time = this.secondsPassed,
-                                 Type = this.type
-                             };
+            var player = new MinesweeperPlayer { Name = args.PlayerName, Time = this.secondsPassed, Type = this.type };
 
             this.players.AddPlayer(player);
             this.players.Save();
@@ -177,7 +186,7 @@ namespace Minesweeper.Controller
         /// </param>
         private void GridOnBoomEvent(object sender, EventArgs eventArgs)
         {
-            this.timer.Stop();
+            this.minesweeperTimer.Stop();
             this.grid.RevealAllMines();
             this.gameView.DisplayGameOver(false);
             this.gameView.DisplayGrid(this.grid);
@@ -200,7 +209,7 @@ namespace Minesweeper.Controller
                 this.StartGame();
                 this.isGameStarted = true;
             }
-            
+
             var args = (MinesweeperCellClickEventArgs)eventArgs;
 
             if (!this.grid.IsCellProtected(args.Row, args.Col))
@@ -213,27 +222,27 @@ namespace Minesweeper.Controller
 
                 if (this.grid.RevealedCellsCount >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
                 {
-                    this.timer.Stop();
+                    this.minesweeperTimer.Stop();
                     this.gameView.DisplayGameOver(true);
                 }
-            }            
+            }
         }
 
+        /// <summary>
+        /// The start game.
+        /// </summary>
         private void StartGame()
         {
             // Configure timer
-            this.timer = new DispatcherTimer();
-            this.timer.Interval = new TimeSpan(0, 0, 1);
-            this.timer.Tick += this.ClockTimeTick;
-
-            this.timer.Start();
+            this.minesweeperTimer.TickEvent += this.ClockTimeTick;
+            this.minesweeperTimer.Start();
 
             // Other local data
             this.score = 0;
             this.secondsPassed = 0;
 
             // Display grid
-            this.gameView.DisplayGrid(this.grid);            
+            this.gameView.DisplayGrid(this.grid);
         }
     }
 }

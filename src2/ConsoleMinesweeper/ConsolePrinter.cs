@@ -30,8 +30,20 @@ namespace ConsoleMinesweeper
         /// </param>
         public static void Print(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output, IConsoleBox<ConsoleColor> box)
         {
+            output.SetWindowSize(80, 50);
             output.BackgroundColor = box.ColorBackground;
             output.ForegroundColor = box.ColorText;
+
+            output.SetCursorPosition(5, 2);
+            output.Write(@"__  __ ___ _   _ _____ ______        _______ _____ ____  _____ ____   ");
+            output.SetCursorPosition(5, 3);
+            output.Write(@"|  \/  |_ _| \ | | ____/ ___\ \      / / ____| ____|  _ \| ____|  _ \ ");
+            output.SetCursorPosition(5, 4);
+            output.Write(@"| |\/| || ||  \| |  _| \___ \\ \ /\ / /|  _| |  _| | |_) |  _| | |_) |");
+            output.SetCursorPosition(5, 5);
+            output.Write(@"| |  | || || |\  | |___ ___) |\ V  V / | |___| |___|  __/| |___|  _ < ");
+            output.SetCursorPosition(5, 6);
+            output.Write(@"|_|  |_|___|_| \_|_____|____/  \_/\_/  |_____|_____|_|   |_____|_| \_\");
 
             for (var i = box.StartX; i <= box.StartX + box.SizeX; i++)
             {
@@ -83,7 +95,26 @@ namespace ConsoleMinesweeper
             output.ResetColor();
         }
 
-        public static void PrintGrid(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output, IConsoleBox<ConsoleColor> box, EventHandler openCellEvent, EventHandler protectCellEvent)
+        /// <summary>
+        /// The print grid.
+        /// </summary>
+        /// <param name="output">
+        /// The output.
+        /// </param>
+        /// <param name="box">
+        /// The box.
+        /// </param>
+        /// <param name="openCellEvent">
+        /// The open cell event.
+        /// </param>
+        /// <param name="protectCellEvent">
+        /// The protect cell event.
+        /// </param>
+        public static void PrintGrid(
+            IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output, 
+            IConsoleBox<ConsoleColor> box, 
+            EventHandler openCellEvent, 
+            EventHandler protectCellEvent)
         {
             Print(output, box);
 
@@ -134,22 +165,14 @@ namespace ConsoleMinesweeper
 
                 if (key.Key == ConsoleKey.Spacebar)
                 {
-                    var args = new MinesweeperCellClickEventArgs
-                    {
-                        Row = y - box.StartY - 1,
-                        Col = x - box.StartX - 1
-                    };
+                    var args = new MinesweeperCellClickEventArgs { Row = y - box.StartY - 1, Col = x - box.StartX - 1 };
 
                     openCellEvent.Invoke(null, args);
                 }
 
                 if (key.Key == ConsoleKey.F)
                 {
-                    var args = new MinesweeperCellClickEventArgs
-                    {
-                        Row = y - box.StartY - 1,
-                        Col = x - box.StartX - 1
-                    };
+                    var args = new MinesweeperCellClickEventArgs { Row = y - box.StartY - 1, Col = x - box.StartX - 1 };
 
                     protectCellEvent.Invoke(null, args);
                 }

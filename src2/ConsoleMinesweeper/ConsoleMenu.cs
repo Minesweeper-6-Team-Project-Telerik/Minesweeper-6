@@ -59,7 +59,7 @@ namespace ConsoleMinesweeper
             int sizeX, 
             int sizeY, 
             ConsoleColor colorBack, 
-            ConsoleColor colorText,
+            ConsoleColor colorText, 
             IList<ConsoleButton<ConsoleColor>> buttons)
             : base(startX, startY, sizeX, sizeY, colorBack, colorText, string.Empty)
         {
@@ -75,7 +75,7 @@ namespace ConsoleMinesweeper
             }
 
             x += 6;
-            y += 4 + (buttons.Count() - 1) * 2;
+            y += 4 + ((buttons.Count() - 1) * 2);
 
             this.SizeX = x;
             this.SizeY = y;
@@ -91,6 +91,47 @@ namespace ConsoleMinesweeper
                 ConsolePrinter.Print(new ConsoleWrapper(), button);
                 y += 2 + button.SizeY;
             }
+        }
+
+        /// <summary>
+        ///     The start.
+        /// </summary>
+        public void Start()
+        {
+            this.buttons[0].Trigger();
+
+            ConsolePrinter.Print(new ConsoleWrapper(), this);
+
+            foreach (var button in this.buttons)
+            {
+                ConsolePrinter.Print(new ConsoleWrapper(), button);
+            }
+
+            ConsoleKeyInfo key;
+            Console.CursorVisible = false;
+
+            do
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key == ConsoleKey.UpArrow)
+                {
+                    this.idx--;
+                    this.RefreshUp();
+                }
+
+                if (key.Key == ConsoleKey.DownArrow)
+                {
+                    this.idx++;
+                    this.RefreshDown();
+                }
+
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    this.buttons[this.idx].Click();
+                }
+            }
+            while (key.KeyChar != 'e');
         }
 
         /// <summary>
@@ -135,47 +176,6 @@ namespace ConsoleMinesweeper
                     ConsolePrinter.Print(new ConsoleWrapper(), button);
                 }
             }
-        }
-
-        /// <summary>
-        ///     The start.
-        /// </summary>
-        public void Start()
-        {
-            this.buttons[0].Trigger();
-
-            ConsolePrinter.Print(new ConsoleWrapper(), this);
-
-            foreach (var button in this.buttons)
-            {
-                ConsolePrinter.Print(new ConsoleWrapper(), button);
-            }
-
-            ConsoleKeyInfo key;
-            Console.CursorVisible = false;
-
-            do
-            {
-                key = Console.ReadKey(true);
-
-                if (key.Key == ConsoleKey.UpArrow)
-                {
-                    this.idx--;
-                    this.RefreshUp();
-                }
-
-                if (key.Key == ConsoleKey.DownArrow)
-                {
-                    this.idx++;
-                    this.RefreshDown();
-                }
-
-                if (key.Key == ConsoleKey.Enter)
-                {
-                    this.buttons[this.idx].Click();
-                }
-            }
-            while (key.KeyChar != 'e');
         }
     }
 }

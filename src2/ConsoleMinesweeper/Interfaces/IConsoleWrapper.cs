@@ -28,12 +28,12 @@ namespace ConsoleMinesweeper.Interfaces
         TColor ForegroundColor { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether cursor visible.
+        ///     Gets or sets a value indicating whether cursor visible.
         /// </summary>
         bool CursorVisible { get; set; }
 
         /// <summary>
-        /// Gets or sets the cursor size.
+        ///     Gets or sets the cursor size.
         /// </summary>
         int CursorSize { get; set; }
 
@@ -71,5 +71,16 @@ namespace ConsoleMinesweeper.Interfaces
         /// The <see cref="TKey"/>.
         /// </returns>
         TKey ReadKey(bool intercept);
+
+        /// <summary>
+        /// The set window size.
+        /// </summary>
+        /// <param name="width">
+        /// The width.
+        /// </param>
+        /// <param name="height">
+        /// The height.
+        /// </param>
+        void SetWindowSize(int width, int height);
     }
 }

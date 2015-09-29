@@ -9,6 +9,7 @@
 namespace ConsoleMinesweeper.View
 {
     using System;
+    using System.Linq;
     using System.Text;
 
     using ConsoleMinesweeper.Models;
@@ -22,6 +23,11 @@ namespace ConsoleMinesweeper.View
     /// </summary>
     internal class ConsoleView : IMinesweeperView
     {
+        /// <summary>
+        /// The is real view.
+        /// </summary>
+        private readonly bool isRealView;
+
         /// <summary>
         ///     The grid box.
         /// </summary>
@@ -41,6 +47,22 @@ namespace ConsoleMinesweeper.View
         ///     The time box.
         /// </summary>
         private ConsoleBox<ConsoleColor> timeBox;
+
+        /// <summary>
+        /// The type.
+        /// </summary>
+        private MinesweeperDifficultyType type;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleView"/> class.
+        /// </summary>
+        /// <param name="real">
+        /// The real.
+        /// </param>
+        public ConsoleView(bool real)
+        {
+            this.isRealView = real;
+        }
 
         /// <summary>
         ///     The open cell event.
@@ -81,35 +103,38 @@ namespace ConsoleMinesweeper.View
         /// </param>
         public void DisplayMoves(int moves)
         {
-            if (this.scoreBox == null)
+            if (this.isRealView)
             {
-                this.scoreBox = new ConsoleBox<ConsoleColor>(
-                    35, 
-                    2, 
-                    10, 
-                    2, 
-                    ConsoleColor.Cyan, 
-                    ConsoleColor.DarkRed, 
-                    moves.ToString());
+                if (this.scoreBox == null)
+                {
+                    this.scoreBox = new ConsoleBox<ConsoleColor>(
+                        35, 
+                        10, 
+                        10, 
+                        2, 
+                        ConsoleColor.Cyan, 
+                        ConsoleColor.DarkRed, 
+                        moves.ToString());
+                }
+
+                this.scoreBox.Text = "Moves: " + moves;
+                ConsolePrinter.Print(new ConsoleWrapper(), this.scoreBox);
+
+                if (this.timeBox == null)
+                {
+                    this.timeBox = new ConsoleBox<ConsoleColor>(
+                        35, 
+                        15, 
+                        10, 
+                        2, 
+                        ConsoleColor.Cyan, 
+                        ConsoleColor.DarkRed, 
+                        this.time.ToString());
+                }
+
+                this.timeBox.Text = "Time: " + this.time;
+                ConsolePrinter.Print(new ConsoleWrapper(), this.timeBox);
             }
-
-            this.scoreBox.Text = "Moves: " + moves;
-            ConsolePrinter.Print(new ConsoleWrapper(), this.scoreBox);
-
-            if (this.timeBox == null)
-            {
-                this.timeBox = new ConsoleBox<ConsoleColor>(
-                    35, 
-                    10, 
-                    10, 
-                    2, 
-                    ConsoleColor.Cyan, 
-                    ConsoleColor.DarkRed, 
-                    this.time.ToString());
-            }
-
-            this.timeBox.Text = "Time: " + this.time;
-            ConsolePrinter.Print(new ConsoleWrapper(), this.timeBox);
         }
 
         /// <summary>
@@ -122,7 +147,28 @@ namespace ConsoleMinesweeper.View
         /// </exception>
         public void DisplayScoreBoard(IMinesweeperPlayerBoard board)
         {
-            throw new NotImplementedException();
+            var list = board.Players.Where(x => x.Type == this.type).OrderBy(x => x.Time);
+            var players = new StringBuilder();
+
+            players.Append(" Name                                           | Score    ");
+            players.Append("-----------------------------------------------------------");
+            foreach (var l in list)
+            {
+                players.Append(" " + l.Name.PadRight(47, ' ') + "| " + l.Time.ToString().PadRight(9, ' '));
+            }
+
+            var scoreBoxList = new ConsoleBox<ConsoleColor>(
+                10, 
+                10, 
+                60, 
+                40, 
+                ConsoleColor.Cyan, 
+                ConsoleColor.DarkRed, 
+                players.ToString());
+
+            ConsolePrinter.Print(new ConsoleWrapper(), scoreBoxList);
+            Console.ReadKey(true);
+            ConsoleMenus.StartMainMenu();
         }
 
         /// <summary>
@@ -133,54 +179,61 @@ namespace ConsoleMinesweeper.View
         /// </param>
         public void DisplayGrid(IMinesweeperGrid grid)
         {
-            var sb = new StringBuilder();
-
-            for (var i = 0; i < grid.Rows; i++)
+            if (this.isRealView)
             {
-                for (var j = 0; j < grid.Cols; j++)
+                var sb = new StringBuilder();
+
+                for (var i = 0; i < grid.Rows; i++)
                 {
-                    if (grid.IsCellRevealed(i, j))
+                    for (var j = 0; j < grid.Cols; j++)
                     {
-                        if (grid.HasCellBomb(i, j))
+                        if (grid.IsCellRevealed(i, j))
                         {
-                            sb.Append("*");
+                            if (grid.HasCellBomb(i, j))
+                            {
+                                sb.Append("*");
+                            }
+                            else if (grid.NeighbourMinesCount(i, j) == 0)
+                            {
+                                sb.Append(" ");
+                            }
+                            else
+                            {
+                                sb.Append(grid.NeighbourMinesCount(i, j).ToString());
+                            }
                         }
-                        else if (grid.NeighbourMinesCount(i, j) == 0)
+                        else if (grid.IsCellProtected(i, j))
                         {
-                            sb.Append(" ");
+                            sb.Append("~");
                         }
                         else
                         {
-                            sb.Append(grid.NeighbourMinesCount(i, j).ToString());
+                            sb.Append('▒');
                         }
                     }
-                    else if (grid.IsCellProtected(i, j))
-                    {
-                        sb.Append("F");
-                    }
-                    else
-                    {
-                        sb.Append('▒');
-                    }
                 }
-            }
 
-            if (this.gridBox == null)
-            {
-                this.gridBox = new ConsoleBox<ConsoleColor>(
-                    2, 
-                    2, 
-                    grid.Rows + 1, 
-                    grid.Cols + 1, 
-                    ConsoleColor.Cyan, 
-                    ConsoleColor.DarkRed, 
-                    sb.ToString());
-                Console.Clear();
-                ConsolePrinter.PrintGrid(new ConsoleWrapper(), this.gridBox, this.OpenCellEvent, this.ProtectCellEvent);                
-            }
+                if (this.gridBox == null)
+                {
+                    this.gridBox = new ConsoleBox<ConsoleColor>(
+                        10, 
+                        10, 
+                        grid.Rows + 1, 
+                        grid.Cols + 1, 
+                        ConsoleColor.Cyan, 
+                        ConsoleColor.DarkRed, 
+                        sb.ToString());
+                    Console.Clear();
+                    ConsolePrinter.PrintGrid(
+                        new ConsoleWrapper(), 
+                        this.gridBox, 
+                        this.OpenCellEvent, 
+                        this.ProtectCellEvent);
+                }
 
-            this.gridBox.Text = sb.ToString();
-            ConsolePrinter.Print(new ConsoleWrapper(), this.gridBox);
+                this.gridBox.Text = sb.ToString();
+                ConsolePrinter.Print(new ConsoleWrapper(), this.gridBox);
+            }
         }
 
         /// <summary>
@@ -225,6 +278,22 @@ namespace ConsoleMinesweeper.View
                 this.AddPlayerEvent.Invoke(this, args);
 
                 ConsoleMenus.StartMainMenu();
+            }
+        }
+
+        /// <summary>
+        /// The request score list.
+        /// </summary>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        public void RequestScoreList(MinesweeperDifficultyType type)
+        {
+            this.type = type;
+
+            if (this.ShowScoreBoardEvent != null)
+            {
+                this.ShowScoreBoardEvent.Invoke(this, EventArgs.Empty);
             }
         }
     }

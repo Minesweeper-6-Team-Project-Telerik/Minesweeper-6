@@ -50,7 +50,7 @@ namespace ConsoleMinesweeper.Models
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether cursor visible.
+        ///     Gets or sets a value indicating whether cursor visible.
         /// </summary>
         public bool CursorVisible
         {
@@ -66,7 +66,7 @@ namespace ConsoleMinesweeper.Models
         }
 
         /// <summary>
-        /// Gets or sets the cursor size.
+        ///     Gets or sets the cursor size.
         /// </summary>
         public int CursorSize
         {
@@ -126,6 +126,20 @@ namespace ConsoleMinesweeper.Models
         public ConsoleKeyInfo ReadKey(bool intercept)
         {
             return Console.ReadKey(intercept);
+        }
+
+        /// <summary>
+        /// The set window size.
+        /// </summary>
+        /// <param name="width">
+        /// The width.
+        /// </param>
+        /// <param name="height">
+        /// The height.
+        /// </param>
+        public void SetWindowSize(int width, int height)
+        {
+            Console.SetWindowSize(width, height);
         }
     }
 }

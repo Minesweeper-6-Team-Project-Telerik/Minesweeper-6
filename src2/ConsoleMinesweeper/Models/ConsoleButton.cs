@@ -18,8 +18,8 @@ namespace ConsoleMinesweeper.Models
     public class ConsoleButton<TColor> : ConsoleBox<TColor>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleButton{TColor}"/> class. 
-        /// Initializes a new instance of the <see cref="ConsoleButton"/> class.
+        /// Initializes a new instance of the <see cref="ConsoleButton{TColor}"/> class.
+        ///     Initializes a new instance of the <see cref="ConsoleButton"/> class.
         /// </summary>
         /// <param name="sizeX">
         /// The size x.

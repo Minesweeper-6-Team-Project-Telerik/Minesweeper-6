@@ -82,5 +82,9 @@ namespace ConsoleMinesweeper.Interfaces
         /// The height.
         /// </param>
         void SetWindowSize(int width, int height);
+
+        void Clear();
+
+        string ReadLine();
     }
 }

@@ -12,6 +12,7 @@ namespace ConsoleMinesweeper
     using System.Collections.Generic;
     using System.Text;
 
+    using ConsoleMinesweeper.Interfaces;
     using ConsoleMinesweeper.Models;
     using ConsoleMinesweeper.View;
 
@@ -36,11 +37,11 @@ namespace ConsoleMinesweeper
         /// <summary>
         ///     The start game menu.
         /// </summary>
-        public static void StartGameMenu()
+        public static void StartGameMenu(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output)
         {
             EventHandler ev1 = (sender, args) =>
             {
-                view = new ConsoleView(true);
+                view = new ConsoleView(true, output);
                 gameController = new MinesweeperGameController(
                     MinesweeperDifficultyType.Easy,
                     view,
@@ -49,7 +50,7 @@ namespace ConsoleMinesweeper
 
             EventHandler ev2 = (sender, args) =>
             {
-                view = new ConsoleView(true);
+                view = new ConsoleView(true, output);
                 gameController = new MinesweeperGameController(
                     MinesweeperDifficultyType.Medium,
                     view,
@@ -58,24 +59,24 @@ namespace ConsoleMinesweeper
 
             EventHandler ev3 = (sender, args) =>
             {
-                view = new ConsoleView(true);
+                view = new ConsoleView(true, output);
                 gameController = new MinesweeperGameController(
                     MinesweeperDifficultyType.Hard,
                     view,
                     new ConsoleTimer());
             };
 
-            EventHandler ev4 = (sender, args) => { StartMainMenu(); };
+            EventHandler ev4 = (sender, args) => { StartMainMenu(output); };
 
-            DisplayFourItemsMenu("Easy", "Medium", "Hard", "Back", ev1, ev2, ev3, ev4);
+            DisplayFourItemsMenu("Easy", "Medium", "Hard", "Back", ev1, ev2, ev3, ev4, output);
         }
 
         /// <summary>
         /// The start scores menu.
         /// </summary>
-        public static void StartScoresMenu()
+        public static void StartScoresMenu(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output)
         {
-            view = new ConsoleView(false);
+            view = new ConsoleView(false, output);
             gameController = new MinesweeperGameController(MinesweeperDifficultyType.Hard, view, new ConsoleTimer());
 
             EventHandler ev1 = (sender, args) => { view.RequestScoreList(MinesweeperDifficultyType.Easy); };
@@ -84,19 +85,19 @@ namespace ConsoleMinesweeper
 
             EventHandler ev3 = (sender, args) => { view.RequestScoreList(MinesweeperDifficultyType.Hard); };
 
-            EventHandler ev4 = (sender, args) => { StartMainMenu(); };
+            EventHandler ev4 = (sender, args) => { StartMainMenu(output); };
 
-            DisplayFourItemsMenu("Easy", "Medium", "Hard", "Back", ev1, ev2, ev3, ev4);
+            DisplayFourItemsMenu("Easy", "Medium", "Hard", "Back", ev1, ev2, ev3, ev4, output);
         }
 
         /// <summary>
         ///     The start main menu.
         /// </summary>
-        public static void StartMainMenu()
+        public static void StartMainMenu(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output)
         {
-            EventHandler ev1 = (sender, args) => { StartGameMenu(); };
+            EventHandler ev1 = (sender, args) => { StartGameMenu(output); };
 
-            EventHandler ev2 = (sender, args) => { StartScoresMenu(); };
+            EventHandler ev2 = (sender, args) => { StartScoresMenu(output); };
 
             EventHandler ev3 = (sender, args) =>
             {
@@ -118,13 +119,13 @@ namespace ConsoleMinesweeper
                     help.ToString());
 
                 ConsolePrinter.Print(new ConsoleWrapper(), scoreBoxList);
-                Console.ReadKey(true);
-                StartMainMenu();
+                output.ReadKey(true);
+                StartMainMenu(output);
             };
 
             EventHandler ev4 = (sender, args) => { Environment.Exit(0); };
 
-            DisplayFourItemsMenu("New Game", "High Scores", "Help", "Exit", ev1, ev2, ev3, ev4);
+            DisplayFourItemsMenu("New Game", "High Scores", "Help", "Exit", ev1, ev2, ev3, ev4, output);
         }
 
         /// <summary>
@@ -162,7 +163,8 @@ namespace ConsoleMinesweeper
             EventHandler ev1, 
             EventHandler ev2, 
             EventHandler ev3, 
-            EventHandler ev4)
+            EventHandler ev4,
+            IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output)
         {
             var buttons = new List<ConsoleButton<ConsoleColor>>
                               {
@@ -205,8 +207,8 @@ namespace ConsoleMinesweeper
             buttons[2].ClickEvent += ev3;
             buttons[3].ClickEvent += ev4;
 
-            Console.Clear();
-            var menu = new Menu(25, 10, 1, 1, ConsoleColor.DarkBlue, ConsoleColor.Gray, buttons);
+            output.Clear();
+            var menu = new Menu(25, 10, 1, 1, ConsoleColor.DarkBlue, ConsoleColor.Gray, buttons, output);
             menu.Start();
         }        
     }

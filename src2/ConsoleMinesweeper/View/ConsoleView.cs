@@ -12,6 +12,7 @@ namespace ConsoleMinesweeper.View
     using System.Linq;
     using System.Text;
 
+    using ConsoleMinesweeper.Interfaces;
     using ConsoleMinesweeper.Models;
 
     using Minesweeper.Models;
@@ -24,7 +25,12 @@ namespace ConsoleMinesweeper.View
     internal class ConsoleView : IMinesweeperView
     {
         /// <summary>
-        /// The is real view.
+        /// The console wrp view.
+        /// </summary>
+        private readonly IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> consoleWrpView;
+
+        /// <summary>
+        ///     The is real view.
         /// </summary>
         private readonly bool isRealView;
 
@@ -49,7 +55,7 @@ namespace ConsoleMinesweeper.View
         private ConsoleBox<ConsoleColor> timeBox;
 
         /// <summary>
-        /// The type.
+        ///     The type.
         /// </summary>
         private MinesweeperDifficultyType type;
 
@@ -59,9 +65,13 @@ namespace ConsoleMinesweeper.View
         /// <param name="real">
         /// The real.
         /// </param>
-        public ConsoleView(bool real)
+        /// <param name="consoleWrpView">
+        /// The console Wrp View.
+        /// </param>
+        public ConsoleView(bool real, IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> consoleWrpView)
         {
             this.isRealView = real;
+            this.consoleWrpView = consoleWrpView;
         }
 
         /// <summary>
@@ -118,7 +128,7 @@ namespace ConsoleMinesweeper.View
                 }
 
                 this.scoreBox.Text = "Moves: " + moves;
-                ConsolePrinter.Print(new ConsoleWrapper(), this.scoreBox);
+                ConsolePrinter.Print(this.consoleWrpView, this.scoreBox);
 
                 if (this.timeBox == null)
                 {
@@ -133,7 +143,7 @@ namespace ConsoleMinesweeper.View
                 }
 
                 this.timeBox.Text = "Time: " + this.time;
-                ConsolePrinter.Print(new ConsoleWrapper(), this.timeBox);
+                ConsolePrinter.Print(this.consoleWrpView, this.timeBox);
             }
         }
 
@@ -166,9 +176,9 @@ namespace ConsoleMinesweeper.View
                 ConsoleColor.DarkRed, 
                 players.ToString());
 
-            ConsolePrinter.Print(new ConsoleWrapper(), scoreBoxList);
-            Console.ReadKey(true);
-            ConsoleMenus.StartMainMenu();
+            ConsolePrinter.Print(this.consoleWrpView, scoreBoxList);
+            this.consoleWrpView.ReadKey(true);
+            ConsoleMenus.StartMainMenu(this.consoleWrpView);
         }
 
         /// <summary>
@@ -223,16 +233,16 @@ namespace ConsoleMinesweeper.View
                         ConsoleColor.Cyan, 
                         ConsoleColor.DarkRed, 
                         sb.ToString());
-                    Console.Clear();
+                    this.consoleWrpView.Clear();
                     ConsolePrinter.PrintGrid(
-                        new ConsoleWrapper(), 
+                        this.consoleWrpView, 
                         this.gridBox, 
                         this.OpenCellEvent, 
                         this.ProtectCellEvent);
                 }
 
                 this.gridBox.Text = sb.ToString();
-                ConsolePrinter.Print(new ConsoleWrapper(), this.gridBox);
+                ConsolePrinter.Print(this.consoleWrpView, this.gridBox);
             }
         }
 
@@ -255,9 +265,9 @@ namespace ConsoleMinesweeper.View
                     ConsoleColor.Black, 
                     "Game Over!");
 
-                ConsolePrinter.Print(new ConsoleWrapper(), gameOverBox);
-                Console.ReadKey(true);
-                ConsoleMenus.StartMainMenu();
+                ConsolePrinter.Print(this.consoleWrpView, gameOverBox);
+                this.consoleWrpView.ReadKey(true);
+                ConsoleMenus.StartMainMenu(this.consoleWrpView);
             }
             else
             {
@@ -270,14 +280,14 @@ namespace ConsoleMinesweeper.View
                     ConsoleColor.Black, 
                     "Enter your name: ");
 
-                ConsolePrinter.Print(new ConsoleWrapper(), gameOverBox);
-                var name = Console.ReadLine();
+                ConsolePrinter.Print(this.consoleWrpView, gameOverBox);
+                var name = this.consoleWrpView.ReadLine();
 
                 var args = new MinesweeperAddPlayerEventArgs { PlayerName = name };
 
                 this.AddPlayerEvent.Invoke(this, args);
 
-                ConsoleMenus.StartMainMenu();
+                ConsoleMenus.StartMainMenu(this.consoleWrpView);
             }
         }
 

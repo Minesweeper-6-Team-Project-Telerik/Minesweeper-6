@@ -141,5 +141,15 @@ namespace ConsoleMinesweeper.Models
         {
             Console.SetWindowSize(width, height);
         }
+
+        public void Clear()
+        {
+            Console.Clear();
+        }
+
+        public string ReadLine()
+        {
+            return Console.ReadLine();
+        }
     }
 }

@@ -8,6 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace ConsoleMinesweeper
 {
+    using ConsoleMinesweeper.Models;
+
     /// <summary>
     ///     The program.
     /// </summary>
@@ -21,7 +23,7 @@ namespace ConsoleMinesweeper
         /// </param>
         private static void Main(string[] args)
         {
-            ConsoleMenus.StartMainMenu();
+            ConsoleMenus.StartMainMenu(new ConsoleWrapper());
         }
     }
 }

@@ -4,11 +4,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ConsoleMinesweeper.Test
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     using ConsoleMinesweeper;
     using ConsoleMinesweeper.Models;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class TestBoxes
     {
         private bool isButtonClicked = false;

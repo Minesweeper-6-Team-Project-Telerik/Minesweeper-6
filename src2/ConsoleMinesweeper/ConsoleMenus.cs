@@ -10,6 +10,7 @@ namespace ConsoleMinesweeper
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
     using ConsoleMinesweeper.Interfaces;
@@ -18,17 +19,13 @@ namespace ConsoleMinesweeper
 
     using Minesweeper.Controller;
     using Minesweeper.Models;
+    using Minesweeper.Views;
 
     /// <summary>
     ///     The console menus.
     /// </summary>
     public static class ConsoleMenus
     {
-        /// <summary>
-        ///     The view.
-        /// </summary>
-        private static ConsoleView view;
-
         /// <summary>
         ///     The game controller.
         /// </summary>
@@ -37,33 +34,30 @@ namespace ConsoleMinesweeper
         /// <summary>
         ///     The start game menu.
         /// </summary>
-        public static void StartGameMenu(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output)
+        public static void StartGameMenu(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output, IConsoleView view, ConsoleTimer timer)
         {
             EventHandler ev1 = (sender, args) =>
             {
-                view = new ConsoleView(true, output);
                 gameController = new MinesweeperGameController(
                     MinesweeperDifficultyType.Easy,
                     view,
-                    new ConsoleTimer());
+                    timer);
             };
 
             EventHandler ev2 = (sender, args) =>
             {
-                view = new ConsoleView(true, output);
                 gameController = new MinesweeperGameController(
                     MinesweeperDifficultyType.Medium,
                     view,
-                    new ConsoleTimer());
+                    timer);
             };
 
             EventHandler ev3 = (sender, args) =>
             {
-                view = new ConsoleView(true, output);
                 gameController = new MinesweeperGameController(
                     MinesweeperDifficultyType.Hard,
                     view,
-                    new ConsoleTimer());
+                    timer);
             };
 
             EventHandler ev4 = (sender, args) => { StartMainMenu(output); };
@@ -74,10 +68,9 @@ namespace ConsoleMinesweeper
         /// <summary>
         /// The start scores menu.
         /// </summary>
-        public static void StartScoresMenu(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output)
+        public static void StartScoresMenu(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output, IConsoleView view, ConsoleTimer timer)
         {
-            view = new ConsoleView(false, output);
-            gameController = new MinesweeperGameController(MinesweeperDifficultyType.Hard, view, new ConsoleTimer());
+            gameController = new MinesweeperGameController(MinesweeperDifficultyType.Hard, view, timer);
 
             EventHandler ev1 = (sender, args) => { view.RequestScoreList(MinesweeperDifficultyType.Easy); };
 
@@ -95,9 +88,9 @@ namespace ConsoleMinesweeper
         /// </summary>
         public static void StartMainMenu(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output)
         {
-            EventHandler ev1 = (sender, args) => { StartGameMenu(output); };
+            EventHandler ev1 = (sender, args) => { StartGameMenu(output, new ConsoleView(true, output), new ConsoleTimer()); };
 
-            EventHandler ev2 = (sender, args) => { StartScoresMenu(output); };
+            EventHandler ev2 = (sender, args) => { StartScoresMenu(output, new ConsoleView(false, output), new ConsoleTimer()); };
 
             EventHandler ev3 = (sender, args) =>
             {
@@ -118,7 +111,7 @@ namespace ConsoleMinesweeper
                     ConsoleColor.DarkRed,
                     help.ToString());
 
-                ConsolePrinter.Print(new ConsoleWrapper(), scoreBoxList);
+                ConsolePrinter.Print(output, scoreBoxList);
                 output.ReadKey(true);
                 StartMainMenu(output);
             };

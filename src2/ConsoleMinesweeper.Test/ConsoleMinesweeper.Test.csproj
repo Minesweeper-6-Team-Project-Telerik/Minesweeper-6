@@ -61,11 +61,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConsolePrinter.cs" />
     <Compile Include="TestMenus.cs" />
+    <Compile Include="TestView.cs" />
+    <Compile Include="TestTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConsoleMinesweeper\ConsoleMinesweeper.csproj">
       <Project>{fce0c6ac-91a0-4252-986f-440a664c0648}</Project>
       <Name>ConsoleMinesweeper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Minesweeper\Minesweeper.csproj">
+      <Project>{1a5e20a2-0220-4ba2-b4f7-8216dc38735e}</Project>
+      <Name>Minesweeper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

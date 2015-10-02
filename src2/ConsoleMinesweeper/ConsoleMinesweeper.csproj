@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IConsoleView.cs" />
     <Compile Include="Interfaces\IConsoleWrapper.cs" />
     <Compile Include="Models\ConsoleButton.cs" />
     <Compile Include="Models\ConsoleBox.cs" />

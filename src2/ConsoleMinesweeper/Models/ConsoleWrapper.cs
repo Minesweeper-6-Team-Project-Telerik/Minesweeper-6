@@ -9,13 +9,15 @@
 namespace ConsoleMinesweeper.Models
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using ConsoleMinesweeper.Interfaces;
 
     /// <summary>
     ///     The console wrapper.
     /// </summary>
-    internal class ConsoleWrapper : IConsoleWrapper<ConsoleColor, ConsoleKeyInfo>
+    [ExcludeFromCodeCoverage]
+    public class ConsoleWrapper : IConsoleWrapper<ConsoleColor, ConsoleKeyInfo>
     {
         /// <summary>
         ///     Gets or sets the background color.

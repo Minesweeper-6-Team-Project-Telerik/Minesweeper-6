@@ -22,7 +22,7 @@ namespace ConsoleMinesweeper.View
     /// <summary>
     ///     The console view.
     /// </summary>
-    internal class ConsoleView : IMinesweeperView
+    public class ConsoleView : IConsoleView
     {
         /// <summary>
         /// The console wrp view.
@@ -32,7 +32,7 @@ namespace ConsoleMinesweeper.View
         /// <summary>
         ///     The is real view.
         /// </summary>
-        private readonly bool isRealView;
+        private bool isRealView;
 
         /// <summary>
         ///     The grid box.

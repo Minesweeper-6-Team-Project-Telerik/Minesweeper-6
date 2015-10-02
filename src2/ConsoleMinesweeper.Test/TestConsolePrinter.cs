@@ -4,10 +4,13 @@ using Moq;
 
 namespace ConsoleMinesweeper.Test
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using ConsoleMinesweeper.Interfaces;
     using ConsoleMinesweeper.Models;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class TestConsolePrinter
     {
         private string testStr;
@@ -24,9 +27,9 @@ namespace ConsoleMinesweeper.Test
 
         private IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> ConsoleMock()
         {
-            var mockedCarsRepository = new Mock<IConsoleWrapper<ConsoleColor, ConsoleKeyInfo>>();
-            mockedCarsRepository.Setup(r => r.Write(It.IsAny<string>())).Callback<string>(r => { this.testStr = r; });
-            mockedCarsRepository.Setup(r => r.ReadKey(It.IsAny<bool>())).Returns(() =>
+            var mockedWrapper = new Mock<IConsoleWrapper<ConsoleColor, ConsoleKeyInfo>>();
+            mockedWrapper.Setup(r => r.Write(It.IsAny<string>())).Callback<string>(r => { this.testStr = r; });
+            mockedWrapper.Setup(r => r.ReadKey(It.IsAny<bool>())).Returns(() =>
                 {
                 calls++;
 
@@ -43,9 +46,9 @@ namespace ConsoleMinesweeper.Test
                     return new ConsoleKeyInfo(' ', ConsoleKey.End, false, false, false);
                 }
             });
-            mockedCarsRepository.Setup(r => r.ResetColor()).Verifiable();
-            mockedCarsRepository.Setup(r => r.SetCursorPosition(It.IsAny<int>(), It.IsAny<int>())).Verifiable(); ;
-            return mockedCarsRepository.Object;
+            mockedWrapper.Setup(r => r.ResetColor()).Verifiable();
+            mockedWrapper.Setup(r => r.SetCursorPosition(It.IsAny<int>(), It.IsAny<int>())).Verifiable();            
+            return mockedWrapper.Object;
         }
 
         [TestMethod]

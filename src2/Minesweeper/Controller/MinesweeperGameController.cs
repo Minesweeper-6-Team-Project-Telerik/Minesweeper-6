@@ -214,16 +214,19 @@ namespace Minesweeper.Controller
 
             if (!this.grid.IsCellProtected(args.Row, args.Col))
             {
-                this.grid.RevealCell(args.Row, args.Col);
-
-                this.score++;
-                this.gameView.DisplayGrid(this.grid);
-                this.gameView.DisplayMoves(this.score);
-
-                if (this.grid.RevealedCellsCount >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
+                if(!this.grid.IsCellRevealed(args.Row, args.Col))
                 {
-                    this.minesweeperTimer.Stop();
-                    this.gameView.DisplayGameOver(true);
+                    this.grid.RevealCell(args.Row, args.Col);
+
+                    this.score++;
+                    this.gameView.DisplayGrid(this.grid);
+                    this.gameView.DisplayMoves(this.score);
+
+                    if (this.grid.RevealedCellsCount >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
+                    {
+                    	this.minesweeperTimer.Stop();
+                        this.gameView.DisplayGameOver(true);
+                    }
                 }
             }
         }

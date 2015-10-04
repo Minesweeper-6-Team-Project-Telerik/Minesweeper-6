@@ -13,7 +13,7 @@ namespace WpfMinesweeper
     /// <summary>
     ///     The wpf minesweeper button.
     /// </summary>
-    internal class WpfMinesweeperButton : Button
+    public class WpfMinesweeperButton : Button
     {
         /// <summary>
         ///     Gets or sets the row.

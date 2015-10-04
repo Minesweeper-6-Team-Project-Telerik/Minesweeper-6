@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfMinesweeper", "WpfMinesw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper.Test", "Minesweeper.Test\Minesweeper.Test.csproj", "{4FC80E32-A8D8-42D6-8DEE-9D5A99A071D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleMinesweeper", "ConsoleMinesweeper\ConsoleMinesweeper.csproj", "{FCE0C6AC-91A0-4252-986F-440A664C0648}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfMinesweeper.Test", "WpfMinesweeper.Test\WpfMinesweeper.Test.csproj", "{390875BF-E4C7-419D-9D6F-AE9B696D01B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleMinesweeper.Test", "ConsoleMinesweeper.Test\ConsoleMinesweeper.Test.csproj", "{35B3FBBB-BC12-40AE-97E2-6FFA885FD552}"
 EndProject
@@ -31,10 +31,10 @@ Global
 		{4FC80E32-A8D8-42D6-8DEE-9D5A99A071D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FC80E32-A8D8-42D6-8DEE-9D5A99A071D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FC80E32-A8D8-42D6-8DEE-9D5A99A071D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCE0C6AC-91A0-4252-986F-440A664C0648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCE0C6AC-91A0-4252-986F-440A664C0648}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCE0C6AC-91A0-4252-986F-440A664C0648}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCE0C6AC-91A0-4252-986F-440A664C0648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{390875BF-E4C7-419D-9D6F-AE9B696D01B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{390875BF-E4C7-419D-9D6F-AE9B696D01B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{390875BF-E4C7-419D-9D6F-AE9B696D01B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{390875BF-E4C7-419D-9D6F-AE9B696D01B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35B3FBBB-BC12-40AE-97E2-6FFA885FD552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{35B3FBBB-BC12-40AE-97E2-6FFA885FD552}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35B3FBBB-BC12-40AE-97E2-6FFA885FD552}.Release|Any CPU.ActiveCfg = Release|Any CPU

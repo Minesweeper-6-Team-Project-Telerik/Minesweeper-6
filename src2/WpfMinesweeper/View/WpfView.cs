@@ -24,6 +24,7 @@ namespace WpfMinesweeper.View
     using Minesweeper.Models.Interfaces;
     using Minesweeper.Views;
 
+    using WpfMinesweeper.Models;
     using WpfMinesweeper.Properties;
 
     /// <summary>
@@ -85,8 +86,8 @@ namespace WpfMinesweeper.View
             // Initialize all resource pictures, and keep them in ram for performance
             this.images = new List<ImageBrush>
                               {
-                                  this.GetImage(Resources.mine), 
-                                  this.GetImage(Resources.flag)
+                                  ImageFactory.CreateImage(Resources.mine), 
+                                  ImageFactory.CreateImage(Resources.flag)
                               };
         }
 
@@ -192,6 +193,7 @@ namespace WpfMinesweeper.View
                     for (var j = 0; j < cols; j++)
                     {
                         var button = new WpfMinesweeperButton { Row = rows, Col = cols };                     
+
                         button.Name = "Button_" + i + "_" + j;
                         button.HorizontalAlignment = HorizontalAlignment.Left;
                         button.VerticalAlignment = VerticalAlignment.Top;
@@ -230,6 +232,18 @@ namespace WpfMinesweeper.View
             }
             else
             {
+                var unprotectedButtons = this.buttons.Where(b => b.Content == string.Empty);
+                foreach (var upb in unprotectedButtons)
+                {
+                    upb.Background = this.images[1];
+                }
+
+                var protectedButtons = this.buttons.Where(b => b.Background == this.images[1]);
+                foreach (var pb in protectedButtons)
+                {
+                    pb.IsHitTestVisible = false;
+                }
+
                 var inputBox = new InputBox(this.PlayerAdd);
                 inputBox.Show();
             }
@@ -309,7 +323,9 @@ namespace WpfMinesweeper.View
                     {
                         button.Content = grid.NeighbourMinesCount(i, j).ToString();
                         button.Foreground = new SolidColorBrush(color);
-                    }                    
+                    }
+
+                    button.IsEnabled = false;
                 }
             }
             else
@@ -318,26 +334,6 @@ namespace WpfMinesweeper.View
 
                 button.Content = string.Empty;
             }
-        }
-
-        /// <summary>
-        /// The get image.
-        /// </summary>
-        /// <param name="imgResourse">
-        /// The img resourse.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ImageBrush"/>.
-        /// </returns>
-        private ImageBrush GetImage(Bitmap imgResourse)
-        {
-            var bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
-                imgResourse.GetHbitmap(), 
-                IntPtr.Zero, 
-                Int32Rect.Empty, 
-                BitmapSizeOptions.FromEmptyOptions());
-
-            return new ImageBrush(bitmapSource);
         }
 
         /// <summary>

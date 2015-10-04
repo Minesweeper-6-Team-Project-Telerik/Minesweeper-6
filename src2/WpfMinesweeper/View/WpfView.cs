@@ -325,7 +325,7 @@ namespace WpfMinesweeper.View
                         button.Foreground = new SolidColorBrush(color);
                     }
 
-                    button.IsEnabled = false;
+                    button.IsHitTestVisible = false;
                 }
             }
             else

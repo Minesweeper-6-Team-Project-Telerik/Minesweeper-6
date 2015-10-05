@@ -51,8 +51,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controller\TestControllerClass.cs" />
     <Compile Include="Models\TestCellClass.cs" />
     <Compile Include="Models\TestGridClass.cs" />
+    <Compile Include="Models\TestDataClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

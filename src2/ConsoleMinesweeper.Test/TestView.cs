@@ -10,6 +10,7 @@ namespace ConsoleMinesweeper.Test
 
     using Minesweeper.Models;
     using Minesweeper.Models.Interfaces;
+    using Minesweeper.Models.Exceptions;
 
     using Moq;
 

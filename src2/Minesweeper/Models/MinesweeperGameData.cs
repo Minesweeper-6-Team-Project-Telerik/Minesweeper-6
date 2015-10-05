@@ -13,10 +13,12 @@ namespace Minesweeper.Models
     using System.Xml;
     using System.Xml.Serialization;
 
+    using Minesweeper.Models.Exceptions;
+
     /// <summary>
     ///     The game data.
     /// </summary>
-    internal static class MinesweeperGameData
+    public static class MinesweeperGameData
     {
         /// <summary>
         /// The save.
@@ -51,7 +53,7 @@ namespace Minesweeper.Models
             }
             catch (Exception)
             {
-                // TODO
+                throw new InvalidPlayerOperation("Cannot save data!");
             }
         }
 
@@ -99,7 +101,7 @@ namespace Minesweeper.Models
             }
             catch (Exception)
             {
-                // TODO
+                throw new InvalidPlayerOperation("Cannot load data!");
             }
 
             return objectOut;

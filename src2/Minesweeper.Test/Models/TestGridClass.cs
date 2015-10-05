@@ -3,10 +3,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Minesweeper.Test.Models
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using Minesweeper.Models;
     using Minesweeper.Models.Exceptions;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class TestGridClass
     {
         private bool isBombFired;

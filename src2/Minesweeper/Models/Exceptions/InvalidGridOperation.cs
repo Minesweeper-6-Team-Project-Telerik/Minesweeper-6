@@ -16,14 +16,6 @@ namespace Minesweeper.Models.Exceptions
     public class InvalidGridOperation : Exception
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="InvalidGridOperation" /> class.
-        /// </summary>
-        public InvalidGridOperation()
-            : base("Invalid grid operation!")
-        {
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="InvalidGridOperation"/> class.
         /// </summary>
         /// <param name="message">

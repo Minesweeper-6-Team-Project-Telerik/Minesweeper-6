@@ -12,6 +12,7 @@ namespace Minesweeper.Models
     using System;
     using System.Collections.Generic;
 
+    using Minesweeper.Models.Exceptions;
     using Minesweeper.Models.Interfaces;
 
     /// <summary>
@@ -33,7 +34,15 @@ namespace Minesweeper.Models
         /// </param>
         public MinesweeperPlayerBoard(string file)
         {
-            this.Players = MinesweeperGameData.Load<List<MinesweeperPlayer>>(file) ?? new List<MinesweeperPlayer>();
+            try
+            {
+                this.Players = MinesweeperGameData.Load<List<MinesweeperPlayer>>(file);
+            }
+            catch (InvalidPlayerOperation)
+            {                
+                this.Players = new List<MinesweeperPlayer>();
+            }
+            
             this.file = file;
         }
 

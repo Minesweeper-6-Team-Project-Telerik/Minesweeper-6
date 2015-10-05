@@ -153,7 +153,7 @@ namespace WpfMinesweeper.View
         /// <param name="board">
         /// The board.
         /// </param>
-        public void DisplayScoreBoard(IMinesweeperPlayerBoard board)
+        public void DisplayScoreBoard(List<MinesweeperPlayer> board)
         {
             var scoresWindow = new ScoresWindow(board);
             scoresWindow.Show();

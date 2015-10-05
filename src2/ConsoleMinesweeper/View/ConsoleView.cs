@@ -9,6 +9,7 @@
 namespace ConsoleMinesweeper.View
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
@@ -155,9 +156,9 @@ namespace ConsoleMinesweeper.View
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public void DisplayScoreBoard(IMinesweeperPlayerBoard board)
+        public void DisplayScoreBoard(List<MinesweeperPlayer> board)
         {
-            var list = board.Players.Where(x => x.Type == this.type).OrderBy(x => x.Time);
+            var list = board.Where(x => x.Type == this.type).OrderBy(x => x.Time);
             var players = new StringBuilder();
 
             players.Append(" Name                                           | Score    ");

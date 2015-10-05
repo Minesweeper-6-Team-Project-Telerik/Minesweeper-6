@@ -14,6 +14,8 @@ namespace ConsoleMinesweeper.Test
     using Minesweeper.Models.Interfaces;
     using Minesweeper.Views;
 
+    using System.Collections.Generic;
+
     using Moq;
 
     [TestClass]
@@ -44,7 +46,7 @@ namespace ConsoleMinesweeper.Test
             mockedView.Setup(r => r.DisplayGrid(It.IsAny<IMinesweeperGrid>())).Verifiable();
             mockedView.Setup(r => r.DisplayMoves(It.IsAny<int>())).Verifiable();
             mockedView.Setup(r => r.DisplayTime(It.IsAny<int>())).Verifiable();
-            mockedView.Setup(r => r.DisplayScoreBoard(It.IsAny<IMinesweeperPlayerBoard>())).Verifiable();
+            mockedView.Setup(r => r.DisplayScoreBoard(It.IsAny <List<MinesweeperPlayer>>())).Verifiable();
             return mockedView.Object;
         }
 

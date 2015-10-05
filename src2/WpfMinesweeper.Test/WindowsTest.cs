@@ -2,8 +2,10 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
+    using System.Collections.Generic;
 
     using Minesweeper.Models;
+    using Minesweeper.Models.Interfaces;
 
     using WpfMinesweeper;
     using WpfMinesweeper.View;
@@ -28,20 +30,19 @@
         public void TestScoreWindowCreation()
         {
             string playersFilename = "scores.data";
-            var board = new MinesweeperPlayerBoard(playersFilename);
+            var board = new List<MinesweeperPlayer>();
             var scoreWindow = new ScoresWindow(board);
-            
+
             Assert.AreNotEqual(null, scoreWindow, "Score window created successfully");
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void TestScoreWindowNotCreatedWhenPassedInvalidData()
-        {
-            var scoreWindow = new ScoresWindow(null);
-
-            Assert.Fail();
-        }
+      //  [TestMethod]
+      //  [ExpectedException(typeof(NullReferenceException))]
+      //  public void TestScoreWindowNotCreatedWhenPassedInvalidData()
+      //  {
+            // todo: not needed anymore: var scoreWindow = new ScoresWindow(null);
+            // todo: not needed anymore: Assert.Fail();
+      //  }
 
         [TestMethod]
         public void TestInputBoxCreation()

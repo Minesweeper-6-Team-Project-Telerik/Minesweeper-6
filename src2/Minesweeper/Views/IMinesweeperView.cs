@@ -13,7 +13,7 @@ namespace Minesweeper.Views
 
     using Minesweeper.Models;
     using Minesweeper.Models.Interfaces;
-    
+
     /// <summary>
     ///     The View interface.
     /// </summary>
@@ -58,10 +58,10 @@ namespace Minesweeper.Views
         /// <summary>
         /// The display score board.
         /// </summary>
-        /// <param name="board">
-        /// The board.
+        /// <param name="players">
+        /// The players.
         /// </param>
-        void DisplayScoreBoard(IMinesweeperPlayerBoard board);
+        void DisplayScoreBoard(List<MinesweeperPlayer> players);
 
         /// <summary>
         /// The display grid.

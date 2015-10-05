@@ -3,10 +3,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Minesweeper.Test.Models
 {
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     using Minesweeper.Models;
     using Minesweeper.Models.Exceptions;
+    using Minesweeper.Models.Interfaces;
+
+    using System.IO;
 
     [TestClass]
     [ExcludeFromCodeCoverage]
@@ -17,11 +21,30 @@ namespace Minesweeper.Test.Models
         [TestMethod]
         public void TestSaveAndLoadDataShouldReturnSameResult()
         {
-            var testStr = "test string";
-            MinesweeperGameData.Save(testStr, this.testFileName);
-            var readStr = MinesweeperGameData.Load<string>(this.testFileName);
+            try
+            {
+                File.Delete(testFileName);
+            }
+            catch
+            {
+                
+            }
 
-            Assert.AreEqual(testStr, readStr, "Save and load do not produce same results!");
+            var players = new List<MinesweeperPlayer>
+                              {
+                                  new MinesweeperPlayer()
+                                      {
+                                          Name = "test",
+                                          Time = 0,
+                                          Type =
+                                              MinesweeperDifficultyType.Easy
+                                      }
+                              };
+
+            MinesweeperGameData.Save(players, this.testFileName);
+            var playersRes = MinesweeperGameData.Load<List<MinesweeperPlayer>>(this.testFileName);
+
+            Assert.AreEqual(players[0].Name, playersRes[0].Name, "Save and load do not produce same results!");
         }
 
         [TestMethod]

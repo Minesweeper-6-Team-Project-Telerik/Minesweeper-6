@@ -9,8 +9,10 @@
 namespace Minesweeper.Controller
 {
     using System;
+    using System.Collections.Generic;
 
     using Minesweeper.Models;
+    using Minesweeper.Models.Exceptions;
     using Minesweeper.Models.Interfaces;
     using Minesweeper.Views;
 
@@ -39,10 +41,7 @@ namespace Minesweeper.Controller
         /// </summary>
         private readonly IMinesweeperTimer minesweeperTimer;
 
-        /// <summary>
-        ///     The player board.
-        /// </summary>
-        private readonly IMinesweeperPlayerBoard players;
+        private readonly List<MinesweeperPlayer> players;
 
         /// <summary>
         /// The type.
@@ -105,7 +104,14 @@ namespace Minesweeper.Controller
             this.grid.BoomEvent += this.GridOnBoomEvent;
 
             // Get the players
-            this.players = new MinesweeperPlayerBoard(PlayersFilename);
+            try
+            {
+                this.players = MinesweeperGameData.Load<List<MinesweeperPlayer>>(PlayersFilename);
+            }
+            catch (InvalidPlayerOperation)
+            {
+                this.players = new List<MinesweeperPlayer>();
+            }           
 
             this.gameView.DisplayGrid(this.grid);
             this.isGameStarted = false;
@@ -122,7 +128,7 @@ namespace Minesweeper.Controller
         /// </param>
         private void GameViewOnShowScoreBoardEvent(object sender, EventArgs eventArgs)
         {
-            this.gameView.DisplayScoreBoard(this.players);
+           this.gameView.DisplayScoreBoard(this.players);
         }
 
         /// <summary>
@@ -139,8 +145,8 @@ namespace Minesweeper.Controller
             var args = (MinesweeperAddPlayerEventArgs)eventArgs;
             var player = new MinesweeperPlayer { Name = args.PlayerName, Time = this.secondsPassed, Type = this.type };
 
-            this.players.AddPlayer(player);
-            this.players.Save();
+           this.players.Add(player);
+           MinesweeperGameData.Save(this.players, PlayersFilename);            
         }
 
         /// <summary>
@@ -224,7 +230,7 @@ namespace Minesweeper.Controller
 
                     if (this.grid.RevealedCellsCount >= (this.grid.Cols * this.grid.Rows) - this.grid.MinesCount)
                     {
-                    	this.minesweeperTimer.Stop();
+                        this.minesweeperTimer.Stop();
                         this.gameView.DisplayGameOver(true);
                     }
                 }

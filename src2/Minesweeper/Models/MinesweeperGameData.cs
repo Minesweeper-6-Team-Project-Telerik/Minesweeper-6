@@ -51,7 +51,7 @@ namespace Minesweeper.Models
                     stream.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new InvalidPlayerOperation("Cannot save data!");
             }

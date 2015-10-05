@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConsoleMinesweeper.Test
 {
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     using ConsoleMinesweeper.Interfaces;
@@ -65,13 +66,15 @@ namespace ConsoleMinesweeper.Test
             testKeys[i++] = new ConsoleKeyInfo(' ', ConsoleKey.E, false, false, false);
 
             var view = new ConsoleView(true, ConsoleMock());
-            IMinesweeperPlayerBoard board = new MinesweeperPlayerBoard("test.mine");
-            board.AddPlayer(new MinesweeperPlayer()
-                                {
-                                    Name = "test",
-                                    Time = 0,
-                                    Type = MinesweeperDifficultyType.Easy
-                                });
+            var board = new List<MinesweeperPlayer>
+                            {
+                                new MinesweeperPlayer()
+                                    {
+                                        Name = "test",
+                                        Time = 0,
+                                        Type = MinesweeperDifficultyType.Easy
+                                    }
+                            };
             view.DisplayScoreBoard(board);
             Assert.AreEqual(testStr != "", true, "No output!");
         }

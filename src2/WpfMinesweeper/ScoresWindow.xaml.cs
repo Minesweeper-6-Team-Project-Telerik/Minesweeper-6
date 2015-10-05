@@ -9,6 +9,7 @@
 namespace WpfMinesweeper
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
 
@@ -23,7 +24,7 @@ namespace WpfMinesweeper
         /// <summary>
         /// The board.
         /// </summary>
-        private readonly IMinesweeperPlayerBoard board;
+        private readonly List<MinesweeperPlayer> board;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ScoresWindow"/> class.
@@ -31,11 +32,11 @@ namespace WpfMinesweeper
         /// <param name="board">
         /// The board.
         /// </param>
-        public ScoresWindow(IMinesweeperPlayerBoard board)
+        public ScoresWindow(List<MinesweeperPlayer> board)
         {
             this.InitializeComponent();
             this.ScoreList.ItemsSource =
-                board.Players.Where(x => x.Type == MinesweeperDifficultyType.Easy).OrderBy(x => x.Time);
+                board.Where(x => x.Type == MinesweeperDifficultyType.Easy).OrderBy(x => x.Time);
             this.board = board;
         }
 
@@ -77,7 +78,7 @@ namespace WpfMinesweeper
             if (this.board != null)
             {
                 this.ScoreList.ItemsSource =
-                    this.board.Players.Where(x => x.Type == this.TextToType(this.SelectBox.Text)).OrderBy(x => x.Time);
+                    this.board.Where(x => x.Type == this.TextToType(this.SelectBox.Text)).OrderBy(x => x.Time);
             }
         }
 

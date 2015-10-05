@@ -30,7 +30,7 @@ namespace WpfMinesweeper.View
     /// <summary>
     ///     The wpf view.
     /// </summary>
-    internal class WpfView : IMinesweeperView
+    public class WpfView : IMinesweeperView
     {
         /// <summary>
         ///     The cell height and width.

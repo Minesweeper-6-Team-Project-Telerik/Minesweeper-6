@@ -232,7 +232,7 @@ namespace WpfMinesweeper.View
             }
             else
             {
-                var unprotectedButtons = this.buttons.Where(b => b.Content == string.Empty);
+                var unprotectedButtons = this.buttons.Where(b => b.Content.ToString() == string.Empty);
                 foreach (var upb in unprotectedButtons)
                 {
                     upb.Background = this.images[1];

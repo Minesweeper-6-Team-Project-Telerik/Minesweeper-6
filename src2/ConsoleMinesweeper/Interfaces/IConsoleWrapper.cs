@@ -83,8 +83,17 @@ namespace ConsoleMinesweeper.Interfaces
         /// </param>
         void SetWindowSize(int width, int height);
 
+        /// <summary>
+        /// The clear.
+        /// </summary>
         void Clear();
 
+        /// <summary>
+        /// The read line.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         string ReadLine();
     }
 }

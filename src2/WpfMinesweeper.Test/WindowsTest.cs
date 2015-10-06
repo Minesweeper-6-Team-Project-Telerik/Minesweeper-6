@@ -29,7 +29,6 @@
         [TestMethod]
         public void TestScoreWindowCreation()
         {
-            string playersFilename = "scores.data";
             var board = new List<MinesweeperPlayer>();
             var scoreWindow = new ScoresWindow(board);
 

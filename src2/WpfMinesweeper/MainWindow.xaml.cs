@@ -9,6 +9,8 @@
 namespace WpfMinesweeper
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
     using System.Windows;
     using System.Windows.Threading;
 
@@ -23,9 +25,9 @@ namespace WpfMinesweeper
     public partial class MainWindow : Window
     {
         /// <summary>
-        ///     The view.
+        /// The players.
         /// </summary>
-        private WpfView view;
+        private readonly List<MinesweeperPlayer> players;
 
         /// <summary>
         ///     The game controller.
@@ -33,15 +35,37 @@ namespace WpfMinesweeper
         private MinesweeperGameController gameController;
 
         /// <summary>
+        ///     The view.
+        /// </summary>
+        private WpfView view;
+
+        /// <summary>
         ///     Initializes a new instance of the <see cref="MainWindow" /> class.
         /// </summary>
         public MainWindow()
         {
             this.InitializeComponent();
+
+            if (File.Exists(MinesweeperGameController.PlayersFilename))
+            {
+                this.players =
+                    MinesweeperGameData.Load<List<MinesweeperPlayer>>(MinesweeperGameController.PlayersFilename);
+            }
+            else
+            {
+                this.players = new List<MinesweeperPlayer>();
+            }
+
             this.view = new WpfView(this.WinesweeperGrid);
             this.Width = 240;
             this.Height = 340;
-            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Easy, this.view, new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)));
+            this.gameController =
+                new MinesweeperGameController(
+                    MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Easy), 
+                    this.view, 
+                    new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)), 
+                    this.players, 
+                    MinesweeperDifficultyType.Easy);
         }
 
         /// <summary>
@@ -72,7 +96,13 @@ namespace WpfMinesweeper
             this.Width = 240;
             this.Height = 340;
             this.view = new WpfView(this.WinesweeperGrid);
-            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Easy, this.view, new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)));
+            this.gameController =
+                new MinesweeperGameController(
+                    MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Easy), 
+                    this.view, 
+                    new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)), 
+                    this.players, 
+                    MinesweeperDifficultyType.Easy);
         }
 
         /// <summary>
@@ -85,11 +115,17 @@ namespace WpfMinesweeper
         /// The e.
         /// </param>
         private void MenuItemNewMediumGameClick(object sender, RoutedEventArgs e)
-        {         
+        {
             this.Width = 380;
             this.Height = 480;
             this.view = new WpfView(this.WinesweeperGrid);
-            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Medium, this.view, new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)));
+            this.gameController =
+                new MinesweeperGameController(
+                    MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Medium), 
+                    this.view, 
+                    new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)), 
+                    this.players, 
+                    MinesweeperDifficultyType.Medium);
         }
 
         /// <summary>
@@ -106,7 +142,13 @@ namespace WpfMinesweeper
             this.Width = 500;
             this.Height = 600;
             this.view = new WpfView(this.WinesweeperGrid);
-            this.gameController = new MinesweeperGameController(MinesweeperDifficultyType.Hard, this.view, new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)));
+            this.gameController =
+                new MinesweeperGameController(
+                    MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Hard), 
+                    this.view, 
+                    new WpfTimer(new DispatcherTimer(), new TimeSpan(0, 0, 1)), 
+                    this.players, 
+                    MinesweeperDifficultyType.Hard);
         }
     }
 }

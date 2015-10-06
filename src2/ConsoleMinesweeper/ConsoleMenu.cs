@@ -20,12 +20,15 @@ namespace ConsoleMinesweeper
     /// </summary>
     public class Menu : ConsoleBox<ConsoleColor>
     {
-        private readonly IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output;
-
         /// <summary>
         ///     The buttons.
         /// </summary>
         private readonly IList<ConsoleButton<ConsoleColor>> buttons;
+
+        /// <summary>
+        /// The output.
+        /// </summary>
+        private readonly IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output;
 
         /// <summary>
         ///     The idx.
@@ -56,7 +59,9 @@ namespace ConsoleMinesweeper
         /// <param name="buttons">
         /// The buttons.
         /// </param>
-        /// 
+        /// <param name="output">
+        /// The output.
+        /// </param>
         public Menu(
             int startX, 
             int startY, 
@@ -64,7 +69,7 @@ namespace ConsoleMinesweeper
             int sizeY, 
             ConsoleColor colorBack, 
             ConsoleColor colorText, 
-            IList<ConsoleButton<ConsoleColor>> buttons,
+            IList<ConsoleButton<ConsoleColor>> buttons, 
             IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output)
             : base(startX, startY, sizeX, sizeY, colorBack, colorText, string.Empty)
         {

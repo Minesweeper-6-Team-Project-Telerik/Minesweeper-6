@@ -24,7 +24,7 @@ namespace Minesweeper.Controller
         /// <summary>
         ///     The players filename.
         /// </summary>
-        private const string PlayersFilename = "scores.data";
+        public const string PlayersFilename = "scores.data";
 
         /// <summary>
         ///     The game view.
@@ -76,23 +76,38 @@ namespace Minesweeper.Controller
         /// The timer.
         /// </param>
         public MinesweeperGameController(
-            MinesweeperDifficultyType type, 
+            IMinesweeperGrid gameGrid, 
             IMinesweeperView gameView, 
-            IMinesweeperTimer timer)
+            IMinesweeperTimer timer,
+            List<MinesweeperPlayer> players,
+            MinesweeperDifficultyType type)
         {
+            if (gameGrid == null)
+            {
+                throw new ArgumentNullException("gameGrid");
+            }
+
             if (gameView == null)
             {
                 throw new ArgumentNullException("gameView");
             }
 
-            // Create grid object
-            this.grid = MinesweeperGridFactory.CreateNewTable(type);
+            if (timer == null)
+            {
+                throw new ArgumentNullException("timer");
+            }
 
-            this.type = type;
+            if (players == null)
+            {
+                throw new ArgumentNullException("players");
+            }
+
+            // Initialize objects
+            this.grid = gameGrid;            
             this.gameView = gameView;
-
-            // Create timer
             this.minesweeperTimer = timer;
+            this.players = players;
+            this.type = type;
 
             // Handle all view callbacks            
             this.gameView.OpenCellEvent += this.GameViewOnOpenCellEvent;
@@ -102,17 +117,6 @@ namespace Minesweeper.Controller
 
             // Handle all grid callbacks
             this.grid.BoomEvent += this.GridOnBoomEvent;
-
-            // Get the players
-            try
-            {
-                this.players = MinesweeperGameData.Load<List<MinesweeperPlayer>>(PlayersFilename);
-            }
-            catch (InvalidPlayerOperation)
-            {
-                this.players = new List<MinesweeperPlayer>();
-            }           
-
             this.gameView.DisplayGrid(this.grid);
             this.isGameStarted = false;
         }
@@ -220,7 +224,7 @@ namespace Minesweeper.Controller
 
             if (!this.grid.IsCellProtected(args.Row, args.Col))
             {
-                if(!this.grid.IsCellRevealed(args.Row, args.Col))
+                if (!this.grid.IsCellRevealed(args.Row, args.Col))
                 {
                     this.grid.RevealCell(args.Row, args.Col);
 

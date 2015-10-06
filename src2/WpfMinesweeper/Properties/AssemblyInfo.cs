@@ -8,8 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows;
 
 // General Information about an assembly is controlled through the following 
@@ -30,6 +30,7 @@ using System.Windows;
 [assembly: ComVisible(false)]
 
 [assembly: InternalsVisibleTo("WpfMinesweeper.Test")]
+
 // Version information for an assembly consists of the following four values:
 //      Major Version
 //      Minor Version 

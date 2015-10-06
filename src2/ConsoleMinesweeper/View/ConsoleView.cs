@@ -18,7 +18,6 @@ namespace ConsoleMinesweeper.View
 
     using Minesweeper.Models;
     using Minesweeper.Models.Interfaces;
-    using Minesweeper.Views;
 
     /// <summary>
     ///     The console view.
@@ -26,14 +25,14 @@ namespace ConsoleMinesweeper.View
     public class ConsoleView : IConsoleView
     {
         /// <summary>
-        /// The console wrp view.
+        ///     The console wrp view.
         /// </summary>
         private readonly IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> consoleWrpView;
 
         /// <summary>
         ///     The is real view.
         /// </summary>
-        private bool isRealView;
+        private readonly bool isRealView;
 
         /// <summary>
         ///     The grid box.

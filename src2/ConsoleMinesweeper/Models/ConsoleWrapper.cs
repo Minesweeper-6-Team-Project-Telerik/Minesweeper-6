@@ -144,11 +144,20 @@ namespace ConsoleMinesweeper.Models
             Console.SetWindowSize(width, height);
         }
 
+        /// <summary>
+        /// The clear.
+        /// </summary>
         public void Clear()
         {
             Console.Clear();
         }
 
+        /// <summary>
+        /// The read line.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string ReadLine()
         {
             return Console.ReadLine();

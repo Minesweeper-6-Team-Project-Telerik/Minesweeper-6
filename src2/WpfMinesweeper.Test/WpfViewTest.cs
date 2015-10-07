@@ -13,29 +13,26 @@
 
     using WpfMinesweeper;
     using WpfMinesweeper.View;
-    
+    using System.Collections.Generic;
+
     [TestClass]
     public class WpfViewTest
     {
-        [DllImport("user32.dll",CharSet=CharSet.Auto, CallingConvention=CallingConvention.StdCall)]
-       public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
-
-       private const int MOUSEEVENTF_LEFTDOWN = 0x02;
-       private const int MOUSEEVENTF_LEFTUP = 0x04;
-       private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
-       private const int MOUSEEVENTF_RIGHTUP = 0x10;
-
         private MainWindow mainWindow = new MainWindow();
         private Random random = new Random();
 
-        private void DoMouseClick(uint X, uint Y)
+        private void ClickRandomButton()
         {
-            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+            PrivateObject privateView = new PrivateObject(new WpfView(mainWindow.WinesweeperGrid));
+            var grid = (Grid)privateView.GetField("win");
+            var randomButton = (Button)grid.Children[random.Next(0, grid.Children.Count)];
+
+            randomButton.RaiseEvent(new System.Windows.RoutedEventArgs(Button.ClickEvent));
         }
 
         [TestMethod]
         public void TestViewCreation()
-        {   
+        {
             var view = new WpfView(mainWindow.WinesweeperGrid);
 
             Assert.AreNotEqual(null, view, "View is created");
@@ -78,15 +75,25 @@
         [TestMethod]
         public void TestCorrectMoves()
         {
-            var windowWidth = (int)mainWindow.ActualWidth;
-            var windowHeight = (int)mainWindow.ActualHeight;
-            uint randomX = (uint)random.Next(0, windowWidth);
-            uint randomY = (uint)random.Next(0, windowHeight);
+            ClickRandomButton();
 
-            WpfView view = new WpfView(mainWindow.WinesweeperGrid);
+            var movesLabel = (Label)mainWindow.WinesweeperGrid.FindName("ScoreLabel");
+            Assert.AreEqual("001", movesLabel.Content, "Correct moves are shown");
+        }
 
-            DoMouseClick(randomX, randomY);
+        [TestMethod]
+        public void TestIncorrectMoves()
+        {
+            ClickRandomButton();
 
+            var movesLabel = (Label)mainWindow.WinesweeperGrid.FindName("ScoreLabel");
+            Assert.AreNotEqual("002", movesLabel.Content, "Correct moves are shown");
+        }
+
+        [TestMethod]
+        public void TestCellBackgroundIsChanged()
+        {
+            
         }
     }
 }

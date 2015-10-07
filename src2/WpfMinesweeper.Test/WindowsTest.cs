@@ -9,7 +9,8 @@
 
     using WpfMinesweeper;
     using WpfMinesweeper.View;
-    
+    using System.Windows.Controls;
+
     [TestClass]
     public class WindowsTest
     {
@@ -24,6 +25,35 @@
             var mainWindow = new MainWindow();
 
             Assert.AreNotEqual(null, mainWindow, "Main window created successfully");
+        }
+
+        [TestMethod]
+        public void TestDefaultMainWindowCreatesNewEasyGame()
+        {
+            var mainWindow = new MainWindow();
+
+            Assert.AreEqual(240, mainWindow.Width);
+            Assert.AreEqual(340, mainWindow.Height);
+        }
+
+        [TestMethod]
+        public void TestNewMediumGameCreation()
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.StartMedium.RaiseEvent(new System.Windows.RoutedEventArgs(MenuItem.ClickEvent));
+
+            Assert.AreEqual(380, mainWindow.Width);
+            Assert.AreEqual(480, mainWindow.Height);
+        }
+
+        [TestMethod]
+        public void TestNewHardGameCreation()
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.StartHard.RaiseEvent(new System.Windows.RoutedEventArgs(MenuItem.ClickEvent));
+
+            Assert.AreEqual(500, mainWindow.Width);
+            Assert.AreEqual(600, mainWindow.Height);
         }
 
         [TestMethod]

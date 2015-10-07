@@ -232,13 +232,13 @@ namespace WpfMinesweeper.View
             }
             else
             {
-                var unprotectedButtons = this.buttons.Where(b => b.Content.ToString() == string.Empty);
+                var unprotectedButtons = this.buttons.Where(b => (string)b.Content == string.Empty);
                 foreach (var upb in unprotectedButtons)
                 {
                     upb.Background = this.images[1];
                 }
 
-                var protectedButtons = this.buttons.Where(b => b.Background == this.images[1]);
+                var protectedButtons = this.buttons.Where(b => b.Background.Equals(this.images[1]));
                 foreach (var pb in protectedButtons)
                 {
                     pb.IsHitTestVisible = false;

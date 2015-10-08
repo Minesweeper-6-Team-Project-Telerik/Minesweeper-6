@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestBoxes.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestBoxes.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The test boxes.

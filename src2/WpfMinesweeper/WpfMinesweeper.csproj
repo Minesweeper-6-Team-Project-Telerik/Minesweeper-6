@@ -123,10 +123,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\mine.png" />
+    <Resource Include="Resources\mine.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\flag.png" />
+    <Resource Include="Resources\flag.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Mine2.ico" />

@@ -324,9 +324,9 @@ namespace WpfMinesweeper.View
                         button.Content = grid.NeighbourMinesCount(i, j).ToString();
                         button.Foreground = new SolidColorBrush(color);
                     }
-
-                    button.IsHitTestVisible = false;
                 }
+
+                button.IsHitTestVisible = false;
             }
             else
             {

@@ -65,14 +65,6 @@
             Assert.AreNotEqual(null, scoreWindow, "Score window created successfully");
         }
 
-      //  [TestMethod]
-      //  [ExpectedException(typeof(NullReferenceException))]
-      //  public void TestScoreWindowNotCreatedWhenPassedInvalidData()
-      //  {
-            // todo: not needed anymore: var scoreWindow = new ScoresWindow(null);
-            // todo: not needed anymore: Assert.Fail();
-      //  }
-
         [TestMethod]
         public void TestInputBoxCreation()
         {
@@ -81,6 +73,15 @@
             Assert.AreNotEqual(null, inputBox, "Input box created successfully");
         }
 
+        [TestMethod]
+        public void TestGameOverShouldBeShown()
+        {
+            MainWindow mainWindow = new MainWindow();
+            PrivateObject view = new PrivateObject(new WpfView(mainWindow.WinesweeperGrid));
 
+            view.Invoke("DisplayGameOver", false);
+            
+            
+        }
     }
 }

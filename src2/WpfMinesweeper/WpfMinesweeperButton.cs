@@ -1,11 +1,12 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WpfMinesweeperButton.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="WpfMinesweeperButton.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The wpf minesweeper button.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace WpfMinesweeper
 {
     using System.Windows.Controls;

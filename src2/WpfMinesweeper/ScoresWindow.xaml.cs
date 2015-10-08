@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ScoresWindow.xaml.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ScoresWindow.xaml.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   Interaction logic for ScoresWindow.xaml

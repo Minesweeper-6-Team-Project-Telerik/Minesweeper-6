@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConsoleWrapper.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConsoleWrapper.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The console wrapper.

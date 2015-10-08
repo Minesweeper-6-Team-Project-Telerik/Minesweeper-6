@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConsoleBox.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConsoleBox.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The console box.
@@ -81,36 +81,43 @@ namespace ConsoleMinesweeper.Models
         /// <summary>
         ///     Gets or sets the start x.
         /// </summary>
+        /// <value>The start x position.</value>
         public int StartX { get; set; }
 
         /// <summary>
         ///     Gets or sets the start y.
         /// </summary>
+        /// <value>The start y position.</value>
         public int StartY { get; set; }
 
         /// <summary>
         ///     Gets or sets the size x.
         /// </summary>
+        /// <value>The size x value.</value>
         public int SizeX { get; protected set; }
 
         /// <summary>
         ///     Gets or sets the size y.
         /// </summary>
+        /// <value>The size y value.</value>
         public int SizeY { get; protected set; }
 
         /// <summary>
-        ///     Gets or sets the color background.
+        ///     Gets or sets the color of background.
         /// </summary>
+        /// <value>The background color.</value>
         public TColor ColorBackground { get; protected set; }
 
         /// <summary>
         ///     Gets or sets the color text.
         /// </summary>
+        /// <value>The text color.</value>
         public TColor ColorText { get; protected set; }
 
         /// <summary>
         ///     Gets or sets the text.
         /// </summary>
+        /// <value>The box text.</value>
         public string Text { get; set; }
     }
 }

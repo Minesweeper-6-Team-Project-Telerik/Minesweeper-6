@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IConsoleWrapper.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IConsoleWrapper.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The ConsoleWrapper interface.
@@ -20,39 +20,43 @@ namespace ConsoleMinesweeper.Interfaces
         /// <summary>
         ///     Gets or sets the background color.
         /// </summary>
+        /// <value>The background color.</value>
         TColor BackgroundColor { get; set; }
 
         /// <summary>
         ///     Gets or sets the foreground color.
         /// </summary>
+        /// <value>The foreground color.</value>
         TColor ForegroundColor { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether cursor visible.
         /// </summary>
+        /// <value>True or false if cursor is visible or not.</value>
         bool CursorVisible { get; set; }
 
         /// <summary>
         ///     Gets or sets the cursor size.
         /// </summary>
+        /// <value>The cursor size.</value>
         int CursorSize { get; set; }
 
         /// <summary>
         /// The set cursor position.
         /// </summary>
         /// <param name="x">
-        /// The x.
+        /// The x cursor position.
         /// </param>
         /// <param name="y">
-        /// The y.
+        /// The y cursor position.
         /// </param>
         void SetCursorPosition(int x, int y);
 
         /// <summary>
-        /// The write.
+        /// The text write.
         /// </summary>
         /// <param name="text">
-        /// The text.
+        /// The text string.
         /// </param>
         void Write(string text);
 
@@ -76,15 +80,15 @@ namespace ConsoleMinesweeper.Interfaces
         /// The set window size.
         /// </summary>
         /// <param name="width">
-        /// The width.
+        /// The window width.
         /// </param>
         /// <param name="height">
-        /// The height.
+        /// The window height.
         /// </param>
         void SetWindowSize(int width, int height);
 
         /// <summary>
-        /// The clear.
+        /// The window clear.
         /// </summary>
         void Clear();
 

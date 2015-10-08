@@ -1,4 +1,12 @@
-﻿namespace WpfMinesweeper.Models
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImageFactory.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
+// </copyright>
+// <summary>
+//   The image factory
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace WpfMinesweeper.Models
 {
     using System;
     using System.Drawing;

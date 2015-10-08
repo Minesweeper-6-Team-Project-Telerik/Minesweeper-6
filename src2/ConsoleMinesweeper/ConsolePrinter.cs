@@ -1,9 +1,9 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConsolePrinter.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConsolePrinter.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
-//   The enumerable ex.
+//   The Console printer.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace ConsoleMinesweeper

@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IConsoleBox.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IConsoleBox.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The ConsoleBox interface.

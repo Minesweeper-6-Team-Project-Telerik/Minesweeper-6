@@ -1,13 +1,11 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AssemblyInfo.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   AssemblyInfo.cs
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-
 
 using System.Reflection;
 using System.Runtime.InteropServices;

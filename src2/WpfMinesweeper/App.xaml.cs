@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="App.xaml.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="App.xaml.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   Interaction logic for App.xaml

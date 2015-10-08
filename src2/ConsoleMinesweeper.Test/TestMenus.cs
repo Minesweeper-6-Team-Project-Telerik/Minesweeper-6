@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestMenus.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestMenus.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The test menus.

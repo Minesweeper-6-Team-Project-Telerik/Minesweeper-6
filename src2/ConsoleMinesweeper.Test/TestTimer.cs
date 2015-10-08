@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestTimer.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestTimer.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The test timer.

@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestConsolePrinter.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestConsolePrinter.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The test console printer.

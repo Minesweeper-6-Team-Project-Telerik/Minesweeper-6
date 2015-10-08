@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConsoleMenus.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConsoleMenus.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The console menus.

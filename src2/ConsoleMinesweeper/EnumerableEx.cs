@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EnumerableEx.cs" company="">
-//   
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EnumerableEx.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The enumerable ex.

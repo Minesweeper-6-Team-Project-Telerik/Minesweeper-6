@@ -77,11 +77,10 @@
         public void TestGameOverShouldBeShown()
         {
             MainWindow mainWindow = new MainWindow();
-            PrivateObject view = new PrivateObject(new WpfView(mainWindow.WinesweeperGrid));
+            WpfView view = new WpfView(mainWindow.WinesweeperGrid);
 
-            view.Invoke("DisplayGameOver", false);
-            
-            
+            view.DisplayGameOver(false);
+            view.DisplayGameOver(true);
         }
     }
 }

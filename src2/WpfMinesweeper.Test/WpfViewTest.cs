@@ -208,6 +208,7 @@ namespace WpfMinesweeper.Test
             Assert.AreEqual(color, buttonColor);
         }
 
+        [TestMethod]
         public void TestColorIsChangedToGreenWhenCellHasTwoNeighoubringMines()
         {
             MainWindow window = new MainWindow();

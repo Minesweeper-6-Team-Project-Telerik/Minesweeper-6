@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinesweeperCell.cs" company="">
-//   
+// <copyright file="MinesweeperCell.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The minesweeper cell.
@@ -46,7 +46,9 @@ namespace Minesweeper.Models
         ///     Gets or sets a value indicating whether is revealed.
         /// </summary>
         /// <exception cref="InvalidCellOperation">
+        ///     The InvalidCellOperation exception.
         /// </exception>
+        /// <value>Is cell revealed or not.</value>
         public bool IsRevealed
         {
             get
@@ -67,7 +69,9 @@ namespace Minesweeper.Models
         ///     Gets or sets a value indicating whether has bomb.
         /// </summary>
         /// <exception cref="InvalidCellOperation">
+        ///     The InvalidCellOperation exception.
         /// </exception>
+        /// <value>Has cell bomb or not.</value>
         public bool HasBomb
         {
             get
@@ -89,6 +93,7 @@ namespace Minesweeper.Models
         /// <summary>
         ///     Gets or sets a value indicating whether is protected.
         /// </summary>
+        /// <value>Is cell protected or not.</value>
         public bool IsProtected
         {
             get
@@ -108,6 +113,7 @@ namespace Minesweeper.Models
         /// <summary>
         ///     Gets or sets a value indicating how many mines surround the cell.
         /// </summary>
+        /// <value>The mines count in the neighboring cells.</value>
         public int NeighboringMinesCount { get; set; }
     }
 }

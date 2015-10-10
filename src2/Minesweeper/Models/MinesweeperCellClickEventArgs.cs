@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinesweeperCellClickEventArgs.cs" company="">
-//   
+// <copyright file="MinesweeperCellClickEventArgs.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The minesweeper cell click event args.
@@ -18,11 +18,13 @@ namespace Minesweeper.Models
         /// <summary>
         ///     Gets or sets the row.
         /// </summary>
+        /// <value>The clicked cell row.</value>
         public int Row { get; set; }
 
         /// <summary>
-        ///     Gets or sets the col.
+        ///     Gets or sets the column.
         /// </summary>
+        /// <value>The clicked cell column.</value>
         public int Col { get; set; }
     }
 }

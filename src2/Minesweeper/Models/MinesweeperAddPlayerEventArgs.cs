@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinesweeperAddPlayerEventArgs.cs" company="">
-//   
+// <copyright file="MinesweeperAddPlayerEventArgs.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The minesweeper add player event args.
@@ -20,6 +20,7 @@ namespace Minesweeper.Models
         /// <summary>
         ///     Gets or sets the player.
         /// </summary>
+        /// <value>The player name.</value>
         public string PlayerName { get; set; }
     }
 }

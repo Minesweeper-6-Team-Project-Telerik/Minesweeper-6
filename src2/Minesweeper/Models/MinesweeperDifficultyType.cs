@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DifficultyType.cs" company="">
-//   
+// <copyright file="MinesweeperDifficultyType.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The difficulty type.
@@ -14,17 +14,17 @@ namespace Minesweeper.Models
     public enum MinesweeperDifficultyType
     {
         /// <summary>
-        ///     The easy.
+        ///     The easy game type.
         /// </summary>
         Easy, 
 
         /// <summary>
-        ///     The medium.
+        ///     The medium game type.
         /// </summary>
         Medium, 
 
         /// <summary>
-        ///     The hard.
+        ///     The hard game type.
         /// </summary>
         Hard
     }

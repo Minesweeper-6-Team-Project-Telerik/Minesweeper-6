@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinesweeperGrid.cs" company="">
-//   
+// <copyright file="MinesweeperGrid.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The minesweeper grid.
@@ -28,10 +28,10 @@ namespace Minesweeper.Models
         /// Initializes a new instance of the <see cref="MinesweeperGrid"/> class.
         /// </summary>
         /// <param name="rows">
-        /// The Rows.
+        /// The number of grid rows.
         /// </param>
         /// <param name="columns">
-        /// The columns.
+        /// The number of grid columns.
         /// </param>
         /// <param name="minesCount">
         /// The mines count.
@@ -59,33 +59,37 @@ namespace Minesweeper.Models
         public event EventHandler BoomEvent;
 
         /// <summary>
-        ///     The mines count.
+        ///     Gets the mines count.
         /// </summary>
+        /// <value>The mines count.</value>
         public int MinesCount { get; private set; }
 
         /// <summary>
-        ///     The Cols.
+        ///     Gets the Cols.
         /// </summary>
+        /// <value>The number of columns.</value>
         public int Cols { get; private set; }
 
         /// <summary>
-        ///     The Rows.
+        ///     Gets the Rows.
         /// </summary>
+        /// <value>The number of rows.</value>
         public int Rows { get; private set; }
 
         /// <summary>
         /// Gets the revealed cells count.
         /// </summary>
+        /// <value>The revealed cells count.</value>
         public int RevealedCellsCount { get; private set; }
 
         /// <summary>
         /// The reveal cell.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell to reveal row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell to reveal column.
         /// </param>
         public void RevealCell(int row, int column)
         {
@@ -106,17 +110,17 @@ namespace Minesweeper.Models
 
             this.grid[row, column].IsRevealed = true;
             this.RevealedCellsCount++;
-            this.RevealAllNeightborsWithZeroMines();
+            this.RevealAllNeighborsWithZeroMines();
         }
 
         /// <summary>
         /// The protect cell.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell to protect row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell to protect column.
         /// </param>
         public void ProtectCell(int row, int column)
         {
@@ -129,18 +133,19 @@ namespace Minesweeper.Models
         }
 
         /// <summary>
-        /// The neighbour mines count.
+        /// The neighbor mines count.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The entered cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The entered cell column.
         /// </param>
         /// <returns>
-        /// The <see cref="int"/>.
+        /// The neighbor mines count <see cref="int"/>.
         /// </returns>
         /// <exception cref="InvalidGridOperation">
+        /// The InvalidGridOperation Exception.
         /// </exception>
         public int NeighborMinesCount(int row, int column)
         {           
@@ -174,15 +179,16 @@ namespace Minesweeper.Models
         /// The is cell revealed.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// Is cell revealed or not <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
+        /// <exception cref="InvalidGridOperation">
+        /// The InvalidGridOperation Exception.
         /// </exception>
         public bool IsCellRevealed(int row, int column)
         {
@@ -198,15 +204,16 @@ namespace Minesweeper.Models
         /// The is cell protected.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// Is cell protected or not <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
+        /// <exception cref="InvalidGridOperation">
+        /// The InvalidGridOperation Exception.
         /// </exception>
         public bool IsCellProtected(int row, int column)
         {
@@ -222,15 +229,16 @@ namespace Minesweeper.Models
         /// The has cell bomb.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// Has cell bomb or not <see cref="bool"/>.
         /// </returns>
         /// <exception cref="InvalidGridOperation">
+        /// The InvalidGridOperation Exception.
         /// </exception>
         public bool HasCellBomb(int row, int column)
         {
@@ -246,12 +254,13 @@ namespace Minesweeper.Models
         /// The trigger cell protection.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
-        /// <exception cref="NotImplementedException">
+        /// <exception cref="InvalidGridOperation">
+        /// The InvalidGridOperation Exception.
         /// </exception>
         public void TriggerCellProtection(int row, int column)
         {
@@ -264,13 +273,13 @@ namespace Minesweeper.Models
         }
 
         /// <summary>
-        /// The open neightbor zero mines.
+        /// The open neighbor zero mines.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         private void OpenNeightborZeroMines(int row, int column)
         {
@@ -278,13 +287,13 @@ namespace Minesweeper.Models
         }
 
         /// <summary>
-        /// The reveal neighbour.
+        /// The reveal neighbor.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         private void RevealNeighbour(int row, int column)
         {
@@ -295,9 +304,9 @@ namespace Minesweeper.Models
         }
 
         /// <summary>
-        ///     The reveal all neightbors with zero mines.
+        ///     The reveal all neighbors with zero mines.
         /// </summary>
-        private void RevealAllNeightborsWithZeroMines()
+        private void RevealAllNeighborsWithZeroMines()
         {
             MinesweeperGridIterator.IterateGrid(this.Rows, this.Cols, this.RevealCellWithZeroMines);
         }
@@ -306,10 +315,10 @@ namespace Minesweeper.Models
         /// The reveal cell with zero mines.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         private void RevealCellWithZeroMines(int row, int column)
         {
@@ -323,13 +332,13 @@ namespace Minesweeper.Models
         /// The is valid cell.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// If is valid cell or not <see cref="bool"/>.
         /// </returns>
         private bool IsValidCell(int row, int column)
         {
@@ -376,10 +385,10 @@ namespace Minesweeper.Models
         /// The populate grid.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         private void PopulateGrid(int row, int column)
         {
@@ -395,17 +404,17 @@ namespace Minesweeper.Models
         /// <param name="currentColumn">
         /// The current column.
         /// </param>
-        /// <param name="initalRow">
-        /// The inital row.
+        /// <param name="initialRow">
+        /// The initial row.
         /// </param>
-        /// <param name="inialColumn">
-        /// The inial column.
+        /// <param name="initialColumn">
+        /// The initial column.
         /// </param>
-        private void IncrementMinesCount(int currentRow, int currentColumn, int initalRow, int inialColumn)
+        private void IncrementMinesCount(int currentRow, int currentColumn, int initialRow, int initialColumn)
         {
             if (this.grid[currentRow, currentColumn].HasBomb)
             {
-                this.grid[initalRow, inialColumn].NeighboringMinesCount++;
+                this.grid[initialRow, initialColumn].NeighboringMinesCount++;
             }
         }
     }

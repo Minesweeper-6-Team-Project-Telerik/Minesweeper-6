@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IMinesweeperTimer.cs" company="">
-//   
+// <copyright file="IMinesweeperTimer.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The MinesweeperTimer interface.
@@ -22,12 +22,12 @@ namespace Minesweeper.Models.Interfaces
         event EventHandler TickEvent;
 
         /// <summary>
-        /// The start.
+        /// The game start.
         /// </summary>
         void Start();
 
         /// <summary>
-        /// The stop.
+        /// The game stop.
         /// </summary>
         void Stop();
     }

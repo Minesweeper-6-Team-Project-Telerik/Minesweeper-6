@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GameData.cs" company="">
-//   
+// <copyright file="MinesweeperGameData.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The game data.
@@ -21,7 +21,7 @@ namespace Minesweeper.Models
     public static class MinesweeperGameData
     {
         /// <summary>
-        /// The save.
+        /// The player data save.
         /// </summary>
         /// <param name="serializableObject">
         /// The serializable object.
@@ -30,6 +30,7 @@ namespace Minesweeper.Models
         /// The file name.
         /// </param>
         /// <typeparam name="T">
+        ///  The player data.
         /// </typeparam>
         public static void Save<T>(T serializableObject, string fileName)
         {
@@ -58,15 +59,16 @@ namespace Minesweeper.Models
         }
 
         /// <summary>
-        /// The load.
+        /// The player data load.
         /// </summary>
         /// <param name="fileName">
         /// The file name.
         /// </param>
         /// <typeparam name="T">
+        ///     The player data.
         /// </typeparam>
         /// <returns>
-        /// The <see cref="T"/>.
+        /// The player data <see cref="T"/>.
         /// </returns>
         public static T Load<T>(string fileName)
         {

@@ -203,13 +203,13 @@ namespace ConsoleMinesweeper.View
                             {
                                 sb.Append("*");
                             }
-                            else if (grid.NeighbourMinesCount(i, j) == 0)
+                            else if (grid.NeighborMinesCount(i, j) == 0)
                             {
                                 sb.Append(" ");
                             }
                             else
                             {
-                                sb.Append(grid.NeighbourMinesCount(i, j).ToString());
+                                sb.Append(grid.NeighborMinesCount(i, j).ToString());
                             }
                         }
                         else if (grid.IsCellProtected(i, j))

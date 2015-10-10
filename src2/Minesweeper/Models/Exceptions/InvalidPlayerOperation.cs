@@ -1,12 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="InvalidPlayerOperation.cs" company="">
-//   
+// <copyright file="InvalidPlayerOperation.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The invalid player operation.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Minesweeper.Models.Exceptions
 {
     using System;

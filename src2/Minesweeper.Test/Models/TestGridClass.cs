@@ -205,7 +205,7 @@ namespace Minesweeper.Test.Models
         public void TestNeighbourMinesCountWithInvalidInputShouldThrow()
         {
             var grid = MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Medium);
-            grid.NeighbourMinesCount(-1, -1);
+            grid.NeighborMinesCount(-1, -1);
         }
 
         /// <summary>

@@ -142,18 +142,18 @@ namespace Minesweeper.Models
         /// </returns>
         /// <exception cref="InvalidGridOperation">
         /// </exception>
-        public int NeighbourMinesCount(int row, int column)
+        public int NeighborMinesCount(int row, int column)
         {           
             if (!this.IsValidCell(row, column))
             {
                 throw new InvalidGridOperation("Not valid cell entered!");
             }
 
-            this.grid[row, column].NeighbouringMinesCount = 0;
+            this.grid[row, column].NeighboringMinesCount = 0;
 
             MinesweeperGridIterator.IterateNeighbours(row, column, this.Rows, this.Cols, this.IncrementMinesCount);
 
-            return this.grid[row, column].NeighbouringMinesCount;
+            return this.grid[row, column].NeighboringMinesCount;
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace Minesweeper.Models
         /// </param>
         private void RevealCellWithZeroMines(int row, int column)
         {
-            if (this.NeighbourMinesCount(row, column) == 0 && this.IsCellRevealed(row, column))
+            if (this.NeighborMinesCount(row, column) == 0 && this.IsCellRevealed(row, column))
             {
                 this.OpenNeightborZeroMines(row, column);
             }
@@ -405,7 +405,7 @@ namespace Minesweeper.Models
         {
             if (this.grid[currentRow, currentColumn].HasBomb)
             {
-                this.grid[initalRow, inialColumn].NeighbouringMinesCount++;
+                this.grid[initalRow, inialColumn].NeighboringMinesCount++;
             }
         }
     }

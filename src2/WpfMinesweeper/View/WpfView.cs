@@ -170,7 +170,7 @@ namespace WpfMinesweeper.View
             var rows = grid.Rows;
             var cols = grid.Cols;
 
-            if (grid.NeighbourMinesCount(this.lastRow, this.lastCol) == 0)
+            if (grid.NeighborMinesCount(this.lastRow, this.lastCol) == 0)
             {
                 this.isGridInitialized = false;
             }            
@@ -291,7 +291,7 @@ namespace WpfMinesweeper.View
                 }
                 else
                 {
-                    switch (grid.NeighbourMinesCount(i, j))
+                    switch (grid.NeighborMinesCount(i, j))
                     {
                         case 1:
                             color = Colors.Blue;
@@ -319,9 +319,9 @@ namespace WpfMinesweeper.View
                             break;                        
                     }
 
-                    if (grid.NeighbourMinesCount(i, j) != 0)
+                    if (grid.NeighborMinesCount(i, j) != 0)
                     {
-                        button.Content = grid.NeighbourMinesCount(i, j).ToString();
+                        button.Content = grid.NeighborMinesCount(i, j).ToString();
                         button.Foreground = new SolidColorBrush(color);
                     }
                 }

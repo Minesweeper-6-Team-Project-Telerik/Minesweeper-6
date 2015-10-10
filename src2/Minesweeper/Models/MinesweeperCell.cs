@@ -39,7 +39,7 @@ namespace Minesweeper.Models
             this.IsProtected = false;
             this.IsRevealed = false;
             this.HasBomb = false;
-            this.NeighbouringMinesCount = 0;
+            this.NeighboringMinesCount = 0;
         }
 
         /// <summary>
@@ -108,6 +108,6 @@ namespace Minesweeper.Models
         /// <summary>
         ///     Gets or sets a value indicating how many mines surround the cell.
         /// </summary>
-        public int NeighbouringMinesCount { get; set; }
+        public int NeighboringMinesCount { get; set; }
     }
 }

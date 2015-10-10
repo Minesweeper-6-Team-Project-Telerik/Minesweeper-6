@@ -172,14 +172,12 @@ namespace WpfMinesweeper.Test
         }
 
         [TestMethod]
-        public void TestContentColorIsChangedWhenCellWithoutMinesIsRevealed()
+        public void TestColorIsChangedToBlueWhenCellHasOneNeighoubringMines()
         {
             MainWindow window = new MainWindow();
             MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Hard);
             PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
             Grid buttons = (Grid)view.GetField("win");
-            Color color = new System.Windows.Media.Color();
-            Button button = new Button();
 
             view.Invoke("DisplayGrid", minesweeperGrid);
 
@@ -201,9 +199,47 @@ namespace WpfMinesweeper.Test
                 }
             }
 
-            button = (Button)buttons.Children[counter];
-            color = Colors.Blue;
-            var buttonColor = button.Foreground;
+            Button button = (Button)buttons.Children[counter];
+
+            Color color = Colors.Blue;
+            SolidColorBrush buttonColorBrush = (SolidColorBrush)button.Foreground;
+            var buttonColor = buttonColorBrush.Color;
+
+            Assert.AreEqual(color, buttonColor);
+        }
+
+        public void TestColorIsChangedToGreenWhenCellHasTwoNeighoubringMines()
+        {
+            MainWindow window = new MainWindow();
+            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Hard);
+            PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
+            Grid buttons = (Grid)view.GetField("win");
+
+            view.Invoke("DisplayGrid", minesweeperGrid);
+
+            int counter = 0;
+            for (int r = 0; r < minesweeperGrid.Rows; r++)
+            {
+                for (int c = 0; c < minesweeperGrid.Cols; c++)
+                {
+                    if (minesweeperGrid.NeighborMinesCount(r, c) == 2)
+                    {
+                        minesweeperGrid.RevealCell(r, c);
+                        view.Invoke("DisplayGrid", minesweeperGrid);
+
+                        r = minesweeperGrid.Rows;
+                        break;
+                    }
+
+                    counter++;
+                }
+            }
+
+            Button button = (Button)buttons.Children[counter];
+
+            Color color = Colors.Green;
+            SolidColorBrush buttonColorBrush = (SolidColorBrush)button.Foreground;
+            var buttonColor = buttonColorBrush.Color;
 
             Assert.AreEqual(color, buttonColor);
         }

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinesweeperGridFactoryMdl.cs" company="">
-//   
+// <copyright file="MinesweeperGridFactory.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The minesweeper grid factory mdl.
@@ -11,7 +11,7 @@ namespace Minesweeper.Models
     using Minesweeper.Models.Interfaces;
 
     /// <summary>
-    ///     The minesweeper grid factory mdl.
+    ///     The minesweeper grid factory.
     /// </summary>
     public static class MinesweeperGridFactory
     {
@@ -19,10 +19,10 @@ namespace Minesweeper.Models
         /// The create new table.
         /// </summary>
         /// <param name="type">
-        /// The type.
+        /// The game difficulty type.
         /// </param>
         /// <returns>
-        /// The <see cref="IMinesweeperGrid"/>.
+        /// The game grid <see cref="IMinesweeperGrid"/>.
         /// </returns>
         public static IMinesweeperGrid CreateNewTable(MinesweeperDifficultyType type)
         {

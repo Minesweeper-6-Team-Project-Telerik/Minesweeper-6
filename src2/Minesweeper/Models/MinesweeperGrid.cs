@@ -156,7 +156,7 @@ namespace Minesweeper.Models
 
             this.grid[row, column].NeighboringMinesCount = 0;
 
-            MinesweeperGridIterator.IterateNeighbours(row, column, this.Rows, this.Cols, this.IncrementMinesCount);
+            MinesweeperGridIterator.IterateNeighbors(row, column, this.Rows, this.Cols, this.IncrementMinesCount);
 
             return this.grid[row, column].NeighboringMinesCount;
         }
@@ -283,7 +283,7 @@ namespace Minesweeper.Models
         /// </param>
         private void OpenNeightborZeroMines(int row, int column)
         {
-            MinesweeperGridIterator.IterateNeighbours(row, column, this.RevealNeighbour);
+            MinesweeperGridIterator.IterateNeighbors(row, column, this.RevealNeighbour);
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IView.cs" company="">
-//   
+// <copyright file="IView.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The View interface.
@@ -43,7 +43,7 @@ namespace Minesweeper.Views
         /// The display time.
         /// </summary>
         /// <param name="timer">
-        /// The timer.
+        /// The game timer.
         /// </param>
         void DisplayTime(int timer);
 
@@ -51,7 +51,7 @@ namespace Minesweeper.Views
         /// The display moves.
         /// </summary>
         /// <param name="moves">
-        /// The moves.
+        /// The game moves.
         /// </param>
         void DisplayMoves(int moves);
 
@@ -59,7 +59,7 @@ namespace Minesweeper.Views
         /// The display score board.
         /// </summary>
         /// <param name="players">
-        /// The players.
+        /// The current players.
         /// </param>
         void DisplayScoreBoard(List<MinesweeperPlayer> players);
 
@@ -67,7 +67,7 @@ namespace Minesweeper.Views
         /// The display grid.
         /// </summary>
         /// <param name="grid">
-        /// The grid.
+        /// The game grid.
         /// </param>
         void DisplayGrid(IMinesweeperGrid grid);
 

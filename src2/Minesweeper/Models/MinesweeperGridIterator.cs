@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinesweeperGridIterator.cs" company="">
-//   
+// <copyright file="MinesweeperGridIterator.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The minesweeper grid iterator.
@@ -20,10 +20,10 @@ namespace Minesweeper.Models
         /// The iterate grid.
         /// </summary>
         /// <param name="rows">
-        /// The rows.
+        /// The number of rows.
         /// </param>
         /// <param name="columns">
-        /// The columns.
+        /// The number of columns.
         /// </param>
         /// <param name="gridAction">
         /// The grid action.
@@ -40,26 +40,26 @@ namespace Minesweeper.Models
         }
 
         /// <summary>
-        /// The iterate neighbours.
+        /// The iterate neighbors.
         /// </summary>
         /// <param name="initialRow">
         /// The initial row.
         /// </param>
-        /// <param name="initalColumn">
-        /// The inital column.
+        /// <param name="initialColumn">
+        /// The initial column.
         /// </param>
         /// <param name="rows">
-        /// The rows.
+        /// The number of rows.
         /// </param>
         /// <param name="columns">
-        /// The columns.
+        /// The number of columns.
         /// </param>
         /// <param name="cellAction">
         /// The cell action.
         /// </param>
-        public static void IterateNeighbours(
+        public static void IterateNeighbors(
             int initialRow, 
-            int initalColumn, 
+            int initialColumn, 
             int rows, 
             int columns, 
             Action<int, int, int, int> cellAction)
@@ -67,31 +67,31 @@ namespace Minesweeper.Models
             // restrict neigbour cell area
             var minRow = (initialRow - 1) < 0 ? initialRow : initialRow - 1;
             var maxRow = (initialRow + 1) >= rows ? initialRow : initialRow + 1;
-            var minColumn = (initalColumn - 1) < 0 ? initalColumn : initalColumn - 1;
-            var maxColumn = (initalColumn + 1) >= columns ? initalColumn : initalColumn + 1;
+            var minColumn = (initialColumn - 1) < 0 ? initialColumn : initialColumn - 1;
+            var maxColumn = (initialColumn + 1) >= columns ? initialColumn : initialColumn + 1;
 
             for (var r = minRow; r <= maxRow; r++)
             {
                 for (var c = minColumn; c <= maxColumn; c++)
                 {
-                    cellAction(r, c, initialRow, initalColumn);
+                    cellAction(r, c, initialRow, initialColumn);
                 }
             }
         }
 
         /// <summary>
-        /// The iterate neighbours.
+        /// The iterate neighbors.
         /// </summary>
         /// <param name="row">
-        /// The row.
+        /// The cell row.
         /// </param>
         /// <param name="column">
-        /// The column.
+        /// The cell column.
         /// </param>
         /// <param name="cellAction">
         /// The cell action.
         /// </param>
-        public static void IterateNeighbours(int row, int column, Action<int, int> cellAction)
+        public static void IterateNeighbors(int row, int column, Action<int, int> cellAction)
         {
             for (var i = row - 1; i <= row + 1; i++)
             {

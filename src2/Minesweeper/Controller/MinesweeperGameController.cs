@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinesweeperGameController.cs" company="">
-//   
+// <copyright file="MinesweeperGameController.cs" company="Telerik Academy">
+//   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
 //   The minesweeper game controller.
@@ -32,7 +32,7 @@ namespace Minesweeper.Controller
         private readonly IMinesweeperView gameView;
 
         /// <summary>
-        ///     The grid.
+        ///     The minesweeper grid.
         /// </summary>
         private readonly IMinesweeperGrid grid;
 
@@ -41,10 +41,13 @@ namespace Minesweeper.Controller
         /// </summary>
         private readonly IMinesweeperTimer minesweeperTimer;
 
+        /// <summary>
+        /// The list of players.
+        /// </summary>
         private readonly List<MinesweeperPlayer> players;
 
         /// <summary>
-        /// The type.
+        /// The type of game difficulty.
         /// </summary>
         private readonly MinesweeperDifficultyType type;
 
@@ -66,14 +69,20 @@ namespace Minesweeper.Controller
         /// <summary>
         /// Initializes a new instance of the <see cref="MinesweeperGameController"/> class.
         /// </summary>
-        /// <param name="type">
-        /// The type.
+        /// /// <param name="gameGrid">
+        /// The game grid.
         /// </param>
         /// <param name="gameView">
         /// The game view.
         /// </param>
         /// <param name="timer">
         /// The timer.
+        /// </param>
+        ///  /// <param name="players">
+        /// The players list.
+        /// </param>
+        ///  /// <param name="type">
+        /// The game's difficulty type.
         /// </param>
         public MinesweeperGameController(
             IMinesweeperGrid gameGrid, 
@@ -160,7 +169,7 @@ namespace Minesweeper.Controller
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The event.
         /// </param>
         private void ClockTimeTick(object sender, EventArgs e)
         {

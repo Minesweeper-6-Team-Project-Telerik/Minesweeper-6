@@ -17,7 +17,7 @@ namespace WpfMinesweeper
     using Minesweeper.Models.Interfaces;
 
     /// <summary>
-    ///     Interaction logic for ScoresWindow.xaml
+    ///     Interaction logic for ScoresWindow...
     /// </summary>
     public partial class ScoresWindow : Window
     {
@@ -44,10 +44,10 @@ namespace WpfMinesweeper
         /// The text to type.
         /// </summary>
         /// <param name="text">
-        /// The text.
+        /// The typed text.
         /// </param>
         /// <returns>
-        /// The <see cref="MinesweeperDifficultyType"/>.
+        /// The game difficulty type <see cref="MinesweeperDifficultyType"/>.
         /// </returns>
         private MinesweeperDifficultyType TextToType(string text)
         {
@@ -71,7 +71,7 @@ namespace WpfMinesweeper
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The select event.
         /// </param>
         private void SelectBox_DropDownClosed(object sender, EventArgs e)
         {
@@ -82,6 +82,13 @@ namespace WpfMinesweeper
             }
         }
 
+        /// <summary>
+        /// The button click.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">
+        /// The click event.
+        /// </param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

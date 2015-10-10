@@ -16,10 +16,10 @@ namespace ConsoleMinesweeper
     public static class Program
     {
         /// <summary>
-        /// The main.
+        /// The main program.
         /// </summary>
         /// <param name="args">
-        /// The args.
+        /// The args of main.
         /// </param>
         private static void Main(string[] args)
         {

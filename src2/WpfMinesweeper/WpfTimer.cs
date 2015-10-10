@@ -15,12 +15,12 @@ namespace WpfMinesweeper
     using Minesweeper.Models.Interfaces;
 
     /// <summary>
-    /// The wpf timer.
+    /// The Windows Presentation Foundation timer.
     /// </summary>
     public class WpfTimer : IMinesweeperTimer
     {
         /// <summary>
-        /// The timer.
+        /// The dispatcher timer.
         /// </summary>
         private readonly DispatcherTimer timer;
 
@@ -28,10 +28,10 @@ namespace WpfMinesweeper
         /// Initializes a new instance of the <see cref="WpfTimer"/> class.
         /// </summary>
         /// <param name="timer">
-        /// The timer.
+        /// The dispatcher timer.
         /// </param>
         /// <param name="span">
-        /// The span.
+        /// The time span.
         /// </param>
         public WpfTimer(DispatcherTimer timer, TimeSpan span)
         {
@@ -45,7 +45,7 @@ namespace WpfMinesweeper
         public event EventHandler TickEvent;
 
         /// <summary>
-        /// The start.
+        /// The timer start.
         /// </summary>
         public void Start()
         {
@@ -60,7 +60,7 @@ namespace WpfMinesweeper
         }
 
         /// <summary>
-        /// The stop.
+        /// The timer stop.
         /// </summary>
         public void Stop()
         {

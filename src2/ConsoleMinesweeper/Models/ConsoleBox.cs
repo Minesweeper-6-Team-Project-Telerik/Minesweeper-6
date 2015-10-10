@@ -16,6 +16,7 @@ namespace ConsoleMinesweeper.Models
     /// The console box.
     /// </summary>
     /// <typeparam name="TColor">
+    /// Console Color...
     /// </typeparam>
     public class ConsoleBox<TColor> : IConsoleBox<TColor>
     {
@@ -41,11 +42,13 @@ namespace ConsoleMinesweeper.Models
         /// The color text.
         /// </param>
         /// <param name="text">
-        /// The text.
+        /// The console text.
         /// </param>
         /// <exception cref="ArgumentException">
+        /// The ArgumentException.
         /// </exception>
         /// <exception cref="ArgumentNullException">
+        /// The ArgumentNullException.
         /// </exception>
         public ConsoleBox(int startX, int startY, int sizeX, int sizeY, TColor colorBack, TColor colorText, string text)
         {

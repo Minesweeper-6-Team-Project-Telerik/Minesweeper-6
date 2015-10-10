@@ -20,13 +20,13 @@ namespace ConsoleMinesweeper
     public static class ConsolePrinter
     {
         /// <summary>
-        /// The print.
+        /// The print at console.
         /// </summary>
         /// <param name="output">
         /// The output.
         /// </param>
         /// <param name="box">
-        /// The box.
+        /// The console box.
         /// </param>
         public static void Print(IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output, IConsoleBox<ConsoleColor> box)
         {
@@ -102,7 +102,7 @@ namespace ConsoleMinesweeper
         /// The output.
         /// </param>
         /// <param name="box">
-        /// The box.
+        /// The console box.
         /// </param>
         /// <param name="openCellEvent">
         /// The open cell event.

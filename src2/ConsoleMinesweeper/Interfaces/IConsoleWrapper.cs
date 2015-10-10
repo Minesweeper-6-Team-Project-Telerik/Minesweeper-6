@@ -12,8 +12,10 @@ namespace ConsoleMinesweeper.Interfaces
     /// The ConsoleWrapper interface.
     /// </summary>
     /// <typeparam name="TColor">
+    /// Console Color...
     /// </typeparam>
     /// <typeparam name="TKey">
+    /// Keyboard Key...
     /// </typeparam>
     public interface IConsoleWrapper<TColor, TKey>
     {
@@ -72,7 +74,7 @@ namespace ConsoleMinesweeper.Interfaces
         /// The intercept.
         /// </param>
         /// <returns>
-        /// The <see cref="TKey"/>.
+        /// The pressed key <see cref="TKey"/>.
         /// </returns>
         TKey ReadKey(bool intercept);
 

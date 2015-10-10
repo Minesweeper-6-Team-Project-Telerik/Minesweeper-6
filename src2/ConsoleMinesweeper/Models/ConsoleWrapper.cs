@@ -22,6 +22,7 @@ namespace ConsoleMinesweeper.Models
         /// <summary>
         ///     Gets or sets the background color.
         /// </summary>
+        /// <value>Background color.</value>
         public ConsoleColor BackgroundColor
         {
             get
@@ -38,6 +39,7 @@ namespace ConsoleMinesweeper.Models
         /// <summary>
         ///     Gets or sets the foreground color.
         /// </summary>
+        /// <value>Foreground color.</value>
         public ConsoleColor ForegroundColor
         {
             get
@@ -54,6 +56,7 @@ namespace ConsoleMinesweeper.Models
         /// <summary>
         ///     Gets or sets a value indicating whether cursor visible.
         /// </summary>
+        /// <value>Is cursor visible or not.</value>
         public bool CursorVisible
         {
             get
@@ -70,6 +73,7 @@ namespace ConsoleMinesweeper.Models
         /// <summary>
         ///     Gets or sets the cursor size.
         /// </summary>
+        /// <value>Cursor size.</value>
         public int CursorSize
         {
             get
@@ -87,10 +91,10 @@ namespace ConsoleMinesweeper.Models
         /// The set cursor position.
         /// </summary>
         /// <param name="x">
-        /// The x.
+        /// The x position.
         /// </param>
         /// <param name="y">
-        /// The y.
+        /// The y position.
         /// </param>
         public void SetCursorPosition(int x, int y)
         {
@@ -98,10 +102,10 @@ namespace ConsoleMinesweeper.Models
         }
 
         /// <summary>
-        /// The write.
+        /// The write text.
         /// </summary>
         /// <param name="text">
-        /// The text.
+        /// The text to write.
         /// </param>
         public void Write(string text)
         {

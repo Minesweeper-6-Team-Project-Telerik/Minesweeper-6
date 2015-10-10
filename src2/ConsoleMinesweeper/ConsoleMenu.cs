@@ -3,7 +3,7 @@
 //   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
-//   The menu.
+//   The console menu.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace ConsoleMinesweeper
@@ -16,9 +16,9 @@ namespace ConsoleMinesweeper
     using ConsoleMinesweeper.Models;
 
     /// <summary>
-    ///     The menu.
+    ///     The game menu.
     /// </summary>
-    public class Menu : ConsoleBox<ConsoleColor>
+    public class ConsoleMenu : ConsoleBox<ConsoleColor>
     {
         /// <summary>
         ///     The buttons.
@@ -31,12 +31,12 @@ namespace ConsoleMinesweeper
         private readonly IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output;
 
         /// <summary>
-        ///     The idx.
+        ///     The current index.
         /// </summary>
         private int idx;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Menu"/> class.
+        /// Initializes a new instance of the <see cref="ConsoleMenu"/> class.
         /// </summary>
         /// <param name="startX">
         /// The start x.
@@ -62,7 +62,7 @@ namespace ConsoleMinesweeper
         /// <param name="output">
         /// The output.
         /// </param>
-        public Menu(
+        public ConsoleMenu(
             int startX, 
             int startY, 
             int sizeX, 

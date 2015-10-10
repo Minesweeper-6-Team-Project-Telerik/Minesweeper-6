@@ -25,7 +25,7 @@ namespace ConsoleMinesweeper.View
     public class ConsoleView : IConsoleView
     {
         /// <summary>
-        ///     The console wrp view.
+        ///     The console wrapper view.
         /// </summary>
         private readonly IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> consoleWrpView;
 
@@ -45,7 +45,7 @@ namespace ConsoleMinesweeper.View
         private ConsoleBox<ConsoleColor> scoreBox;
 
         /// <summary>
-        ///     The time.
+        ///     The game time.
         /// </summary>
         private int time;
 
@@ -55,7 +55,7 @@ namespace ConsoleMinesweeper.View
         private ConsoleBox<ConsoleColor> timeBox;
 
         /// <summary>
-        ///     The type.
+        ///     The game difficulty type.
         /// </summary>
         private MinesweeperDifficultyType type;
 
@@ -63,10 +63,10 @@ namespace ConsoleMinesweeper.View
         /// Initializes a new instance of the <see cref="ConsoleView"/> class.
         /// </summary>
         /// <param name="real">
-        /// The real.
+        /// The real view.
         /// </param>
         /// <param name="consoleWrpView">
-        /// The console Wrp View.
+        /// The console Wrapper View.
         /// </param>
         public ConsoleView(bool real, IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> consoleWrpView)
         {
@@ -151,9 +151,10 @@ namespace ConsoleMinesweeper.View
         /// The display score board.
         /// </summary>
         /// <param name="board">
-        /// The board.
+        /// The score board.
         /// </param>
         /// <exception cref="NotImplementedException">
+        /// The Exception.
         /// </exception>
         public void DisplayScoreBoard(List<MinesweeperPlayer> board)
         {
@@ -185,7 +186,7 @@ namespace ConsoleMinesweeper.View
         /// The display grid.
         /// </summary>
         /// <param name="grid">
-        /// The grid.
+        /// The game grid.
         /// </param>
         public void DisplayGrid(IMinesweeperGrid grid)
         {
@@ -295,7 +296,7 @@ namespace ConsoleMinesweeper.View
         /// The request score list.
         /// </summary>
         /// <param name="type">
-        /// The type.
+        /// The game difficulty type.
         /// </param>
         public void RequestScoreList(MinesweeperDifficultyType type)
         {

@@ -20,7 +20,7 @@ namespace WpfMinesweeper
     using WpfMinesweeper.View;
 
     /// <summary>
-    ///     Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow...
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -35,7 +35,7 @@ namespace WpfMinesweeper
         private MinesweeperGameController gameController;
 
         /// <summary>
-        ///     The view.
+        ///     The game view.
         /// </summary>
         private WpfView view;
 
@@ -75,7 +75,7 @@ namespace WpfMinesweeper
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The click event.
         /// </param>
         public void ScoreItemClick(object sender, RoutedEventArgs e)
         {
@@ -89,7 +89,7 @@ namespace WpfMinesweeper
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The click event.
         /// </param>
         private void MenuItemNewEasyGameClick(object sender, RoutedEventArgs e)
         {
@@ -112,7 +112,7 @@ namespace WpfMinesweeper
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The click event.
         /// </param>
         private void MenuItemNewMediumGameClick(object sender, RoutedEventArgs e)
         {
@@ -135,7 +135,7 @@ namespace WpfMinesweeper
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The click event.
         /// </param>
         private void MenuItemNewHardGameClick(object sender, RoutedEventArgs e)
         {

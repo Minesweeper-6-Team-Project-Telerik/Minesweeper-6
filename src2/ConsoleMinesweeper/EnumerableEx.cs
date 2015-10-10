@@ -20,15 +20,16 @@ namespace ConsoleMinesweeper
         /// The split by.
         /// </summary>
         /// <param name="str">
-        /// The str.
+        /// The string.
         /// </param>
         /// <param name="chunkLength">
         /// The chunk length.
         /// </param>
         /// <returns>
-        /// The <see cref="IEnumerable"/>.
+        /// The substring <see cref="IEnumerable"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
+        /// The ArgumentException.
         /// </exception>
         public static IEnumerable<string> SplitBy(this string str, int chunkLength)
         {

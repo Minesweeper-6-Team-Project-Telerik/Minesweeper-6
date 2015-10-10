@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Button.cs" company="Telerik Academy">
+// <copyright file="ConsoleButton.cs" company="Telerik Academy">
 //   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>
@@ -14,6 +14,7 @@ namespace ConsoleMinesweeper.Models
     /// The button.
     /// </summary>
     /// <typeparam name="TColor">
+    /// Console Color...
     /// </typeparam>
     public class ConsoleButton<TColor> : ConsoleBox<TColor>
     {
@@ -34,13 +35,13 @@ namespace ConsoleMinesweeper.Models
         /// The color text.
         /// </param>
         /// <param name="colorBackSel">
-        /// The color back sel.
+        /// The color back selection.
         /// </param>
         /// <param name="colorTextSel">
-        /// The color text sel.
+        /// The color text selection.
         /// </param>
         /// <param name="text">
-        /// The text.
+        /// The console text.
         /// </param>
         public ConsoleButton(
             int sizeX, 
@@ -69,11 +70,13 @@ namespace ConsoleMinesweeper.Models
         /// <summary>
         ///     Gets or sets the color back selected.
         /// </summary>
+        /// <value>Selected color back.</value>
         public TColor ColorBackSelected { get; protected set; }
 
         /// <summary>
         ///     Gets or sets the color text selected.
         /// </summary>
+        /// <value>Selected color text.</value>
         public TColor ColorTextSelected { get; protected set; }
 
         /// <summary>
@@ -90,7 +93,7 @@ namespace ConsoleMinesweeper.Models
         }
 
         /// <summary>
-        ///     The click.
+        ///     The click event.
         /// </summary>
         public void Click()
         {

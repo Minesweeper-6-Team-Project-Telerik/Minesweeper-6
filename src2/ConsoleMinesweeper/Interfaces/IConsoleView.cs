@@ -21,7 +21,7 @@ namespace ConsoleMinesweeper.Interfaces
         /// The request score list.
         /// </summary>
         /// <param name="type">
-        /// The type.
+        /// The game difficulty type.
         /// </param>
         void RequestScoreList(MinesweeperDifficultyType type);
     }

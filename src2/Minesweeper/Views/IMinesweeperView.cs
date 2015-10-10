@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IView.cs" company="Telerik Academy">
+// <copyright file="IMinesweeperView.cs" company="Telerik Academy">
 //   Teamwork Project "Minesweeper-6"
 // </copyright>
 // <summary>

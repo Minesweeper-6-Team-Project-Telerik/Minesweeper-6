@@ -37,10 +37,10 @@ namespace ConsoleMinesweeper
         /// The output.
         /// </param>
         /// <param name="view">
-        /// The view.
+        /// The console view.
         /// </param>
         /// <param name="timer">
-        /// The timer.
+        /// The console timer.
         /// </param>
         public static void StartGameMenu(
             IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output, 
@@ -95,10 +95,10 @@ namespace ConsoleMinesweeper
         /// The output.
         /// </param>
         /// <param name="view">
-        /// The view.
+        /// The console view.
         /// </param>
         /// <param name="timer">
-        /// The timer.
+        /// The console timer.
         /// </param>
         public static void StartScoresMenu(
             IConsoleWrapper<ConsoleColor, ConsoleKeyInfo> output, 
@@ -171,28 +171,28 @@ namespace ConsoleMinesweeper
         /// The display four items menu.
         /// </summary>
         /// <param name="str1">
-        /// The str 1.
+        /// The string 1.
         /// </param>
         /// <param name="str2">
-        /// The str 2.
+        /// The string 2.
         /// </param>
         /// <param name="str3">
-        /// The str 3.
+        /// The string 3.
         /// </param>
         /// <param name="str4">
-        /// The str 4.
+        /// The string 4.
         /// </param>
         /// <param name="ev1">
-        /// The ev 1.
+        /// The event 1.
         /// </param>
         /// <param name="ev2">
-        /// The ev 2.
+        /// The event 2.
         /// </param>
         /// <param name="ev3">
-        /// The ev 3.
+        /// The event 3.
         /// </param>
         /// <param name="ev4">
-        /// The ev 4.
+        /// The event 4.
         /// </param>
         /// <param name="output">
         /// The output.
@@ -250,7 +250,7 @@ namespace ConsoleMinesweeper
             buttons[3].ClickEvent += ev4;
 
             output.Clear();
-            var menu = new Menu(25, 10, 1, 1, ConsoleColor.DarkBlue, ConsoleColor.Gray, buttons, output);
+            var menu = new ConsoleMenu(25, 10, 1, 1, ConsoleColor.DarkBlue, ConsoleColor.Gray, buttons, output);
             menu.Start();
         }
 
@@ -258,7 +258,7 @@ namespace ConsoleMinesweeper
         /// The load players.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        /// The players list <see cref="List"/>.
         /// </returns>
         private static List<MinesweeperPlayer> LoadPlayers()
         {

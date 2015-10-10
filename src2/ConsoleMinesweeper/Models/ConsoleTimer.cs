@@ -29,7 +29,7 @@ namespace ConsoleMinesweeper.Models
         public event EventHandler TickEvent;
 
         /// <summary>
-        ///     The start.
+        ///     The timer start.
         /// </summary>
         public void Start()
         {
@@ -37,7 +37,7 @@ namespace ConsoleMinesweeper.Models
         }
 
         /// <summary>
-        ///     The stop.
+        ///     The timer stop.
         /// </summary>
         public void Stop()
         {
@@ -47,7 +47,7 @@ namespace ConsoleMinesweeper.Models
         /// The timer callback.
         /// </summary>
         /// <param name="o">
-        /// The o.
+        /// The object.
         /// </param>
         private void TimerCallback(object o)
         {

@@ -15,13 +15,18 @@ namespace WpfMinesweeper.Models
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     
+    /// <summary>
+    /// The image factory.
+    /// </summary>
     public static class ImageFactory
     {
         /// <summary>
         ///     Creates an image, ready to be used in the WPF view.
         /// </summary>
         /// <param name="imgResource">The resource of the image.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// The image, ready to be used in the WPF view.
+        /// </returns>
         public static ImageBrush CreateImage(Bitmap imgResource)
         {
             var bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(

@@ -28,7 +28,7 @@ namespace WpfMinesweeper.View
     using WpfMinesweeper.Properties;
 
     /// <summary>
-    ///     The wpf view.
+    ///     The Windows Presentation Foundation view.
     /// </summary>
     public class WpfView : IMinesweeperView
     {
@@ -48,7 +48,7 @@ namespace WpfMinesweeper.View
         private readonly List<ImageBrush> images;
 
         /// <summary>
-        ///     The win.
+        ///     The win grid.
         /// </summary>
         private readonly Grid win;
 
@@ -58,7 +58,7 @@ namespace WpfMinesweeper.View
         private bool isGridInitialized;
 
         /// <summary>
-        ///     The last col.
+        ///     The last column.
         /// </summary>
         private int lastCol;
 
@@ -115,7 +115,7 @@ namespace WpfMinesweeper.View
         /// The display time.
         /// </summary>
         /// <param name="timer">
-        /// The timer.
+        /// The game timer.
         /// </param>
         public void DisplayTime(int timer)
         {
@@ -133,7 +133,7 @@ namespace WpfMinesweeper.View
         /// The display moves.
         /// </summary>
         /// <param name="moves">
-        /// The moves.
+        /// The game moves.
         /// </param>
         public void DisplayMoves(int moves)
         {
@@ -151,7 +151,7 @@ namespace WpfMinesweeper.View
         /// The display score board.
         /// </summary>
         /// <param name="board">
-        /// The board.
+        /// The score board.
         /// </param>
         public void DisplayScoreBoard(List<MinesweeperPlayer> board)
         {
@@ -163,7 +163,7 @@ namespace WpfMinesweeper.View
         /// The display grid.
         /// </summary>
         /// <param name="grid">
-        /// The grid.
+        /// The game grid.
         /// </param>
         public void DisplayGrid(IMinesweeperGrid grid)
         {
@@ -250,7 +250,7 @@ namespace WpfMinesweeper.View
         }
 
         /// <summary>
-        ///     The score item_ click.
+        ///     The score item click.
         /// </summary>
         public void ScoreItemClick()
         {
@@ -264,7 +264,7 @@ namespace WpfMinesweeper.View
         /// The update cell button.
         /// </summary>
         /// <param name="grid">
-        /// The grid.
+        /// The game grid.
         /// </param>
         /// <param name="button">
         /// The button.
@@ -340,7 +340,7 @@ namespace WpfMinesweeper.View
         /// The player add.
         /// </summary>
         /// <param name="name">
-        /// The name.
+        /// The player name.
         /// </param>
         private void PlayerAdd(string name)
         {
@@ -398,7 +398,7 @@ namespace WpfMinesweeper.View
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The click event.
         /// </param>
         private void CellButtonClick(object sender, RoutedEventArgs e)
         {

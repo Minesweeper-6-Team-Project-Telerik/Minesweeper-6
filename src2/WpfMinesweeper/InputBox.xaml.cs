@@ -12,7 +12,7 @@ namespace WpfMinesweeper
     using System.Windows;
 
     /// <summary>
-    ///     Interaction logic for InputBox.xaml
+    ///     Interaction logic for InputBox...
     /// </summary>
     public partial class InputBox : Window
     {
@@ -40,7 +40,7 @@ namespace WpfMinesweeper
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The click event.
         /// </param>
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
@@ -54,7 +54,7 @@ namespace WpfMinesweeper
         /// The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        /// The click event.
         /// </param>
         private void OkButtonClick(object sender, RoutedEventArgs e)
         {

@@ -106,40 +106,24 @@ namespace WpfMinesweeper.Test
         }
 
         [TestMethod]
-        public void TestButtonBackgroundIsChangedOnClick()
-        {
-            PrivateObject view = new PrivateObject(new WpfView(mainWindow.WinesweeperGrid));
-            Grid grid = (Grid)view.GetField("win");
-            Button button = (Button) grid.Children[0];
-            SolidColorBrush initalBackgroundColor = (SolidColorBrush)button.Background;
-            button.RaiseEvent(new System.Windows.RoutedEventArgs(Button.ClickEvent));
-
-            Assert.AreNotEqual(initalBackgroundColor, button.Background);
-        }
-
-        [TestMethod]
         public void TestCellBackgroundIsChangedWhenCellHasMine()
         {
-            PrivateObject view = new PrivateObject(new WpfView(mainWindow.WinesweeperGrid));
-            PrivateObject window = new PrivateObject(new MainWindow());
-            PrivateObject gameController = new PrivateObject((MinesweeperGameController)window.GetField("gameController"));
-            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)gameController.GetField("grid");
-            Grid grid = (Grid)view.GetField("win");
-            List<WpfMinesweeperButton> buttons = (List<WpfMinesweeperButton>)view.GetField("buttons");
+            MainWindow window = new MainWindow();
+            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Easy);
+            PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
+            Grid buttons = (Grid)view.GetField("win");
 
-
-            WpfMinesweeperButton button = new WpfMinesweeperButton();
             view.Invoke("DisplayGrid", minesweeperGrid);
-            int counter = 0;
 
+            int counter = 0;
             for (int r = 0; r < minesweeperGrid.Rows; r++)
             {
                 for (int c = 0; c < minesweeperGrid.Cols; c++)
                 {
                     if (minesweeperGrid.HasCellBomb(r, c))
                     {
-                        button = buttons.Find(b => b.Name.Equals("Button_" + r + "_" + c));
-                        button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        minesweeperGrid.RevealCell(r, c);
+                        view.Invoke("DisplayGrid", minesweeperGrid);
                         r = minesweeperGrid.Rows;
                         break;
                     }
@@ -149,23 +133,40 @@ namespace WpfMinesweeper.Test
             }
             
             List<ImageBrush> images = (List<ImageBrush>)view.GetField("images");
+            Button button = (Button)buttons.Children[counter];
 
-
-            //Assert.AreEqual(string.Empty, button.Content);
             Assert.AreEqual(images[0], button.Background);
         }
 
         [TestMethod]
         public void TestCellBackgroundIsChangedWhenProtected()
         {
-            PrivateObject view = new PrivateObject(new WpfView(mainWindow.WinesweeperGrid));
-            PrivateObject window = new PrivateObject(new MainWindow());
-            Grid grid = (Grid)view.GetField("win");
-            Button button = (Button) grid.Children[0];
+            MainWindow window = new MainWindow();
+            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Easy);
+            PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
+            Grid buttons = (Grid)view.GetField("win");
 
-            button.RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, Environment.TickCount, MouseButton.Right) { RoutedEvent = Button.ClickEvent});
+            view.Invoke("DisplayGrid", minesweeperGrid);
 
-            List<ImageBrush> images = (List<ImageBrush>) view.GetField("images");
+            int counter = 0;
+            for (int r = 0; r < minesweeperGrid.Rows; r++)
+            {
+                for (int c = 0; c < minesweeperGrid.Cols; c++)
+                {
+                    if (minesweeperGrid.HasCellBomb(r, c))
+                    {
+                        minesweeperGrid.ProtectCell(r, c);
+                        view.Invoke("DisplayGrid", minesweeperGrid);
+                        r = minesweeperGrid.Rows;
+                        break;
+                    }
+
+                    counter++;
+                }
+            }
+
+            List<ImageBrush> images = (List<ImageBrush>)view.GetField("images");
+            Button button = (Button)buttons.Children[counter];
 
             Assert.AreEqual(images[1], button.Background);
         }

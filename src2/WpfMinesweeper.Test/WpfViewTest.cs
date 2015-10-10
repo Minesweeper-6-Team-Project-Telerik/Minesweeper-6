@@ -170,5 +170,42 @@ namespace WpfMinesweeper.Test
 
             Assert.AreEqual(images[1], button.Background);
         }
+
+        [TestMethod]
+        public void TestContentColorIsChangedWhenCellWithoutMinesIsRevealed()
+        {
+            MainWindow window = new MainWindow();
+            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Hard);
+            PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
+            Grid buttons = (Grid)view.GetField("win");
+            Color color = new System.Windows.Media.Color();
+            Button button = new Button();
+
+            view.Invoke("DisplayGrid", minesweeperGrid);
+
+            int counter = 0;
+            for (int r = 0; r < minesweeperGrid.Rows; r++)
+            {
+                for (int c = 0; c < minesweeperGrid.Cols; c++)
+                {
+                    if (minesweeperGrid.NeighborMinesCount(r, c) == 1)
+                    {
+                        minesweeperGrid.RevealCell(r, c);
+                        view.Invoke("DisplayGrid", minesweeperGrid);
+
+                        r = minesweeperGrid.Rows;
+                        break;
+                    }
+
+                    counter++;
+                }
+            }
+
+            button = (Button)buttons.Children[counter];
+            color = Colors.Blue;
+            var buttonColor = button.Foreground;
+
+            Assert.AreEqual(color, buttonColor);
+        }
     }
 }

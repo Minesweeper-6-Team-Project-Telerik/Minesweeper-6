@@ -1,0 +1,27 @@
+﻿<Window x:Class="WpfMinesweeper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize">
+    <Grid Name="Minesweeper">
+        <DockPanel HorizontalAlignment="Left" Height="24" LastChildFill="False" VerticalAlignment="Top" Width="517">
+            <Menu Width="Auto" Height="20" Background="#FFA9D1F4" DockPanel.Dock="Top">
+                <MenuItem Header="Game">
+                    <MenuItem Header="New">
+                        <MenuItem Header="Easy" Name="StartEasy" Click="MenuItemNewEasyGameClick" />
+                        <MenuItem Header="Medium" Name="StartMedium" Click="MenuItemNewMediumGameClick" />
+                        <MenuItem Header="Hard" Name="StartHard" Click="MenuItemNewHardGameClick" />
+                    </MenuItem>
+                    <MenuItem Header="High Scores" Click="ScoreItemClick" />
+                    <MenuItem Header="Exit" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Label x:Name="ScoreLabel" HorizontalContentAlignment="Right" HorizontalAlignment="Left"
+               VerticalAlignment="Top" Width="75" Height="35" Margin="5,25,0,0" BorderThickness="1" IsEnabled="False"
+               FontFamily="Verdana" FontSize="20" Background="White" />
+        <Label Content="" x:Name="TimeLabel" HorizontalContentAlignment="Right" HorizontalAlignment="Right"
+               VerticalAlignment="Top" Width="75" Height="35" Margin="0,25,15,0" BorderThickness="1" IsEnabled="False"
+               FontFamily="Verdana" FontSize="20" Background="White" />
+        <Grid Name="WinesweeperGrid" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" />
+    </Grid>
+</Window>

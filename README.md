@@ -28,12 +28,14 @@ Game supports three levels - easy, medium and hard. Best times are recorded.
 * Player and click event arguments
 * Grid/cell/player exceptions
 
-####Controls all game logic
+####Minesweeper controller
+* Controls all game logic
 * Works with abstract grid, view, timer, players and game level types
 * Handle all view events and reacts on their change
 * Stores game data using data model
 
-#### No implementation, only interface definition
+####Minesweeper view
+* No implementation, only interface definition
 * Any view should be able to display:
 	* DisplayGrid
 	* DisplayScoreBoard

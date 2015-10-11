@@ -10,6 +10,7 @@ namespace WpfMinesweeper
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows;
 
@@ -19,6 +20,7 @@ namespace WpfMinesweeper
     /// <summary>
     ///     Interaction logic for ScoresWindow...
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class ScoresWindow : Window
     {
         /// <summary>

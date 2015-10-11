@@ -9,6 +9,7 @@ namespace WpfMinesweeper.Test
     using System.Timers;
     using System.Threading;
     using System.Windows.Controls;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Minesweeper.Controller;
@@ -17,6 +18,7 @@ namespace WpfMinesweeper.Test
     using WpfMinesweeper;
     using WpfMinesweeper.Models;
     using WpfMinesweeper.View;
+
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows.Media;
@@ -26,6 +28,7 @@ namespace WpfMinesweeper.Test
     public class WpfViewTest
     {
         private MainWindow mainWindow = new MainWindow();
+
         private Random random = new Random();
 
         private void ClickRandomButton()
@@ -52,7 +55,7 @@ namespace WpfMinesweeper.Test
             Label timeLabel = (Label)mainWindow.WinesweeperGrid.FindName("TimeLabel");
 
             Stopwatch sw = Stopwatch.StartNew();
-            Thread.Sleep(2250);     //A little bit over two seconds because of offset between Thread.Sleep and Stopwatch
+            Thread.Sleep(2250); //A little bit over two seconds because of offset between Thread.Sleep and Stopwatch
             sw.Stop();
 
             int timePassed = sw.Elapsed.Seconds;
@@ -111,7 +114,8 @@ namespace WpfMinesweeper.Test
         public void TestCellBackgroundIsChangedWhenCellHasMine()
         {
             MainWindow window = new MainWindow();
-            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Easy);
+            MinesweeperGrid minesweeperGrid =
+                (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Easy);
             PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
             Grid buttons = (Grid)view.GetField("win");
 
@@ -133,7 +137,7 @@ namespace WpfMinesweeper.Test
                     counter++;
                 }
             }
-            
+
             List<ImageBrush> images = (List<ImageBrush>)view.GetField("images");
             Button button = (Button)buttons.Children[counter];
 
@@ -144,7 +148,8 @@ namespace WpfMinesweeper.Test
         public void TestCellBackgroundIsChangedWhenProtected()
         {
             MainWindow window = new MainWindow();
-            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Easy);
+            MinesweeperGrid minesweeperGrid =
+                (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Easy);
             PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
             Grid buttons = (Grid)view.GetField("win");
 
@@ -177,7 +182,8 @@ namespace WpfMinesweeper.Test
         public void TestColorIsChangedToBlueWhenCellHasOneNeighoubringMines()
         {
             MainWindow window = new MainWindow();
-            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Hard);
+            MinesweeperGrid minesweeperGrid =
+                (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Hard);
             PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
             Grid buttons = (Grid)view.GetField("win");
 
@@ -214,7 +220,8 @@ namespace WpfMinesweeper.Test
         public void TestColorIsChangedToGreenWhenCellHasTwoNeighoubringMines()
         {
             MainWindow window = new MainWindow();
-            MinesweeperGrid minesweeperGrid = (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Hard);
+            MinesweeperGrid minesweeperGrid =
+                (MinesweeperGrid)MinesweeperGridFactory.CreateNewTable(MinesweeperDifficultyType.Hard);
             PrivateObject view = new PrivateObject(new WpfView(window.WinesweeperGrid));
             Grid buttons = (Grid)view.GetField("win");
 
